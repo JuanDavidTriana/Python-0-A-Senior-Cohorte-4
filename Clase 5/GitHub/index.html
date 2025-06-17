@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git y GitHub - Control de Versiones</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #9c27b0;
+            border-radius: 2px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid #e9ecef;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(111,66,193,0.1);
+            border-color: #6f42c1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #6f42c1;
+        }
+
+        .feature-card h4 {
+            color: #6f42c1;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .install-section {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(111,66,193,0.2);
+        }
+
+        .install-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .install-section p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .install-btn {
+            display: inline-block;
+            background: white;
+            color: #6f42c1;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: #f8f9fa;
+        }
+
+        .accordion {
+            margin: 2rem 0;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #6f42c1;
+            color: white;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: #5a32a3;
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-content.active {
+            padding: 1.5rem;
+            max-height: 2000px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .code-block:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #2d2d2d;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .code-block:after {
+            content: "•••";
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+            padding-top: 1rem;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .number { color: #b5cea8; }
+        .operator { color: #d4d4d4; }
+        .boolean { color: #569cd6; }
+
+        .note {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid #6f42c1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .note strong {
+            color: #6f42c1;
+            font-size: 1.1rem;
+        }
+
+        .note p {
+            margin-top: 1rem;
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .image-caption {
+            color: #6f42c1;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../GitHub/index.html" class="nav-link active">GitHub</a>
+                <a href="../Condicionales/index.html" class="nav-link">Condicionales</a>
+                <a href="../Bucles/index.html" class="nav-link">Bucles</a>
+                <a href="../MiniProyecto/index.html" class="nav-link">Mini Proyecto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="logo-container">
+            <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" alt="Git Logo" class="logo">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" class="logo">
+        </div>
+        <h1>Git y GitHub</h1>
+        <p>Una guía completa para entender el control de versiones y la colaboración en el desarrollo de software</p>
+    </div>
+
+    <main>
+        <section class="section">
+            <h2>¿Qué es un sistema de control de versiones?</h2>
+            <p>Un sistema de control de versiones es una herramienta fundamental que permite registrar y gestionar los cambios realizados en archivos y proyectos a lo largo del tiempo. Es esencial para el desarrollo colaborativo, ya que permite a varios desarrolladores trabajar sobre el mismo proyecto sin perder información ni sobrescribir el trabajo de otros.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📝</span>
+                    <h4>Registro de Cambios</h4>
+                    <p>Mantén un historial detallado de todas las modificaciones realizadas en tu código.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h4>Colaboración</h4>
+                    <p>Trabaja en equipo sin preocuparte por conflictos o pérdida de información.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h4>Control de Versiones</h4>
+                    <p>Gestiona diferentes versiones de tu proyecto y vuelve a versiones anteriores si es necesario.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>¿Qué es Git?</h2>
+            <p><strong>Git</strong> es un sistema de control de versiones distribuido, creado por Linus Torvalds en 2005. Permite a los desarrolladores gestionar el historial de cambios de su código, colaborar en equipo y experimentar de forma segura. Git almacena todo el historial de un proyecto y permite crear ramas para desarrollar nuevas funcionalidades sin afectar la versión principal.</p>
+            
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-container">
+                        <img src="git_google.png" alt="Git en Google">
+                        <p class="image-caption">Git en los resultados de búsqueda de Google</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <div class="image-container">
+                        <img src="git_pagina.png" alt="Página oficial de Git">
+                        <p class="image-caption">Página oficial de Git</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="install-section">
+            <h2>¡Vamos a instalar Git!</h2>
+            <p>Para comenzar a usar Git en tu computadora, necesitas instalarlo. Descarga la versión adecuada para tu sistema operativo desde la página oficial.</p>
+            <a href="https://git-scm.com/downloads" target="_blank" class="install-btn">Descargar Git</a>
+        </section>
+
+        <section class="section">
+            <h2>¿Qué es GitHub?</h2>
+            <p><strong>GitHub</strong> es una plataforma web que utiliza Git como base para el control de versiones. Permite alojar repositorios en la nube, colaborar con otros desarrolladores, gestionar proyectos y contribuir a proyectos de código abierto. GitHub añade herramientas sociales y de gestión que potencian el trabajo en equipo.</p>
+            
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-container">
+                        <img src="github_pages.png" alt="Página principal de GitHub">
+                        <p class="image-caption">Página principal de GitHub</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">☁️</span>
+                    <h4>Repositorios en la nube</h4>
+                    <p>Accede a tu código desde cualquier lugar y dispositivo.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🤝</span>
+                    <h4>Colaboración</h4>
+                    <p>Trabaja con otros mediante Pull Requests, Issues y revisiones de código.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📈</span>
+                    <h4>Gestión de proyectos</h4>
+                    <p>Organiza tareas, bugs y mejoras con tableros y herramientas integradas.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h4>Integración continua</h4>
+                    <p>Automatiza pruebas y despliegues para mejorar la calidad del software.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="install-section">
+            <h2>¡Vamos a registrarnos en GitHub!</h2>
+            <p>Para comenzar a usar GitHub, necesitas crear una cuenta. Es gratis y te dará acceso a todas las herramientas de colaboración y control de versiones.</p>
+            <a href="https://github.com/signup" target="_blank" class="install-btn">Crear cuenta en GitHub</a>
+        </section>
+
+        <section class="section">
+            <h2>Comandos Básicos de Git</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Inicializar un repositorio
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Para comenzar a usar Git en un proyecto, primero debes inicializar un repositorio:</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">git</span> <span class="keyword">init</span></pre>
+                        </div>
+                        <div class="note">
+                            <strong>Nota:</strong>
+                            <p>Este comando crea un nuevo repositorio Git en el directorio actual. Se creará una carpeta oculta .git que contiene toda la información del repositorio.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Clonar un repositorio
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Para obtener una copia de un repositorio existente:</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">git</span> <span class="keyword">clone</span> <span class="string">https://github.com/usuario/repositorio.git</span></pre>
+                        </div>
+                        <div class="note">
+                            <strong>Nota:</strong>
+                            <p>Este comando descarga una copia completa del repositorio, incluyendo todo su historial.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Añadir cambios
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Para preparar los cambios para un commit:</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">git</span> <span class="keyword">add</span> <span class="string">archivo.txt</span>  <span class="comment"># Añadir un archivo específico</span>
+<span class="keyword">git</span> <span class="keyword">add</span> <span class="string">.</span>  <span class="comment"># Añadir todos los cambios</span></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        Crear un commit
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Para guardar los cambios en el historial:</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">git</span> <span class="keyword">commit</span> <span class="string">-m</span> <span class="string">"Descripción de los cambios"</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Actividad Práctica: Subir tus proyectos de clase</h2>
+            <p>Ahora que ya tienes una cuenta en GitHub, vamos a subir los proyectos que hemos trabajado en clase. Sigue estos pasos:</p>
+            
+            <div class="note">
+                <strong>Pasos a seguir:</strong>
+                <p>1. Crea un nuevo repositorio en GitHub para cada proyecto<br>
+                2. Abre VS Code y la carpeta de tu proyecto<br>
+                3. Inicializa el repositorio Git y sube tus archivos</p>
+            </div>
+
+            <a href="https://github.com/new" target="_blank" class="install-btn">Crear nuevo repositorio</a>
+        </section>
+    </main>
+
+    <script>
+        // Script para manejar los acordeones
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = header.classList.contains('active');
+                
+                // Cerrar todos los acordeones
+                document.querySelectorAll('.accordion-header').forEach(h => {
+                    h.classList.remove('active');
+                    h.nextElementSibling.classList.remove('active');
+                });
+                
+                // Abrir el acordeón clickeado si no estaba activo
+                if (!isActive) {
+                    header.classList.add('active');
+                    content.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

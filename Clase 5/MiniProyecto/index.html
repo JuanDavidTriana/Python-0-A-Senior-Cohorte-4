@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Proyecto - Sistema de Gestión de Inventario</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .project-section {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .project-section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .project-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #9c27b0;
+            border-radius: 2px;
+        }
+
+        .contexto-proyecto {
+            background: linear-gradient(90deg, #f3eafd 60%, #faf7fd 100%);
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(111,66,193,0.07);
+            padding: 2.5rem 2rem 2rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .contexto-title {
+            color: #6f42c1;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .contexto-desc {
+            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contexto-mision {
+            display: flex;
+            align-items: flex-start;
+            background: #f8f9fa;
+            border-left: 6px solid #6f42c1;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(111,66,193,0.09);
+            padding: 1.3rem 1.5rem;
+            font-size: 1.13rem;
+            font-weight: 500;
+            color: #4b267a;
+            margin-top: 1.5rem;
+        }
+
+        .contexto-mision-emoji {
+            font-size: 1.7rem;
+            margin-right: 1.1rem;
+            margin-top: 0.1rem;
+        }
+
+        .requisitos-sistema {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(111,66,193,0.07);
+            padding: 2.5rem 2rem 2rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .requisitos-title {
+            color: #6f42c1;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .requisitos-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.08);
+            padding: 2rem 2rem 1.5rem 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .requisitos-subtitle {
+            color: #6f42c1;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            border-bottom: 3px solid #6f42c1;
+            padding-bottom: 0.3rem;
+            width: fit-content;
+        }
+
+        .requisitos-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .requisitos-list li {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 4px rgba(111,66,193,0.04);
+            margin-bottom: 1.1rem;
+            padding: 1.1rem 1.5rem;
+            font-size: 1.08rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .requisitos-bullet {
+            color: #6f42c1;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            font-weight: bold;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .code-block:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #2d2d2d;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .code-block:after {
+            content: "•••";
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+            padding-top: 1rem;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .number { color: #b5cea8; }
+        .operator { color: #d4d4d4; }
+        .boolean { color: #569cd6; }
+
+        .note {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid #6f42c1;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .note strong {
+            color: #6f42c1;
+            font-size: 1.1rem;
+        }
+
+        .note p {
+            margin-top: 1rem;
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .github-section {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(111,66,193,0.2);
+        }
+
+        .github-section h2 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .github-section p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .github-btn {
+            display: inline-block;
+            background: white;
+            color: #6f42c1;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .github-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../GitHub/index.html" class="nav-link">GitHub</a>
+                <a href="../Condicionales/index.html" class="nav-link">Condicionales</a>
+                <a href="../Bucles/index.html" class="nav-link">Bucles</a>
+                <a href="../MiniProyecto/index.html" class="nav-link active">Mini Proyecto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Mini-Proyecto: Sistema de Gestión de Inventario</h1>
+        <p>Desarrolla un sistema de gestión de inventario para "Tienda ABC" aplicando todos los conceptos aprendidos</p>
+    </div>
+
+    <main>
+        <section class="project-section">
+            <div class="contexto-proyecto">
+                <h2 class="contexto-title">Contexto de la Industria Real</h2>
+                <p class="contexto-desc">Imagina que eres un desarrollador de software junior en una pequeña empresa de consultoría. Tu primer cliente es "Tienda ABC", una tienda de abarrotes local. Actualmente, el dueño de la tienda, Don Carlos, lleva el control de su inventario en un cuaderno. Esto le causa muchos problemas: no sabe con certeza cuántos productos le quedan, a veces vende productos que ya se agotaron y pierde ventas porque no sabe cuándo reabastecerse.</p>
+                
+                <div class="contexto-mision">
+                    <span class="contexto-mision-emoji">🎯</span>
+                    <span>Tu misión: Desarrollar un prototipo simple de un sistema de gestión de inventario basado en la consola para demostrarle a Don Carlos cómo la tecnología puede ayudarlo.</span>
+                </div>
+            </div>
+
+            <div class="requisitos-sistema">
+                <h2 class="requisitos-title">Requisitos del Sistema</h2>
+                <div class="requisitos-card">
+                    <h3 class="requisitos-subtitle">Representación del Inventario</h3>
+                    <p>Tu inventario debe ser una lista donde cada elemento es otra lista con los datos de un producto: [nombre, cantidad, precio].</p>
+                    <p>Debes iniciar tu programa con al menos 3 productos de ejemplo.</p>
+                    
+                    <div class="code-block">
+                        <pre><span class="comment"># Ejemplo de cómo podría empezar tu inventario</span>
+<span class="keyword">inventario</span> = [
+    [<span class="string">"leche"</span>, <span class="number">20</span>, <span class="number">3500</span>],
+    [<span class="string">"pan"</span>, <span class="number">50</span>, <span class="number">2000</span>],
+    [<span class="string">"huevos"</span>, <span class="number">30</span>, <span class="number">500</span>]
+]</pre>
+                    </div>
+                </div>
+
+                <div class="requisitos-card">
+                    <h3 class="requisitos-subtitle">Funcionalidades Requeridas</h3>
+                    <ul class="requisitos-list">
+                        <li><span class="requisitos-bullet">1</span>Ver la lista completa de productos en el inventario</li>
+                        <li><span class="requisitos-bullet">2</span>Registrar una venta, actualizando la cantidad disponible</li>
+                        <li><span class="requisitos-bullet">3</span>Registrar la llegada de nueva mercancía</li>
+                        <li><span class="requisitos-bullet">4</span>Salir del programa</li>
+                    </ul>
+                </div>
+
+                <div class="requisitos-card">
+                    <h3 class="requisitos-subtitle">Conceptos a Utilizar</h3>
+                    <ul class="requisitos-list">
+                        <li><span class="requisitos-bullet">📝</span>Variables para guardar datos</li>
+                        <li><span class="requisitos-bullet">📋</span>Listas para estructurar el inventario</li>
+                        <li><span class="requisitos-bullet">🔄</span>Bucles while para el menú principal</li>
+                        <li><span class="requisitos-bullet">🔍</span>Bucles for para recorrer el inventario</li>
+                        <li><span class="requisitos-bullet">⚖️</span>Condicionales if/elif/else para validaciones</li>
+                        <li><span class="requisitos-bullet">🚪</span>break para salir del programa</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="github-section">
+                <h2>¡No olvides usar GitHub!</h2>
+                <p>Recuerda crear un repositorio en GitHub para este proyecto. Esto te ayudará a mantener un control de versiones y a mostrar tu trabajo a futuros empleadores.</p>
+                <a href="https://github.com/new" target="_blank" class="github-btn">Crear repositorio en GitHub</a>
+            </div>
+
+            <div class="note">
+                <strong>Consejo:</strong>
+                <p>Antes de comenzar a programar, planifica bien la estructura de tu código. Piensa en cómo organizarás las funciones y cómo manejarás las diferentes opciones del menú. Esto te ayudará a tener un código más limpio y mantenible.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html> 

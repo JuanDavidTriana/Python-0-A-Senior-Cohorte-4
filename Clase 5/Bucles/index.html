@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bucles en Python</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .code-block:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #2d2d2d;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .code-block:after {
+            content: "•••";
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+            padding-top: 1rem;
+        }
+
+        .keyword {
+            color: #569cd6;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .number {
+            color: #b5cea8;
+        }
+
+        .operator {
+            color: #d4d4d4;
+        }
+
+        .boolean {
+            color: #569cd6;
+        }
+
+        .accordion {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #6f42c1;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: #5a32a3;
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-content.active {
+            padding: 1.5rem;
+            max-height: 2000px;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-bloques {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.08);
+            background: #fff;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .accordion-bloque-item {
+            border-bottom: 1px solid #eee;
+        }
+        .accordion-bloque-header {
+            background: linear-gradient(90deg, #6f42c1, #9c27b0);
+            color: #fff;
+            padding: 1.2rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+        .accordion-bloque-header:hover {
+            background: linear-gradient(90deg, #5a32a3, #6f42c1);
+        }
+        .accordion-bloque-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #faf7fd;
+            transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+            padding: 0 2rem;
+        }
+        .accordion-bloque-content.active {
+            padding: 2rem;
+            max-height: 800px;
+        }
+        .accordion-bloque-header .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .accordion-bloque-header.active .toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        .ejercicios-acordeon {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.08);
+            background: #fff;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .ejercicio-item {
+            border-bottom: 1px solid #eee;
+        }
+        .ejercicio-header {
+            background: linear-gradient(90deg, #6f42c1, #9c27b0);
+            color: #fff;
+            padding: 1.1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+        .ejercicio-header:hover {
+            background: linear-gradient(90deg, #5a32a3, #6f42c1);
+        }
+        .ejercicio-header .ej-icon {
+            font-size: 1.3rem;
+            margin-right: 1rem;
+        }
+        .ejercicio-header .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .ejercicio-header.active .toggle-icon {
+            transform: rotate(90deg);
+        }
+        .ejercicio-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #faf7fd;
+            transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+            padding: 0 2rem;
+        }
+        .ejercicio-content.active {
+            padding: 2rem;
+            max-height: 800px;
+        }
+        .ej-problema {
+            margin-bottom: 1.2rem;
+        }
+        .ej-problema strong {
+            color: #6f42c1;
+            font-size: 1.1rem;
+        }
+        .ej-pista {
+            background: #fffbe6;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0 1.5rem 0;
+            font-style: italic;
+        }
+        .ej-solucion {
+            background: #f3f0fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            padding: 1.5rem 1rem;
+            margin-top: 1.2rem;
+            display: none;
+        }
+        .ej-solucion.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+        .ej-btn-solucion {
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 1rem 0 0.5rem 0;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(111,66,193,0.08);
+        }
+        .ej-btn-solucion:hover {
+            background: #5a32a3;
+            box-shadow: 0 4px 12px rgba(111,66,193,0.13);
+        }
+        .explicacion-codigo {
+            margin-top: 1rem;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        .explicacion-codigo b, .explicacion-codigo strong {
+            color: #5a32a3;
+            font-weight: 700;
+        }
+        .test-wizard-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(111,66,193,0.10);
+            padding: 2.5rem 2rem 2rem 2rem;
+            text-align: left;
+        }
+        .test-wizard-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6f42c1;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .test-wizard-progress {
+            width: 100%;
+            height: 8px;
+            background: #f3eafd;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .test-wizard-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #6f42c1, #9c27b0);
+            width: 0;
+            transition: width 0.4s;
+        }
+        .test-wizard-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #333;
+        }
+        .test-wizard-options {
+            margin-bottom: 1.5rem;
+        }
+        .test-wizard-option {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.7rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.2s, background 0.2s;
+            font-size: 1rem;
+        }
+        .test-wizard-option.selected {
+            border: 2px solid #6f42c1;
+            background: #ede7f6;
+        }
+        .test-wizard-option.correct {
+            border: 2px solid #28a745;
+            background: #e6f9ed;
+        }
+        .test-wizard-option.incorrect {
+            border: 2px solid #dc3545;
+            background: #fbeaea;
+        }
+        .test-wizard-btn {
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(111,66,193,0.08);
+            display: block;
+            width: 100%;
+        }
+        .test-wizard-btn:hover {
+            background: #5a32a3;
+        }
+        .test-wizard-feedback {
+            margin: 1.2rem 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .test-wizard-feedback.correct {
+            background: #e6f9ed;
+            color: #28a745;
+        }
+        .test-wizard-feedback.incorrect {
+            background: #fbeaea;
+            color: #dc3545;
+        }
+        .test-wizard-explanation {
+            background: #f3f0fa;
+            color: #5a32a3;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .test-wizard-result {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .test-wizard-result-score {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #6f42c1;
+            margin-bottom: 0.5rem;
+        }
+        .test-wizard-result-message {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../GitHub/index.html" class="nav-link">GitHub</a>
+                <a href="../Condicionales/index.html" class="nav-link">Condicionales</a>
+                <a href="../Bucles/index.html" class="nav-link active">Bucles</a>
+                <a href="../MiniProyecto/index.html" class="nav-link">Mini Proyecto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Bucles en Python 🔄</h1>
+        <p>Aprende a repetir acciones y procesar datos de manera eficiente usando bucles en Python.</p>
+    </div>
+
+    <main>
+        <section class="section">
+            <h2>¿Qué son los Bucles?</h2>
+            <p>Los bucles son estructuras que permiten ejecutar un bloque de código múltiples veces. Son fundamentales para procesar datos, realizar cálculos repetitivos y automatizar tareas.</p>
+            
+            <div class="code-block">
+                <pre>
+<span class="comment"># Ejemplo de un bucle for</span>
+<span class="keyword">for</span> numero <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">5</span>):
+    <span class="keyword">print</span>(<span class="string">f"Contando: {numero}"</span>)</pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Tipos de Bucles</h2>
+            <div class="accordion-bloques">
+                <div class="accordion-bloque-item">
+                    <div class="accordion-bloque-header">
+                        Bucle for
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-bloque-content">
+                        <p>Se utiliza cuando sabemos cuántas veces queremos repetir una acción o cuando queremos iterar sobre una secuencia de elementos.</p>
+                        <div class="code-block">
+                            <pre><span class="comment"># Iterar sobre una lista</span>
+frutas = [<span class="string">"manzana"</span>, <span class="string">"banana"</span>, <span class="string">"naranja"</span>]
+<span class="keyword">for</span> fruta <span class="keyword">in</span> frutas:
+    <span class="keyword">print</span>(fruta)</pre>
+                        </div>
+                        <div class="explicacion-codigo">
+                            <b>¿Qué hace este código?</b> <br>
+                            Crea una lista de frutas y usa un <strong>bucle for</strong> para recorrer cada elemento de la lista. En cada iteración, imprime el nombre de la fruta. <br>
+                            <b>¿Cuándo usarlo?</b> <br>
+                            Cuando necesitas procesar todos los elementos de una colección (lista, tupla, string, etc.).
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-bloque-item">
+                    <div class="accordion-bloque-header">
+                        Bucle while
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-bloque-content">
+                        <p>Se utiliza cuando queremos repetir una acción mientras una condición sea verdadera.</p>
+                        <div class="code-block">
+                            <pre><span class="comment"># Contador con while</span>
+contador = <span class="number">0</span>
+<span class="keyword">while</span> contador < <span class="number">5</span>:
+    <span class="keyword">print</span>(contador)
+    contador += <span class="number">1</span></pre>
+                        </div>
+                        <div class="explicacion-codigo">
+                            <b>¿Qué hace este código?</b> <br>
+                            Inicializa una variable <strong>contador</strong> en 0 y la incrementa en cada iteración mientras sea menor que 5. Imprime el valor de <strong>contador</strong> en cada paso. <br>
+                            <b>¿Cuándo usarlo?</b> <br>
+                            Cuando no sabes cuántas veces se repetirá la acción y depende de una condición lógica.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-bloque-item">
+                    <div class="accordion-bloque-header">
+                        Bucles Anidados
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-bloque-content">
+                        <p>Son útiles para trabajar con estructuras de datos multidimensionales o para realizar operaciones que requieren múltiples iteraciones.</p>
+                        <div class="code-block">
+                            <pre><span class="comment"># Tabla de multiplicación</span>
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">1</span>, <span class="number">4</span>):
+    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">1</span>, <span class="number">4</span>):
+        <span class="keyword">print</span>(<span class="string">f"{i} x {j} = {i * j}"</span>)</pre>
+                        </div>
+                        <div class="explicacion-codigo">
+                            <b>¿Qué hace este código?</b> <br>
+                            Usa dos <strong>bucles for</strong> anidados para imprimir una tabla de multiplicar del 1 al 3. El bucle externo controla la fila (<strong>i</strong>) y el interno la columna (<strong>j</strong>). <br>
+                            <b>¿Cuándo usarlo?</b> <br>
+                            Cuando necesitas recorrer estructuras de datos en dos dimensiones (matrices, tablas) o realizar combinaciones de elementos.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-bloque-item">
+                    <div class="accordion-bloque-header">
+                        Control de Bucles (break, continue, else)
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-bloque-content">
+                        <p><b>break</b>: Termina el bucle inmediatamente.<br>
+                        <b>continue</b>: Salta a la siguiente iteración del bucle.<br>
+                        <b>else</b>: Se ejecuta cuando el bucle termina normalmente (sin break).</p>
+                        <div class="code-block">
+                            <pre><span class="comment"># Ejemplo de break y continue</span>
+<span class="keyword">for</span> numero <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">10</span>):
+    <span class="keyword">if</span> numero == <span class="number">5</span>:
+        <span class="keyword">break</span>
+    <span class="keyword">if</span> numero % <span class="number">2</span> == <span class="number">0</span>:
+        <span class="keyword">continue</span>
+    <span class="keyword">print</span>(numero)
+
+<span class="comment"># Ejemplo de else</span>
+<span class="keyword">for</span> numero <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">5</span>):
+    <span class="keyword">print</span>(numero)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Bucle completado"</span>)</pre>
+                        </div>
+                        <div class="explicacion-codigo">
+                            <b>¿Qué hace este código?</b> <br>
+                            El primer bloque imprime solo los números impares menores que 5 y se detiene cuando <strong>numero</strong> es igual a 5. El segundo bloque imprime los números del 0 al 4 y luego muestra un mensaje usando <strong>else</strong> al finalizar el bucle. <br>
+                            <b>¿Cuándo usarlo?</b> <br>
+                            Cuando necesitas controlar el flujo del bucle, saltar iteraciones o ejecutar acciones al finalizar.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Ejercicios Prácticos</h2>
+            <div class="ejercicios-acordeon">
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🧮</span>Ejercicio 1: Suma de una Lista</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Escribe un programa que calcule la suma de todos los números en una lista usando un bucle for.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Inicializa una variable para almacenar la suma y usa un bucle for para iterar sobre la lista.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="variable">numeros</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]
+<span class="variable">suma</span> = <span class="number">0</span>
+
+<span class="keyword">for</span> <span class="variable">numero</span> <span class="keyword">in</span> <span class="variable">numeros</span>:
+    <span class="variable">suma</span> += <span class="variable">numero</span>
+
+<span class="function">print</span>(<span class="string">f"La suma es: {suma}"</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🔑</span>Ejercicio 2: Adivina la Palabra Secreta</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Crea un juego simple donde el usuario debe adivinar una palabra secreta usando un bucle while.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Usa un bucle while para seguir pidiendo al usuario que adivine hasta que acierte.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="variable">palabra_secreta</span> = <span class="string">"python"</span>
+<span class="variable">intento</span> = <span class="string">""</span>
+
+<span class="keyword">while</span> <span class="variable">intento</span> != <span class="variable">palabra_secreta</span>:
+    <span class="variable">intento</span> = <span class="function">input</span>(<span class="string">"Adivina la palabra secreta: "</span>).lower()
+    <span class="keyword">if</span> <span class="variable">intento</span> != <span class="variable">palabra_secreta</span>:
+        <span class="function">print</span>(<span class="string">"¡Incorrecto! Intenta de nuevo."</span>)
+
+<span class="function">print</span>(<span class="string">"¡Felicidades! Has adivinado la palabra."</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🚦</span>Ejercicio 3: Filtrando Múltiplos de 3</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Escribe un programa que imprima los números del 1 al 20, pero que se salte los múltiplos de 3 usando continue.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Usa el operador módulo (%) para identificar los múltiplos de 3.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="keyword">for</span> <span class="variable">numero</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="number">21</span>):
+    <span class="keyword">if</span> <span class="variable">numero</span> % <span class="number">3</span> == <span class="number">0</span>:
+        <span class="keyword">continue</span>
+    <span class="function">print</span>(<span class="variable">numero</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🗺️</span>Ejercicio 4: Búsqueda del Tesoro</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Crea un programa que busque un tesoro en una lista de ubicaciones y se detenga cuando lo encuentre usando break.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Usa un bucle for con break para detener la búsqueda cuando encuentres el tesoro.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="variable">ubicaciones</span> = [<span class="string">"playa"</span>, <span class="string">"montaña"</span>, <span class="string">"tesoro"</span>, <span class="string">"desierto"</span>]
+
+<span class="keyword">for</span> <span class="variable">ubicacion</span> <span class="keyword">in</span> <span class="variable">ubicaciones</span>:
+    <span class="keyword">if</span> <span class="variable">ubicacion</span> == <span class="string">"tesoro"</span>:
+        <span class="function">print</span>(<span class="string">"¡Encontré el tesoro!"</span>)
+        <span class="keyword">break</span>
+    <span class="function">print</span>(<span class="string">f"Buscando en {ubicacion}..."</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">⬛</span>Ejercicio 5: Creando un Rectángulo</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Escribe un programa que use bucles anidados para imprimir un rectángulo de asteriscos con un ancho y alto específicos.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Usa dos bucles for anidados: uno para las filas y otro para las columnas.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="variable">ancho</span> = <span class="number">4</span>
+<span class="variable">alto</span> = <span class="number">3</span>
+
+<span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="variable">alto</span>):
+    <span class="keyword">for</span> <span class="variable">j</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="variable">ancho</span>):
+        <span class="function">print</span>(<span class="string">"*"</span>, <span class="variable">end</span>=<span class="string">""</span>)
+    <span class="function">print</span>()</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="test-wizard-container" id="test-wizard">
+                <div class="test-wizard-title">Test: Dominando los Bucles</div>
+                <div class="test-wizard-progress">
+                    <div class="test-wizard-progress-bar" id="testProgressBar"></div>
+                </div>
+                <div id="testWizardContent"></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Acordeón de tipos de bloques
+        const headers = document.querySelectorAll('.accordion-bloque-header');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                document.querySelectorAll('.accordion-bloque-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.accordion-bloque-header').forEach(h => h.classList.remove('active'));
+                if (!isActive) {
+                    content.classList.add('active');
+                    header.classList.add('active');
+                }
+            });
+        });
+
+        // Interactividad acordeón para ejercicios prácticos
+        document.querySelectorAll('.ejercicio-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                document.querySelectorAll('.ejercicio-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.ejercicio-header').forEach(h => h.classList.remove('active'));
+                if (!isActive) {
+                    content.classList.add('active');
+                    header.classList.add('active');
+                }
+            });
+        });
+        document.querySelectorAll('.ej-btn-solucion').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sol = this.nextElementSibling;
+                sol.classList.toggle('active');
+            });
+        });
+
+        const testQuestions = [
+            {
+                question: '¿Cuál es el propósito principal de un bucle for en Python?',
+                options: [
+                    'Iterar sobre una secuencia de elementos',
+                    'Ejecutar código solo una vez',
+                    'Terminar el programa'
+                ],
+                correct: 0,
+                explanation: 'Un bucle for se utiliza para iterar sobre una secuencia de elementos, como listas, tuplas o rangos.'
+            },
+            {
+                question: '¿Qué hace la función range(5) en Python?',
+                options: [
+                    'Genera una secuencia de números del 0 al 4',
+                    'Genera una secuencia de números del 1 al 5',
+                    'Genera una secuencia de números del 0 al 5'
+                ],
+                correct: 0,
+                explanation: 'range(5) genera una secuencia de números del 0 al 4, no incluyendo el 5.'
+            },
+            {
+                question: '¿Qué hace la sentencia break en un bucle?',
+                options: [
+                    'Termina el bucle inmediatamente',
+                    'Continúa con la siguiente iteración',
+                    'Reinicia el bucle desde el principio'
+                ],
+                correct: 0,
+                explanation: 'La sentencia break termina el bucle inmediatamente y continúa con el código después del bucle.'
+            },
+            {
+                question: '¿Qué hace la sentencia continue en un bucle?',
+                options: [
+                    'Termina el bucle inmediatamente',
+                    'Continúa con la siguiente iteración',
+                    'Reinicia el bucle desde el principio'
+                ],
+                correct: 1,
+                explanation: 'La sentencia continue salta a la siguiente iteración del bucle, omitiendo el código restante en la iteración actual.'
+            },
+            {
+                question: '¿Cuál es la salida del siguiente código?',
+                code: `<span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):<br>    <span class="keyword">for</span> <span class="variable">j</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">2</span>):<br>        <span class="function">print</span>(<span class="string">f"{i}, {j}"</span>)`,
+                options: [
+                    '0, 0\n0, 1\n1, 0\n1, 1\n2, 0\n2, 1',
+                    '0, 0\n1, 1\n2, 2',
+                    '0, 1\n1, 2\n2, 3'
+                ],
+                correct: 0,
+                explanation: 'El código imprime todas las combinaciones de i (0-2) y j (0-1) en un bucle anidado.'
+            }
+        ];
+        let currentQ = 0;
+        let score = 0;
+        let answered = false;
+
+        function renderTestWizard() {
+            const content = document.getElementById('testWizardContent');
+            const progress = document.getElementById('testProgressBar');
+            if (currentQ >= testQuestions.length) {
+                // Resultado final
+                let msg = '';
+                if (score === testQuestions.length) {
+                    msg = '¡Excelente! Has dominado los bucles.';
+                } else if (score >= testQuestions.length * 0.7) {
+                    msg = '¡Buen trabajo! Sigue practicando.';
+                } else {
+                    msg = 'Necesitas repasar más. ¡No te rindas!';
+                }
+                content.innerHTML = `
+                    <div class="test-wizard-result">
+                        <div class="test-wizard-result-score">${score}/${testQuestions.length}</div>
+                        <div class="test-wizard-result-message">${msg}</div>
+                        <button class="test-wizard-btn" onclick="restartTestWizard()">Reintentar Test</button>
+                    </div>
+                `;
+                progress.style.width = '100%';
+                return;
+            }
+            const q = testQuestions[currentQ];
+            let codeBlock = '';
+            if (q.code) {
+                codeBlock = `<div class='code-block' style='margin-bottom:1.2rem;'><pre>${q.code}</pre></div>`;
+            }
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <div class="test-wizard-option" data-idx="${idx}" onclick="selectTestOption(${idx})">
+                        <input type="radio" name="testOption" id="testOption${idx}" style="margin-right:0.7rem;" ${answered && idx===q.selected ? 'checked' : ''}>
+                        <label for="testOption${idx}">${opt.replace(/\n/g, '<br>')}</label>
+                    </div>
+                `;
+            });
+            content.innerHTML = `
+                <div class="test-wizard-question">${q.question}</div>
+                ${codeBlock}
+                <div class="test-wizard-options">${optionsHtml}</div>
+                <div id="testWizardFeedback"></div>
+                <button class="test-wizard-btn" id="testWizardBtn" onclick="submitTestAnswer()">${answered ? (currentQ === testQuestions.length-1 ? 'Ver resultado' : 'Siguiente') : 'Responder'}</button>
+            `;
+            progress.style.width = `${(currentQ)/testQuestions.length*100}%`;
+            // Marcar opción seleccionada si ya respondió
+            if (answered && typeof q.selected !== 'undefined') {
+                document.querySelectorAll('.test-wizard-option').forEach((el, idx) => {
+                    if (idx === q.selected) {
+                        el.classList.add(idx === q.correct ? 'correct' : 'incorrect');
+                        el.classList.add('selected');
+                    }
+                    if (idx === q.correct && idx !== q.selected) {
+                        el.classList.add('correct');
+                    }
+                });
+                showTestFeedback(q.selected === q.correct, q.explanation);
+            }
+        }
+        function selectTestOption(idx) {
+            if (answered) return;
+            document.querySelectorAll('.test-wizard-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('testOption'+idx).checked = true;
+            document.querySelectorAll('.test-wizard-option')[idx].classList.add('selected');
+            testQuestions[currentQ].selected = idx;
+        }
+        function submitTestAnswer() {
+            const q = testQuestions[currentQ];
+            if (!answered) {
+                if (typeof q.selected === 'undefined') return;
+                answered = true;
+                if (q.selected === q.correct) score++;
+                renderTestWizard();
+            } else {
+                // Siguiente pregunta
+                answered = false;
+                currentQ++;
+                renderTestWizard();
+            }
+        }
+        function showTestFeedback(isCorrect, explanation) {
+            const feedback = document.getElementById('testWizardFeedback');
+            feedback.innerHTML = `
+                <div class="test-wizard-feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    ${isCorrect ? '✔️ ¡Correcto!' : '❌ Incorrecto.'}
+                </div>
+                <div class="test-wizard-explanation">${explanation}</div>
+            `;
+        }
+        function restartTestWizard() {
+            currentQ = 0;
+            score = 0;
+            answered = false;
+            testQuestions.forEach(q => { delete q.selected; });
+            renderTestWizard();
+        }
+        // Inicializar
+        renderTestWizard();
+    </script>
+</body>
+</html> 

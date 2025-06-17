@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condicionales en Python</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/base.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        .section p {
+            margin-bottom: 1rem;
+        }
+        .code-block {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .code-block:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #2d2d2d;
+            border-radius: 12px 12px 0 0;
+        }
+        .code-block:after {
+            content: "•••";
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+        .code-block pre {
+            margin: 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+            padding-top: 1rem;
+        }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .number { color: #b5cea8; }
+        .operator { color: #d4d4d4; }
+        .boolean { color: #569cd6; }
+        .variable { color: #9cdcfe; }
+        .function { color: #dcdcaa; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: #faf7fd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+        }
+        table th, table td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+        table th {
+            background: #ede7f6;
+            color: #6f42c1;
+            font-weight: 700;
+        }
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        table tr:nth-child(odd) {
+            background: #fff;
+        }
+        .note {
+            background: #f3f0fa;
+            border-left: 4px solid #6f42c1;
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            color: #5a32a3;
+            font-size: 1.05rem;
+        }
+        .warning {
+            background: #fffbe6;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0 1.5rem 0;
+            font-style: italic;
+        }
+        .accordion {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .accordion-header {
+            background: #6f42c1;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background: #5a32a3;
+        }
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            padding: 1.5rem;
+            max-height: 2000px;
+        }
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        .test-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin: 2rem 0;
+        }
+        .test-question {
+            background: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        .test-question:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .test-option {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .test-option:hover {
+            background: var(--primary-light);
+        }
+        .test-option input[type="radio"] {
+            margin-right: 1rem;
+        }
+        .test-option.correct {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+        }
+        .test-option.incorrect {
+            background: var(--error-light);
+            border: 1px solid var(--error);
+        }
+        .test-explanation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-radius: var(--border-radius);
+            display: none;
+        }
+        .test-explanation.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-color);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0;
+            transition: width 0.3s ease-out;
+        }
+        .result-message {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: none;
+        }
+        .result-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .test-wizard-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(111,66,193,0.10);
+            padding: 2.5rem 2rem 2rem 2rem;
+            text-align: left;
+        }
+        .test-wizard-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6f42c1;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .test-wizard-progress {
+            width: 100%;
+            height: 8px;
+            background: #f3eafd;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .test-wizard-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #6f42c1, #9c27b0);
+            width: 0;
+            transition: width 0.4s;
+        }
+        .test-wizard-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #333;
+        }
+        .test-wizard-options {
+            margin-bottom: 1.5rem;
+        }
+        .test-wizard-option {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.7rem;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border 0.2s, background 0.2s;
+            font-size: 1rem;
+        }
+        .test-wizard-option.selected {
+            border: 2px solid #6f42c1;
+            background: #ede7f6;
+        }
+        .test-wizard-option.correct {
+            border: 2px solid #28a745;
+            background: #e6f9ed;
+        }
+        .test-wizard-option.incorrect {
+            border: 2px solid #dc3545;
+            background: #fbeaea;
+        }
+        .test-wizard-btn {
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(111,66,193,0.08);
+            display: block;
+            width: 100%;
+        }
+        .test-wizard-btn:hover {
+            background: #5a32a3;
+        }
+        .test-wizard-feedback {
+            margin: 1.2rem 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .test-wizard-feedback.correct {
+            background: #e6f9ed;
+            color: #28a745;
+        }
+        .test-wizard-feedback.incorrect {
+            background: #fbeaea;
+            color: #dc3545;
+        }
+        .test-wizard-explanation {
+            background: #f3f0fa;
+            color: #5a32a3;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .test-wizard-result {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .test-wizard-result-score {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #6f42c1;
+            margin-bottom: 0.5rem;
+        }
+        .test-wizard-result-message {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .accordion-condicionales {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.08);
+            background: #fff;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .accordion-cond-item {
+            border-bottom: 1px solid #eee;
+        }
+        .accordion-cond-header {
+            background: linear-gradient(90deg, #6f42c1, #9c27b0);
+            color: #fff;
+            padding: 1.2rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+        .accordion-cond-header:hover {
+            background: linear-gradient(90deg, #5a32a3, #6f42c1);
+        }
+        .accordion-cond-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #faf7fd;
+            transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+            padding: 0 2rem;
+        }
+        .accordion-cond-content.active {
+            padding: 2rem;
+            max-height: 800px;
+        }
+        .accordion-cond-header .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .accordion-cond-header.active .toggle-icon {
+            transform: rotate(90deg);
+        }
+        .cond-explicacion {
+            margin-top: 1rem;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        .cond-explicacion b, .cond-explicacion strong {
+            color: #5a32a3;
+            font-weight: 700;
+        }
+
+        /* === ESTILOS DE ACORDEÓN DE EJERCICIOS (igual que Bucles) === */
+        .ejercicios-acordeon {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.08);
+            background: #fff;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .ejercicio-item {
+            border-bottom: 1px solid #eee;
+        }
+        .ejercicio-header {
+            background: linear-gradient(90deg, #6f42c1, #9c27b0);
+            color: #fff;
+            padding: 1.1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s;
+        }
+        .ejercicio-header:hover {
+            background: linear-gradient(90deg, #5a32a3, #6f42c1);
+        }
+        .ejercicio-header .ej-icon {
+            font-size: 1.3rem;
+            margin-right: 1rem;
+        }
+        .ejercicio-header .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        .ejercicio-header.active .toggle-icon {
+            transform: rotate(90deg);
+        }
+        .ejercicio-content {
+            max-height: 0;
+            overflow: hidden;
+            background: #faf7fd;
+            transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+            padding: 0 2rem;
+        }
+        .ejercicio-content.active {
+            padding: 2rem;
+            max-height: 800px;
+        }
+        .ej-problema {
+            margin-bottom: 1.2rem;
+        }
+        .ej-problema strong {
+            color: #6f42c1;
+            font-size: 1.1rem;
+        }
+        .ej-pista {
+            background: #fffbe6;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0 1.5rem 0;
+            font-style: italic;
+        }
+        .ej-solucion {
+            background: #f3f0fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            padding: 1.5rem 1rem;
+            margin-top: 1.2rem;
+            display: none;
+        }
+        .ej-solucion.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+        .ej-btn-solucion {
+            background: #6f42c1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 1rem 0 0.5rem 0;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 6px rgba(111,66,193,0.08);
+        }
+        .ej-btn-solucion:hover {
+            background: #5a32a3;
+            box-shadow: 0 4px 12px rgba(111,66,193,0.13);
+        }
+        .explicacion-codigo {
+            margin-top: 1rem;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        .explicacion-codigo b, .explicacion-codigo strong {
+            color: #5a32a3;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../GitHub/index.html" class="nav-link">GitHub</a>
+                <a href="../Condicionales/index.html" class="nav-link active">Condicionales</a>
+                <a href="../Bucles/index.html" class="nav-link">Bucles</a>
+                <a href="../MiniProyecto/index.html" class="nav-link">Mini Proyecto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Condicionales en Python 🎯</h1>
+        <p>Aprende a controlar el flujo de tu programa usando condicionales y toma decisiones basadas en diferentes situaciones.</p>
+    </div>
+
+    <main>
+        <section class="section">
+            <h2>¿Qué son las Condicionales?</h2>
+            <p>Las condicionales son estructuras que permiten a tu programa tomar decisiones basadas en ciertas condiciones. Son fundamentales para crear programas dinámicos que respondan a diferentes situaciones.</p>
+            
+            <div class="code-block">
+                <pre>
+<span class="keyword">if</span> <span class="boolean">True</span>:
+    <span class="comment"># Este código siempre se ejecutará</span>
+    <span class="keyword">print</span>(<span class="string">"La condición es verdadera"</span>)
+<span class="keyword">else</span>:
+    <span class="comment"># Este código nunca se ejecutará</span>
+    <span class="keyword">print</span>(<span class="string">"La condición es falsa"</span>)</pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Tipos de Condicionales</h2>
+            <div class="accordion-condicionales">
+                <div class="accordion-cond-item">
+                    <div class="accordion-cond-header">
+                        if (condición)
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-cond-content">
+                        <p>La estructura más básica que ejecuta un bloque de código si la condición es verdadera.</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">if</span> <span class="variable">edad</span> &gt;= <span class="number">18</span>:
+    <span class="function">print</span>(<span class="string">"Eres mayor de edad"</span>)</pre>
+                        </div>
+                        <div class="cond-explicacion">
+                            <b>¿Qué hace este código?</b><br>
+                            Evalúa si la variable <strong>edad</strong> es mayor o igual a 18. Si es cierto, imprime el mensaje.<br>
+                            <b>¿Cuándo usarlo?</b><br>
+                            Cuando necesitas ejecutar una acción solo si se cumple una condición.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-cond-item">
+                    <div class="accordion-cond-header">
+                        if ... else
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-cond-content">
+                        <p>Permite ejecutar un bloque alternativo si la condición es falsa.</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">if</span> <span class="variable">nota</span> &gt;= <span class="number">60</span>:
+    <span class="function">print</span>(<span class="string">"Aprobado"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Reprobado"</span>)</pre>
+                        </div>
+                        <div class="cond-explicacion">
+                            <b>¿Qué hace este código?</b><br>
+                            Si <strong>nota</strong> es mayor o igual a 60, imprime "Aprobado". Si no, imprime "Reprobado".<br>
+                            <b>¿Cuándo usarlo?</b><br>
+                            Cuando necesitas tomar una decisión entre dos caminos posibles.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-cond-item">
+                    <div class="accordion-cond-header">
+                        if ... elif ... else
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-cond-content">
+                        <p>Permite evaluar múltiples condiciones en secuencia.</p>
+                        <div class="code-block">
+                            <pre><span class="keyword">if</span> <span class="variable">nota</span> &gt;= <span class="number">90</span>:
+    <span class="function">print</span>(<span class="string">"A"</span>)
+<span class="keyword">elif</span> <span class="variable">nota</span> &gt;= <span class="number">80</span>:
+    <span class="function">print</span>(<span class="string">"B"</span>)
+<span class="keyword">elif</span> <span class="variable">nota</span> &gt;= <span class="number">70</span>:
+    <span class="function">print</span>(<span class="string">"C"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"F"</span>)</pre>
+                        </div>
+                        <div class="cond-explicacion">
+                            <b>¿Qué hace este código?</b><br>
+                            Evalúa la variable <strong>nota</strong> y asigna una calificación según el rango en el que se encuentre.<br>
+                            <b>¿Cuándo usarlo?</b><br>
+                            Cuando necesitas tomar decisiones entre más de dos opciones.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Operadores de Comparación</h2>
+            <p>Los operadores de comparación te permiten comparar valores y obtener un resultado booleano (True o False).</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operador</th>
+                            <th>Descripción</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>==</td>
+                            <td>Igual a</td>
+                            <td>5 == 5 (True)</td>
+                        </tr>
+                        <tr>
+                            <td>!=</td>
+                            <td>Diferente de</td>
+                            <td>5 != 3 (True)</td>
+                        </tr>
+                        <tr>
+                            <td>></td>
+                            <td>Mayor que</td>
+                            <td>5 > 3 (True)</td>
+                        </tr>
+                        <tr>
+                            <td><</td>
+                            <td>Menor que</td>
+                            <td>3 < 5 (True)</td>
+                        </tr>
+                        <tr>
+                            <td>>=</td>
+                            <td>Mayor o igual que</td>
+                            <td>5 >= 5 (True)</td>
+                        </tr>
+                        <tr>
+                            <td><=</td>
+                            <td>Menor o igual que</td>
+                            <td>5 <= 5 (True)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Operadores Lógicos</h2>
+            <p>Los operadores lógicos te permiten combinar condiciones y crear expresiones más complejas.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operador</th>
+                            <th>Descripción</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>and</td>
+                            <td>Y lógico</td>
+                            <td>True and True (True)</td>
+                        </tr>
+                        <tr>
+                            <td>or</td>
+                            <td>O lógico</td>
+                            <td>True or False (True)</td>
+                        </tr>
+                        <tr>
+                            <td>not</td>
+                            <td>No lógico</td>
+                            <td>not True (False)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="code-block">
+                <pre>
+<span class="comment"># Ejemplo de operadores lógicos</span>
+edad = <span class="number">20</span>
+tiene_licencia = <span class="boolean">True</span>
+
+<span class="keyword">if</span> edad >= <span class="number">18</span> <span class="keyword">and</span> tiene_licencia:
+    <span class="keyword">print</span>(<span class="string">"Puedes conducir"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"No puedes conducir"</span>)</pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Ejemplos Avanzados</h2>
+            <div class="accordion-condicionales">
+                <div class="accordion-cond-item">
+                    <div class="accordion-cond-header">
+                        Condicionales Anidadas
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-cond-content">
+                        <p>Puedes anidar condicionales para crear estructuras más complejas.</p>
+                        <div class="code-block">
+                            <pre>
+<span class="keyword">if</span> edad >= <span class="number">18</span>:
+    <span class="keyword">if</span> tiene_licencia:
+        <span class="keyword">print</span>(<span class="string">"Puedes conducir"</span>)
+    <span class="keyword">else</span>:
+        <span class="keyword">print</span>(<span class="string">"Necesitas obtener una licencia"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Eres menor de edad"</span>)</pre>
+                        </div>
+                        <div class="cond-explicacion">
+                            <b>¿Qué hace este código?</b><br>
+                            Evalúa si la variable <strong>edad</strong> es mayor o igual a 18. Si es cierto, verifica si <strong>tiene_licencia</strong> es verdadero. Si es así, imprime "Puedes conducir"; de lo contrario, imprime "Necesitas obtener una licencia". Si la edad es menor a 18, imprime "Eres menor de edad".<br>
+                            <b>¿Cuándo usarlo?</b><br>
+                            Cuando necesitas tomar decisiones en cascada basadas en múltiples condiciones.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-cond-item">
+                    <div class="accordion-cond-header">
+                        Operador Ternario
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="accordion-cond-content">
+                        <p>Una forma concisa de escribir condicionales simples.</p>
+                        <div class="code-block">
+                            <pre>
+<span class="comment"># Forma tradicional</span>
+<span class="keyword">if</span> edad >= <span class="number">18</span>:
+    mensaje = <span class="string">"Mayor de edad"</span>
+<span class="keyword">else</span>:
+    mensaje = <span class="string">"Menor de edad"</span>
+
+<span class="comment"># Usando operador ternario</span>
+mensaje = <span class="string">"Mayor de edad"</span> <span class="keyword">if</span> edad >= <span class="number">18</span> <span class="keyword">else</span> <span class="string">"Menor de edad"</span></pre>
+                        </div>
+                        <div class="cond-explicacion">
+                            <b>¿Qué hace este código?</b><br>
+                            Asigna a la variable <strong>mensaje</strong> el valor "Mayor de edad" si <strong>edad</strong> es mayor o igual a 18, y "Menor de edad" en caso contrario.<br>
+                            <b>¿Cuándo usarlo?</b><br>
+                            Cuando necesitas una asignación condicional simple y concisa.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Práctica de Condicionales: 5 Ejercicios</h2>
+            <div class="ejercicios-acordeon">
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🔢</span> Ejercicio 1: ¿Par o Impar?</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Crea un programa que tome un número entero y determine si es un número par o impar.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Un número es par si el residuo de su división entre 2 es cero. Puedes usar el operador de módulo % para obtener el residuo.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="comment"># Definimos una variable con el número a evaluar</span>
+numero = <span class="number">15</span>
+
+<span class="comment"># Usamos el operador de módulo (%) para obtener el residuo de la división por 2</span>
+<span class="comment"># Si el residuo es 0, el número es par.</span>
+<span class="keyword">if</span> numero % <span class="number">2</span> == <span class="number">0</span>:
+    <span class="keyword">print</span>(<span class="string">f"El número {numero} es PAR."</span>)
+<span class="comment"># Si la condición del if es Falsa, significa que el residuo no fue 0.</span>
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">f"El número {numero} es IMPAR."</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">👱🏽‍♀️</span> Ejercicio 2: Etapas de la Vida</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Escribe un programa que, dada una edad, imprima la etapa de la vida de una persona. Usa las siguientes reglas:</p>
+                            <ul>
+                                <li>0-12 años: "Eres un(a) niño(a)."</li>
+                                <li>13-17 años: "Eres un(a) adolescente."</li>
+                                <li>18-64 años: "Eres un(a) adulto(a)."</li>
+                                <li>65 años o más: "Eres un(a) adulto(a) mayor."</li>
+                            </ul>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Usa condicionales if/elif/else para evaluar las diferentes etapas de la vida.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="comment"># Definimos la edad a clasificar</span>
+edad = <span class="number">25</span>
+
+<span class="comment"># El programa evalúa las condiciones en orden</span>
+<span class="keyword">if</span> edad >= <span class="number">0</span> <span class="keyword">and</span> edad <= <span class="number">12</span>:
+    <span class="keyword">print</span>(<span class="string">"Eres un(a) niño(a)."</span>)
+<span class="comment"># Si la primera falla, evalúa esta</span>
+<span class="keyword">elif</span> edad >= <span class="number">13</span> <span class="keyword">and</span> edad <= <span class="number">17</span>:
+    <span class="keyword">print</span>(<span class="string">"Eres un(a) adolescente."</span>)
+<span class="comment"># Si la segunda falla, evalúa esta</span>
+<span class="keyword">elif</span> edad >= <span class="number">18</span> <span class="keyword">and</span> edad <= <span class="number">64</span>:
+    <span class="keyword">print</span>(<span class="string">"Eres un(a) adulto(a)."</span>)
+<span class="comment"># Si ninguna de las anteriores fue Verdadera, se ejecuta esta</span>
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Eres un(a) adulto(a) mayor."</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🎢</span> Ejercicio 3: Acceso a la Montaña Rusa</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Un parque de diversiones quiere permitir el acceso a su nueva montaña rusa solo a personas que midan 1.50 metros o más y que además tengan 16 años o más. Crea un programa que determine si una persona puede subir o no.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Necesitarás combinar dos condiciones con el operador and.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="comment"># Datos de la persona que quiere subir</span>
+estatura_metros = <span class="number">1.75</span>
+edad = <span class="number">18</span>
+
+<span class="comment"># La condición requiere que AMBAS comparaciones sean verdaderas</span>
+<span class="comment"># gracias al operador 'and'</span>
+<span class="keyword">if</span> estatura_metros >= <span class="number">1.50</span> <span class="keyword">and</span> edad >= <span class="number">16</span>:
+    <span class="keyword">print</span>(<span class="string">"¡Acceso permitido! Disfruta de la adrenalina. ✅"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Acceso denegado. No cumples con los requisitos de edad y/o estatura. ❌"</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🛒</span> Ejercicio 4: Día de Descuento o Cupón</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Una tienda online ofrece envío gratis si el día es sábado o si el cliente tiene un cupón de envío gratis. Escribe un programa que le diga al usuario si su envío es gratis o no.</p>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Necesitarás usar el operador or.
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="comment"># Estado actual del cliente y del día</span>
+dia = <span class="string">"lunes"</span>
+tiene_cupon = <span class="boolean">True</span>
+
+<span class="comment"># La condición se cumple si CUALQUIERA de las dos comparaciones es Verdadera</span>
+<span class="comment"># gracias al operador 'or'</span>
+<span class="keyword">if</span> dia == <span class="string">"sábado"</span> <span class="keyword">or</span> tiene_cupon == <span class="boolean">True</span>:
+    <span class="keyword">print</span>(<span class="string">"¡Felicidades! Tu envío es GRATIS. 📦"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"El costo de envío se aplicará a tu compra."</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ejercicio-item">
+                    <div class="ejercicio-header">
+                        <span><span class="ej-icon">🔐</span> Ejercicio 5: Login de Usuario</span>
+                        <span class="toggle-icon">▶</span>
+                    </div>
+                    <div class="ejercicio-content">
+                        <div class="ej-problema">
+                            <strong>Problema:</strong>
+                            <p>Simula un inicio de sesión simple. El programa debe verificar un nombre de usuario y una contraseña.</p>
+                            <ul>
+                                <li>Si ambos son correctos (usuario: "admin", contraseña: "12345"), imprime "Acceso concedido".</li>
+                                <li>Si el nombre de usuario es correcto pero la contraseña no, imprime "Contraseña incorrecta".</li>
+                                <li>Si el nombre de usuario es incorrecto, imprime "Usuario no encontrado".</li>
+                            </ul>
+                        </div>
+                        <div class="ej-pista">
+                            <b>Pista:</b> Este problema requiere condicionales anidados (un if dentro de otro if/else).
+                        </div>
+                        <button class="ej-btn-solucion">Ver Solución</button>
+                        <div class="ej-solucion">
+                            <div class="code-block">
+                                <pre><span class="comment"># Datos correctos</span>
+<span class="variable">usuario_correcto</span> = <span class="string">"admin"</span>
+<span class="variable">contrasena_correcta</span> = <span class="string">"12345"</span>
+
+<span class="comment"># Datos que ingresa el usuario</span>
+<span class="variable">usuario_ingresado</span> = <span class="string">"admin"</span>
+<span class="variable">contrasena_ingresada</span> = <span class="string">"password"</span>
+
+<span class="comment"># Primer nivel de verificación: el usuario</span>
+<span class="keyword">if</span> <span class="variable">usuario_ingresado</span> == <span class="variable">usuario_correcto</span>:
+    <span class="comment"># Si el usuario es correcto, pasamos a verificar la contraseña</span>
+    <span class="comment"># Este es el condicional anidado</span>
+    <span class="keyword">if</span> <span class="variable">contrasena_ingresada</span> == <span class="variable">contrasena_correcta</span>:
+        <span class="function">print</span>(<span class="string">"Acceso concedido. ¡Bienvenido! ✨"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"Contraseña incorrecta. Intenta de nuevo. 🔒"</span>)
+<span class="comment"># Si el primer 'if' falla, significa que el usuario es incorrecto</span>
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Usuario no encontrado."</span>)</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="test-wizard-container" id="test-wizard">
+                <div class="test-wizard-title">Test: Dominando las Condicionales</div>
+                <div class="test-wizard-progress">
+                    <div class="test-wizard-progress-bar" id="testProgressBar"></div>
+                </div>
+                <div id="testWizardContent"></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const testQuestions = [
+            {
+                question: '¿Cuál será la salida del siguiente código?',
+                code: `<span class="variable">x</span> = <span class="number">5</span><br><span class="keyword">if</span> <span class="variable">x</span> > <span class="number">3</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"A"</span>)<br><span class="keyword">elif</span> <span class="variable">x</span> > <span class="number">4</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"B"</span>)<br><span class="keyword">else</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"C"</span>)`,
+                options: [
+                    'A', 'B', 'C'
+                ],
+                correct: 0,
+                explanation: 'El código imprime "A" porque la primera condición (x > 3) es verdadera, y las condiciones elif y else no se evalúan.'
+            },
+            {
+                question: '¿Cuál es el resultado de la siguiente expresión?',
+                code: `<span class="keyword">not</span> (<span class="boolean">True</span> <span class="keyword">and</span> <span class="boolean">False</span>)`,
+                options: [
+                    'True', 'False'
+                ],
+                correct: 0,
+                explanation: 'True and False es False, y not False es True.'
+            },
+            {
+                question: '¿Cuál será la salida del siguiente código?',
+                code: `<span class="variable">x</span> = <span class="number">10</span><br><span class="variable">y</span> = <span class="number">5</span><br><span class="keyword">if</span> <span class="variable">x</span> > <span class="variable">y</span> <span class="keyword">and</span> <span class="variable">y</span> < <span class="number">10</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"A"</span>)<br><span class="keyword">elif</span> <span class="variable">x</span> > <span class="variable">y</span> <span class="keyword">or</span> <span class="variable">y</span> > <span class="number">10</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"B"</span>)<br><span class="keyword">else</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"C"</span>)`,
+                options: [
+                    'A', 'B', 'C'
+                ],
+                correct: 0,
+                explanation: 'La primera condición es verdadera porque x > y (10 > 5) y y < 10 (5 < 10), por lo que imprime "A".'
+            },
+            {
+                question: '¿Cuál es el resultado de la siguiente expresión?',
+                code: `<span class="number">5</span> <= <span class="number">5</span> <span class="keyword">and</span> <span class="number">5</span> >= <span class="number">5</span>`,
+                options: [
+                    'True', 'False'
+                ],
+                correct: 0,
+                explanation: '5 <= 5 es True y 5 >= 5 es True, por lo tanto True and True es True.'
+            },
+            {
+                question: '¿Cuál será la salida del siguiente código?',
+                code: `<span class="variable">x</span> = <span class="number">0</span><br><span class="keyword">if</span> <span class="variable">x</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"A"</span>)<br><span class="keyword">else</span>:<br>&nbsp;&nbsp;<span class="function">print</span>(<span class="string">"B"</span>)`,
+                options: [
+                    'A', 'B'
+                ],
+                correct: 1,
+                explanation: 'En Python, 0 se evalúa como False en un contexto booleano, por lo que se ejecuta el bloque else.'
+            }
+        ];
+        let currentQ = 0;
+        let score = 0;
+        let answered = false;
+
+        function renderTestWizard() {
+            const content = document.getElementById('testWizardContent');
+            const progress = document.getElementById('testProgressBar');
+            if (currentQ >= testQuestions.length) {
+                // Resultado final
+                let msg = '';
+                if (score === testQuestions.length) {
+                    msg = '¡Excelente! Has dominado las condicionales.';
+                } else if (score >= testQuestions.length * 0.7) {
+                    msg = '¡Buen trabajo! Sigue practicando.';
+                } else {
+                    msg = 'Necesitas repasar más. ¡No te rindas!';
+                }
+                content.innerHTML = `
+                    <div class="test-wizard-result">
+                        <div class="test-wizard-result-score">${score}/${testQuestions.length}</div>
+                        <div class="test-wizard-result-message">${msg}</div>
+                        <button class="test-wizard-btn" onclick="restartTestWizard()">Reintentar Test</button>
+                    </div>
+                `;
+                progress.style.width = '100%';
+                return;
+            }
+            const q = testQuestions[currentQ];
+            let codeBlock = '';
+            if (q.code) {
+                codeBlock = `<div class='code-block' style='margin-bottom:1.2rem;'><pre>${q.code}</pre></div>`;
+            }
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                optionsHtml += `
+                    <div class="test-wizard-option" data-idx="${idx}" onclick="selectTestOption(${idx})">
+                        <input type="radio" name="testOption" id="testOption${idx}" style="margin-right:0.7rem;" ${answered && idx===q.selected ? 'checked' : ''}>
+                        <label for="testOption${idx}">${opt.replace(/\n/g, '<br>')}</label>
+                    </div>
+                `;
+            });
+            content.innerHTML = `
+                <div class="test-wizard-question">${q.question}</div>
+                ${codeBlock}
+                <div class="test-wizard-options">${optionsHtml}</div>
+                <div id="testWizardFeedback"></div>
+                <button class="test-wizard-btn" id="testWizardBtn" onclick="submitTestAnswer()">${answered ? (currentQ === testQuestions.length-1 ? 'Ver resultado' : 'Siguiente') : 'Responder'}</button>
+            `;
+            progress.style.width = `${(currentQ)/testQuestions.length*100}%`;
+            // Marcar opción seleccionada si ya respondió
+            if (answered && typeof q.selected !== 'undefined') {
+                document.querySelectorAll('.test-wizard-option').forEach((el, idx) => {
+                    if (idx === q.selected) {
+                        el.classList.add(idx === q.correct ? 'correct' : 'incorrect');
+                        el.classList.add('selected');
+                    }
+                    if (idx === q.correct && idx !== q.selected) {
+                        el.classList.add('correct');
+                    }
+                });
+                showTestFeedback(q.selected === q.correct, q.explanation);
+            }
+        }
+        function selectTestOption(idx) {
+            if (answered) return;
+            document.querySelectorAll('.test-wizard-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById('testOption'+idx).checked = true;
+            document.querySelectorAll('.test-wizard-option')[idx].classList.add('selected');
+            testQuestions[currentQ].selected = idx;
+        }
+        function submitTestAnswer() {
+            const q = testQuestions[currentQ];
+            if (!answered) {
+                if (typeof q.selected === 'undefined') return;
+                answered = true;
+                if (q.selected === q.correct) score++;
+                renderTestWizard();
+            } else {
+                // Siguiente pregunta
+                answered = false;
+                currentQ++;
+                renderTestWizard();
+            }
+        }
+        function showTestFeedback(isCorrect, explanation) {
+            const feedback = document.getElementById('testWizardFeedback');
+            feedback.innerHTML = `
+                <div class="test-wizard-feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                    ${isCorrect ? '✔️ ¡Correcto!' : '❌ Incorrecto.'}
+                </div>
+                <div class="test-wizard-explanation">${explanation}</div>
+            `;
+        }
+        function restartTestWizard() {
+            currentQ = 0;
+            score = 0;
+            answered = false;
+            testQuestions.forEach(q => { delete q.selected; });
+            renderTestWizard();
+        }
+        // Inicializar
+        renderTestWizard();
+
+        // Acordeón de tipos de condicionales
+        const condHeaders = document.querySelectorAll('.accordion-cond-header');
+        condHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                document.querySelectorAll('.accordion-cond-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.accordion-cond-header').forEach(h => h.classList.remove('active'));
+                if (!isActive) {
+                    content.classList.add('active');
+                    header.classList.add('active');
+                }
+            });
+        });
+
+        // Interactividad acordeón para ejercicios (igual que Bucles)
+        document.querySelectorAll('.ejercicio-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = content.classList.contains('active');
+                document.querySelectorAll('.ejercicio-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.ejercicio-header').forEach(h => h.classList.remove('active'));
+                if (!isActive) {
+                    content.classList.add('active');
+                    header.classList.add('active');
+                }
+            });
+        });
+        document.querySelectorAll('.ej-btn-solucion').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sol = this.nextElementSibling;
+                sol.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html> 
