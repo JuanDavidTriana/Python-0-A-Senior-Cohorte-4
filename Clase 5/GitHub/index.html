@@ -193,6 +193,56 @@
             background: #f8f9fa;
         }
 
+        .config-section {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .config-section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .config-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #9c27b0;
+            border-radius: 2px;
+        }
+
+        .config-section p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .config-commands {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #6f42c1;
+        }
+
+        .config-commands code {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: #1e1e1e;
+            color: #fff;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+        }
+
         .accordion {
             margin: 2rem 0;
         }
@@ -423,10 +473,31 @@
         </section>
 
         <section class="install-section">
-            <h2>¡Vamos a instalar Git!</h2>
-            <p>Para comenzar a usar Git en tu computadora, necesitas instalarlo. Descarga la versión adecuada para tu sistema operativo desde la página oficial.</p>
-            <a href="https://git-scm.com/downloads" target="_blank" class="install-btn">Descargar Git</a>
+            <h2>Instalación de Git</h2>
+            <p>Para comenzar a usar Git, primero necesitas instalarlo en tu sistema. Haz clic en el botón correspondiente a tu sistema operativo:</p>
+            <a href="https://git-scm.com/download/win" class="install-btn" target="_blank">Descargar Git para Windows</a>
         </section>
+
+        <div class="config-section">
+            <h2>Configuración Inicial de Git</h2>
+            <p>Después de instalar Git, es importante configurar tu identidad. Esto es necesario para que Git pueda identificar quién está realizando los cambios en el repositorio.</p>
+            
+            <div class="config-commands">
+                <p>Configura tu nombre de usuario:</p>
+                <code>git config --global user.name "Tu Nombre"</code>
+                
+                <p>Configura tu correo electrónico:</p>
+                <code>git config --global user.email "tu@ejemplo.com"</code>
+            </div>
+
+            <p>Estos comandos son esenciales porque:</p>
+            <ul>
+                <li>Establecen tu identidad en todos los repositorios Git de tu computadora</li>
+                <li>Permiten que tus commits estén correctamente firmados con tu nombre y correo</li>
+                <li>Son necesarios para colaborar en proyectos y que otros desarrolladores puedan identificarte</li>
+                <li>La opción --global hace que esta configuración se aplique a todos tus repositorios</li>
+            </ul>
+        </div>
 
         <section class="section">
             <h2>¿Qué es GitHub?</h2>
