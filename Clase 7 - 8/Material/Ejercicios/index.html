@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Prácticos - Clase 7</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .exercise {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 5px solid #6f42c1;
+        }
+
+        .exercise:hover {
+            transform: translateY(-5px);
+        }
+
+        .exercise h2 {
+            color: #6f42c1;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .easy { background: #d4edda; color: #155724; }
+        .medium { background: #fff3cd; color: #856404; }
+        .hard { background: #f8d7da; color: #721c24; }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-function {
+            color: #63b3ed;
+        }
+
+        .hint {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .hint h4 {
+            color: #2c7a7b;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution {
+            background: #f0fff4;
+            border: 2px solid #48bb78;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .solution h4 {
+            color: #2f855a;
+            margin-bottom: 0.5rem;
+        }
+
+        .toggle-btn {
+            background: #6f42c1;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: #5a32a3;
+        }
+
+        .challenge-box {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .exercise {
+                padding: 1.5rem;
+            }
+        }
+
+        .exercise-conditions-list {
+            list-style: none;
+            margin: 1.2rem 0 1.7rem 2.5rem;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .exercise-conditions-list li {
+            position: relative;
+            padding-left: 2.1rem;
+            font-size: 1.08rem;
+            color: #333;
+        }
+        .exercise-conditions-list li::before {
+            content: '';
+            position: absolute;
+            left: 0.3rem;
+            top: 0.6rem;
+            width: 0.85rem;
+            height: 0.85rem;
+            background: #7C3AED;
+            border-radius: 50%;
+            box-shadow: 0 1px 4px rgba(124,58,237,0.13);
+            display: inline-block;
+        }
+        .condition-example {
+            color: #6f42c1;
+            font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 1.01rem;
+            margin-left: 0.3rem;
+        }
+
+        .github-reminder {
+            background: #f3e8ff;
+            color: #4B2067;
+            border-left: 5px solid #7C3AED;
+            border-radius: 8px;
+            margin: 1.2rem auto 0 auto;
+            padding: 1rem 1.5rem;
+            font-size: 1.08rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            max-width: 700px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            justify-content: center;
+            text-align: left;
+        }
+        .github-icon {
+            font-size: 1.7rem;
+            margin-right: 0.7rem;
+        }
+        .github-link {
+            color: #7C3AED;
+            font-weight: bold;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .github-link:hover {
+            color: #4B2067;
+        }
+
+        .next-module-box {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            border-radius: 18px;
+            padding: 2.2rem 4rem 2rem 4rem;
+            margin: 3rem auto 2rem auto;
+            max-width: 1200px;
+            text-align: center;
+            box-shadow: 0 4px 16px 0 rgba(111,66,193,0.13);
+        }
+        .next-module-box h3 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .next-module-btn {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: #fff;
+            color: #7C3AED;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.8rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .next-module-btn:hover {
+            background: #f3e8ff;
+            color: #4B2067;
+            transform: translateY(-2px) scale(1.04);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Taller de Funciones</a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="../Funciones/index.html" class="nav-link">Funciones</a>
+                <a href="index.html" class="nav-link active">Ejercicios</a>
+                <a href="../Proyecto/index.html" class="nav-link">Proyecto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Ejercicios Prácticos</h1>
+        <p>¡Pon a prueba tus conocimientos de funciones!</p>
+    </div>
+
+    <main>
+        <div class="challenge-box">
+            <h3>🎯 Desafío de la Clase</h3>
+            <p>Completa todos los ejercicios para dominar las funciones en Python. Cada ejercicio te ayudará a entender mejor cómo crear y usar funciones efectivamente.</p>
+            <div class="github-reminder">
+                <span class="github-icon">🐙</span>
+                <span><b>Recuerda:</b> Sube todos tus ejercicios a <a href="https://github.com/" target="_blank" class="github-link">GitHub</a> para seguir practicando el uso de esta herramienta y llevar un registro de tu progreso.</span>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h2>Ejercicio 1: Función de Saludo Personalizado</h2>
+            <span class="difficulty easy">Fácil</span>
+            <p>Crea una función llamada <code>saludar_persona</code> que tome dos parámetros: <code>nombre</code> y <code>hora</code>. La función debe devolver un saludo apropiado según la hora del día:</p>
+            <ul class="exercise-conditions-list">
+                <li>Si la hora es menor a 12: <span class="condition-example">"¡Buenos días, [nombre]!"</span></li>
+                <li>Si la hora está entre 12 y 18: <span class="condition-example">"¡Buenas tardes, [nombre]!"</span></li>
+                <li>Si la hora es mayor a 18: <span class="condition-example">"¡Buenas noches, [nombre]!"</span></li>
+            </ul>
+            
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Usa condicionales (if, elif, else) dentro de tu función para determinar qué saludo mostrar.</p>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSolution('sol1')">Ver Solución</button>
+            <div id="sol1" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block syntax-highlight">
+def <span class="code-function">saludar_persona</span>(nombre, hora):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> hora &lt; 12:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">f"¡Buenos días, {nombre}!"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">elif</span> hora &lt; 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">f"¡Buenas tardes, {nombre}!"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">else</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">f"¡Buenas noches, {nombre}!"</span><br><br><span class="code-comment"># Pruebas</span><br><span class="code-keyword">print</span>(<span class="code-function">saludar_persona</span>(<span class="code-string">"Ana"</span>, 9))   <span class="code-comment"># ¡Buenos días, Ana!</span><br><span class="code-keyword">print</span>(<span class="code-function">saludar_persona</span>(<span class="code-string">"Carlos"</span>, 15)) <span class="code-comment"># ¡Buenas tardes, Carlos!</span><br><span class="code-keyword">print</span>(<span class="code-function">saludar_persona</span>(<span class="code-string">"María"</span>, 20)) <span class="code-comment"># ¡Buenas noches, María!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h2>Ejercicio 2: Calculadora de Estadísticas</h2>
+            <span class="difficulty medium">Medio</span>
+            <p>Crea una función llamada <code>calcular_estadisticas</code> que tome una lista de números y devuelva un diccionario con:</p>
+            <ul class="exercise-conditions-list">
+                <li>La suma de todos los números: <span class="condition-example">"suma"</span></li>
+                <li>El promedio: <span class="condition-example">"promedio"</span></li>
+                <li>El número máximo: <span class="condition-example">"maximo"</span></li>
+                <li>El número mínimo: <span class="condition-example">"minimo"</span></li>
+                <li>La cantidad de números: <span class="condition-example">"cantidad"</span></li>
+            </ul>
+            
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Usa las funciones built-in de Python como <code>sum()</code>, <code>max()</code>, <code>min()</code> y <code>len()</code>.</p>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSolution('sol2')">Ver Solución</button>
+            <div id="sol2" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block syntax-highlight">
+def <span class="code-function">calcular_estadisticas</span>(numeros):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> <span class="code-keyword">len</span>(numeros) == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"La lista está vacía"</span><br>&nbsp;&nbsp;&nbsp;&nbsp;estadisticas = {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"suma"</span>: <span class="code-keyword">sum</span>(numeros),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"promedio"</span>: <span class="code-keyword">sum</span>(numeros) / <span class="code-keyword">len</span>(numeros),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"maximo"</span>: <span class="code-keyword">max</span>(numeros),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"minimo"</span>: <span class="code-keyword">min</span>(numeros),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"cantidad"</span>: <span class="code-keyword">len</span>(numeros)<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> estadisticas<br><br><span class="code-comment"># Pruebas</span><br>numeros = [10, 20, 30, 40, 50]<br>resultado = <span class="code-function">calcular_estadisticas</span>(numeros)<br><span class="code-keyword">print</span>(resultado)<br><span class="code-comment"># {'suma': 150, 'promedio': 30.0, 'maximo': 50, 'minimo': 10, 'cantidad': 5}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h2>Ejercicio 3: Validador de Contraseña</h2>
+            <span class="difficulty medium">Medio</span>
+            <p>Crea una función llamada <code>validar_password</code> que tome una contraseña como parámetro y devuelva <code>True</code> si cumple con los siguientes criterios:</p>
+            <ul class="exercise-conditions-list">
+                <li>Tiene al menos 8 caracteres</li>
+                <li>Contiene al menos una letra mayúscula</li>
+                <li>Contiene al menos una letra minúscula</li>
+                <li>Contiene al menos un número</li>
+                <li>Contiene al menos un carácter especial <span class="condition-example">!@#$%^&*</span></li>
+            </ul>
+            
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Usa métodos de string como <code>isupper()</code>, <code>islower()</code>, <code>isdigit()</code> y verifica si los caracteres están en una lista de caracteres especiales.</p>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSolution('sol3')">Ver Solución</button>
+            <div id="sol3" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+<span class="code-keyword">def</span> <span class="code-function">validar_password</span>(password):
+    <span class="code-keyword">if</span> <span class="code-keyword">len</span>(password) < 8:
+        <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    tiene_mayuscula = <span class="code-keyword">False</span>
+    tiene_minuscula = <span class="code-keyword">False</span>
+    tiene_numero = <span class="code-keyword">False</span>
+    tiene_especial = <span class="code-keyword">False</span>
+    
+    caracteres_especiales = <span class="code-string">"!@#$%^&*"</span>
+    
+    <span class="code-keyword">for</span> caracter <span class="code-keyword">in</span> password:
+        <span class="code-keyword">if</span> caracter.isupper():
+            tiene_mayuscula = <span class="code-keyword">True</span>
+        <span class="code-keyword">elif</span> caracter.islower():
+            tiene_minuscula = <span class="code-keyword">True</span>
+        <span class="code-keyword">elif</span> caracter.isdigit():
+            tiene_numero = <span class="code-keyword">True</span>
+        <span class="code-keyword">elif</span> caracter <span class="code-keyword">in</span> caracteres_especiales:
+            tiene_especial = <span class="code-keyword">True</span>
+    
+    <span class="code-keyword">return</span> tiene_mayuscula <span class="code-keyword">and</span> tiene_minuscula <span class="code-keyword">and</span> tiene_numero <span class="code-keyword">and</span> tiene_especial
+
+<span class="code-comment"># Pruebas</span>
+<span class="code-keyword">print</span>(<span class="code-function">validar_password</span>(<span class="code-string">"Abc123!"</span>))  <span class="code-comment"># True</span>
+<span class="code-keyword">print</span>(<span class="code-function">validar_password</span>(<span class="code-string">"password"</span>))  <span class="code-comment"># False</span>
+<span class="code-keyword">print</span>(<span class="code-function">validar_password</span>(<span class="code-string">"12345678"</span>))  <span class="code-comment"># False</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h2>Ejercicio 4: Generador de Fibonacci</h2>
+            <span class="difficulty hard">Difícil</span>
+            <p>Crea una función llamada <code>fibonacci</code> que genere los primeros n números de la secuencia de Fibonacci. La función debe usar argumentos variables (*args) para aceptar diferentes parámetros:</p>
+            <ul class="exercise-conditions-list">
+                <li>Si se pasa un número: <span class="condition-example">genera esa cantidad de números</span></li>
+                <li>Si se pasan dos números: <span class="condition-example">genera números hasta que el siguiente sea mayor al segundo número</span></li>
+                <li>Si se pasan tres números: <span class="condition-example">genera números entre el rango especificado</span></li>
+            </ul>
+            
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Usa <code>len(args)</code> para determinar cuántos argumentos se pasaron y ajusta la lógica en consecuencia.</p>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSolution('sol4')">Ver Solución</button>
+            <div id="sol4" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+<span class="code-keyword">def</span> <span class="code-function">fibonacci</span>(*args):
+    <span class="code-keyword">if</span> <span class="code-keyword">len</span>(args) == 0:
+        <span class="code-keyword">return</span> <span class="code-string">"Debes pasar al menos un argumento"</span>
+    
+    <span class="code-keyword">if</span> <span class="code-keyword">len</span>(args) == 1:
+        <span class="code-comment"># Generar n números</span>
+        n = args[0]
+        secuencia = [0, 1]
+        <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-keyword">range</span>(2, n):
+            secuencia.append(secuencia[i-1] + secuencia[i-2])
+        <span class="code-keyword">return</span> secuencia[:n]
+    
+    <span class="code-keyword">elif</span> <span class="code-keyword">len</span>(args) == 2:
+        <span class="code-comment"># Generar hasta que el siguiente sea mayor al límite</span>
+        limite = args[1]
+        secuencia = [0, 1]
+        <span class="code-keyword">while</span> secuencia[-1] <= limite:
+            siguiente = secuencia[-1] + secuencia[-2]
+            <span class="code-keyword">if</span> siguiente > limite:
+                <span class="code-keyword">break</span>
+            secuencia.append(siguiente)
+        <span class="code-keyword">return</span> secuencia
+    
+    <span class="code-keyword">elif</span> <span class="code-keyword">len</span>(args) == 3:
+        <span class="code-comment"># Generar en un rango específico</span>
+        inicio, fin, paso = args
+        secuencia = [0, 1]
+        <span class="code-keyword">while</span> secuencia[-1] <= fin:
+            siguiente = secuencia[-1] + secuencia[-2]
+            <span class="code-keyword">if</span> siguiente > fin:
+                <span class="code-keyword">break</span>
+            secuencia.append(siguiente)
+        
+        <span class="code-comment"># Filtrar por rango</span>
+        resultado = [num <span class="code-keyword">for</span> num <span class="code-keyword">in</span> secuencia <span class="code-keyword">if</span> inicio <= num <= fin]
+        <span class="code-keyword">return</span> resultado[::paso] <span class="code-keyword">if</span> paso > 0 <span class="code-keyword">else</span> resultado
+
+<span class="code-comment"># Pruebas</span>
+<span class="code-keyword">print</span>(<span class="code-function">fibonacci</span>(8))  <span class="code-comment"># [0, 1, 1, 2, 3, 5, 8, 13]</span>
+<span class="code-keyword">print</span>(<span class="code-function">fibonacci</span>(0, 20))  <span class="code-comment"># [0, 1, 1, 2, 3, 5, 8, 13]</span>
+<span class="code-keyword">print</span>(<span class="code-function">fibonacci</span>(5, 15, 2))  <span class="code-comment"># [5, 8, 13]</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h2>Ejercicio 5: Decorador Personalizado</h2>
+            <span class="difficulty hard">Difícil</span>
+            <p>Crea un decorador llamado <code>medir_tiempo</code> que mida el tiempo de ejecución de cualquier función y muestre cuánto tiempo tardó en ejecutarse.</p>
+            
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Usa el módulo <code>time</code> para medir el tiempo. Un decorador es una función que toma otra función como argumento y retorna una nueva función.</p>
+            </div>
+
+            <button class="toggle-btn" onclick="toggleSolution('sol5')">Ver Solución</button>
+            <div id="sol5" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+<span class="code-keyword">import</span> time
+
+<span class="code-keyword">def</span> <span class="code-function">medir_tiempo</span>(funcion):
+    <span class="code-keyword">def</span> <span class="code-function">wrapper</span>(*args, **kwargs):
+        inicio = time.time()
+        resultado = funcion(*args, **kwargs)
+        fin = time.time()
+        tiempo_total = fin - inicio
+        <span class="code-keyword">print</span>(<span class="code-string">f"La función {funcion.__name__} tardó {tiempo_total:.4f} segundos en ejecutarse"</span>)
+        <span class="code-keyword">return</span> resultado
+    <span class="code-keyword">return</span> wrapper
+
+<span class="code-comment"># Ejemplo de uso</span>
+@medir_tiempo
+<span class="code-keyword">def</span> <span class="code-function">funcion_lenta</span>():
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-keyword">range</span>(1000000):
+        <span class="code-keyword">pass</span>
+    <span class="code-keyword">return</span> <span class="code-string">"¡Listo!"</span>
+
+@medir_tiempo
+<span class="code-keyword">def</span> <span class="code-function">sumar_numeros</span>(*numeros):
+    <span class="code-keyword">return</span> <span class="code-keyword">sum</span>(numeros)
+
+<span class="code-comment"># Pruebas</span>
+<span class="code-function">funcion_lenta</span>()
+<span class="code-function">sumar_numeros</span>(1, 2, 3, 4, 5)
+                </div>
+            </div>
+        </div>
+
+
+        <div class="next-module-box">
+            <h3>🚀 ¡Muy bien, has completado los ejercicios!</h3>
+            <p>Ya dominas las funciones en Python. Ahora estás listo para avanzar al siguiente reto y aplicar tus conocimientos en un proyecto real.</p>
+            <a href="../Proyecto/index.html" class="next-module-btn">Ir al Proyecto Final</a>
+        </div>
+    </main>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+            } else {
+                solution.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html> 

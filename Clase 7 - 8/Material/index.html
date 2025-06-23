@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenida Clase 5</title>
+    <title>Bienvenida Taller de Funciones</title>
     <style>
         body {
             min-height: 100vh;
@@ -79,6 +79,27 @@
             box-shadow: 0 8px 32px 0 #b794f4;
             transform: translateY(-2px) scale(1.03);
         }
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
         @media (max-width: 900px) {
             .welcome-container {
                 max-width: 98vw;
@@ -94,17 +115,17 @@
     </style>
 </head>
 <body>
+    <a href="../../index.html" class="back-btn">← Volver a Principal</a>
     <canvas id="matrix-canvas"></canvas>
     <div class="welcome-container">
-        <div class="welcome-title">¡Bienvenidos a la Clase 5!</div>
+        <div class="welcome-title">¡Bienvenidos al Taller de Funciones!</div>
         <div class="welcome-desc">
             Hoy trabajaremos los siguientes módulos. Haz clic en cada uno para ir directamente al contenido:
         </div>
         <div class="modules-list">
-            <a class="module-btn" href="GitHub/index.html">Git y GitHub</a>
-            <a class="module-btn" href="Condicionales/index.html">Condicionales</a>
-            <a class="module-btn" href="Bucles/index.html">Bucles</a>
-            <a class="module-btn" href="MiniProyecto/index.html">Mini Proyecto</a>
+            <a class="module-btn" href="Funciones/index.html">Funciones en Python</a>
+            <a class="module-btn" href="Ejercicios/index.html">Ejercicios Prácticos</a>
+            <a class="module-btn" href="Proyecto/index.html">Proyecto Final</a>
         </div>
     </div>
     <script>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones en Python - Clase 7</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #9c27b0;
+            border-radius: 2px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-function {
+            color: #63b3ed;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .example-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #6f42c1;
+        }
+
+        .example-card h4 {
+            color: #6f42c1;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .tip-box {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .tip-box h4 {
+            color: #2c7a7b;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+
+        .function-types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .function-type-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(111,66,193,0.08);
+            padding: 2rem 1.5rem;
+            border-left: 5px solid #6f42c1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .function-type-card h3 {
+            color: #6f42c1;
+            margin-bottom: 0.5rem;
+        }
+        .syntax-highlight {
+            background: #23272e;
+            color: #e2e8f0;
+            font-family: 'Fira Mono', 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            border-radius: 8px;
+            padding: 1.2rem 1rem;
+            margin: 0.5rem 0 0.7rem 0;
+            overflow-x: auto;
+            line-height: 1.7;
+        }
+        .syntax-highlight .code-keyword { color: #c792ea; font-weight: bold; }
+        .syntax-highlight .code-function { color: #82aaff; }
+        .syntax-highlight .code-class { color: #ffcb6b; }
+        .syntax-highlight .code-string { color: #c3e88d; }
+        .syntax-highlight .code-comment { color: #7fdbca; font-style: italic; }
+
+        .best-practices-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0 0 0;
+        }
+        .practice-card {
+            background: linear-gradient(135deg, #f3e8ff 60%, #e9d8fd 100%);
+            border-left: 5px solid #6f42c1;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            padding: 1.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .practice-card h4 {
+            color: #6f42c1;
+            margin-bottom: 0.3rem;
+        }
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0 2.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .benefits-list li {
+            font-size: 1.05rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            background: #f3e8ff;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+        }
+        .benefits-list .benefit-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            color: #7C3AED !important;
+            flex-shrink: 0;
+        }
+        .benefits-list .benefit-strong {
+            font-weight: bold;
+            color: #4B2067 !important;
+            margin-right: 0.4rem;
+        }
+        .next-module-box {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            border-radius: 18px;
+            padding: 2.2rem 4rem 2rem 4rem;
+            margin: 3rem auto 2rem auto;
+            max-width: 1200px;
+            text-align: center;
+            box-shadow: 0 4px 16px 0 rgba(111,66,193,0.13);
+        }
+        .next-module-box h3 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        .next-module-btn {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: #fff;
+            color: #7C3AED;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.8rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+        .next-module-btn:hover {
+            background: #f3e8ff;
+            color: #4B2067;
+            transform: translateY(-2px) scale(1.04);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Taller de Funciones</a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="index.html" class="nav-link active">Funciones</a>
+                <a href="../Ejercicios/index.html" class="nav-link">Ejercicios</a>
+                <a href="../Proyecto/index.html" class="nav-link">Proyecto</a>
+            </div>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>Funciones en Python</h1>
+        <p>Organiza tu código y reutiliza lógica con funciones</p>
+    </div>
+
+    <main>
+        <div class="section">
+            <h2>¿Qué son las Funciones en Python?</h2>
+            <p>Las funciones son bloques de código reutilizables que realizan una tarea específica. Permiten dividir un programa en partes más pequeñas, organizadas y fáciles de mantener. Usar funciones ayuda a evitar la repetición de código, mejora la legibilidad y facilita la depuración.</p>
+            <ul class="benefits-list">
+                <li><span class="benefit-icon">✔️</span><span class="benefit-strong">Evitan la repetición:</span> Escribe una vez, usa muchas veces.</li>
+                <li><span class="benefit-icon">🗂️</span><span class="benefit-strong">Organizan el código:</span> Cada función tiene una responsabilidad clara.</li>
+                <li><span class="benefit-icon">🛠️</span><span class="benefit-strong">Facilitan el mantenimiento:</span> Si algo cambia, solo modificas la función.</li>
+                <li><span class="benefit-icon">🔁</span><span class="benefit-strong">Permiten reutilización:</span> Puedes usar la misma función en diferentes partes del programa o en otros proyectos.</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Ejemplo de uso en la vida real</h3>
+                <p>Imagina que necesitas calcular el área de varios rectángulos en tu programa. En vez de repetir el mismo cálculo muchas veces, puedes crear una función <code>calcular_area_rectangulo(base, altura)</code> y llamarla cada vez que la necesites.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Ejemplo de Uso Básico</h2>
+            <div class="code-block syntax-highlight">
+def <span class="code-function">calcular_area_rectangulo</span>(base, altura):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># Calcula el área de un rectángulo</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> base * altura<br><br>area1 = <span class="code-function">calcular_area_rectangulo</span>(5, 3)<br>area2 = <span class="code-function">calcular_area_rectangulo</span>(10, 2)<br><span class="code-keyword">print</span>(area1)  <span class="code-comment"># 15</span><br><span class="code-keyword">print</span>(area2)  <span class="code-comment"># 20</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Tipos de Funciones en Python</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función Simple</button>
+                    <div class="accordion-content">
+                        <p>Una función que no recibe parámetros y solo ejecuta una acción.</p>
+                        <div class="code-block syntax-highlight">
+def <span class="code-function">saludar</span>():<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(<span class="code-string">"¡Hola mundo!"</span>)<br><br><span class="code-function">saludar</span>()
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función con Parámetros</button>
+                    <div class="accordion-content">
+                        <p>Recibe uno o más valores para trabajar con ellos.</p>
+                        <div class="code-block syntax-highlight">
+def <span class="code-function">saludar_persona</span>(nombre):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(f"¡Hola {nombre}!")<br><br><span class="code-function">saludar_persona</span>(<span class="code-string">"Juan"</span>)
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función con Valor de Retorno</button>
+                    <div class="accordion-content">
+                        <p>Devuelve un resultado usando <code>return</code>.</p>
+                        <div class="code-block syntax-highlight">
+def <span class="code-function">sumar</span>(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> a + b<br><br>resultado = <span class="code-function">sumar</span>(5, 3)
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función con Parámetros por Defecto</button>
+                    <div class="accordion-content">
+                        <p>Permite valores opcionales si no se pasan argumentos.</p>
+                        <div class="code-block syntax-highlight">
+def <span class="code-function">saludar_edad</span>(nombre, edad=25):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(f"¡Hola {nombre}, tienes {edad} años!")<br><br><span class="code-function">saludar_edad</span>(<span class="code-string">"Ana"</span>)<br><span class="code-function">saludar_edad</span>(<span class="code-string">"Carlos"</span>, 30)
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función Lambda (Anónima)</button>
+                    <div class="accordion-content">
+                        <p>Función pequeña y sin nombre, útil para operaciones rápidas.</p>
+                        <div class="code-block syntax-highlight">
+cuadrado = <span class="code-keyword">lambda</span> x: x ** 2<br><span class="code-keyword">print</span>(cuadrado(5))  <span class="code-comment"># 25</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función dentro de una Clase</button>
+                    <div class="accordion-content">
+                        <p>Las funciones dentro de clases se llaman <b>métodos</b>.</p>
+                        <div class="code-block syntax-highlight">
+class <span class="code-class">Persona</span>:<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, nombre):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">saludar</span>(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">print</span>(f"Hola, soy {self.nombre}")<br><br>p = <span class="code-class">Persona</span>(<span class="code-string">"Ana"</span>)<br>p.saludar()
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-title" onclick="toggleAccordion(this)">Función como Argumento</button>
+                    <div class="accordion-content">
+                        <p>Puedes pasar funciones como argumentos a otras funciones.</p>
+                        <div class="code-block syntax-highlight">
+def <span class="code-function">operar</span>(f, x, y):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> f(x, y)<br><br>def <span class="code-function">multiplicar</span>(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> a * b<br><br>resultado = <span class="code-function">operar</span>(multiplicar, 4, 5)  <span class="code-comment"># 20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Ejemplo Avanzado: Decoradores</h2>
+            <p>Un decorador es una función que recibe otra función y la modifica o amplía. Son muy usados en Python para añadir funcionalidades.</p>
+            <div class="code-block syntax-highlight">
+def <span class="code-function">mayusculas</span>(f):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> <span class="code-function">envoltura</span>(*args, **kwargs):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultado = f(*args, **kwargs)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> resultado.upper()<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> envoltura<br><br>@mayusculas<br>def <span class="code-function">saludo</span>():<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-string">"hola mundo"</span><br><br><span class="code-keyword">print</span>(saludo())  <span class="code-comment"># HOLA MUNDO</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Buenas Prácticas</h2>
+            <div class="best-practices-grid">
+                <div class="practice-card">
+                    <h4>✅ Usa nombres descriptivos</h4>
+                    <p>Elige nombres que expliquen claramente qué hace la función. Ejemplo: <code>calcular_area_circulo</code> es mejor que <code>func1</code>.</p>
+                </div>
+                <div class="practice-card">
+                    <h4>✅ Una función, una responsabilidad</h4>
+                    <p>Cada función debe hacer solo una cosa. Si hace demasiado, divídela en funciones más pequeñas.</p>
+                </div>
+                <div class="practice-card">
+                    <h4>✅ Mantén las funciones cortas</h4>
+                    <p>Evita funciones largas. Si una función crece mucho, probablemente puede dividirse.</p>
+                </div>
+                <div class="practice-card">
+                    <h4>✅ Documenta tus funciones</h4>
+                    <p>Usa <b>docstrings</b> para explicar qué hace la función, sus parámetros y lo que retorna. Esto ayuda a otros (¡y a ti mismo en el futuro!) a entender el código.</p>
+                    <div class="code-block syntax-highlight" style="margin-top: 0.7rem;">
+def <span class="code-function">calcular_promedio</span>(numeros):<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"""<br>&nbsp;&nbsp;&nbsp;&nbsp;Calcula el promedio de una lista de números.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Args:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numeros (list): Lista de números<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Returns:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float: El promedio de los números<br>&nbsp;&nbsp;&nbsp;&nbsp;"""</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-keyword">sum</span>(numeros) / <span class="code-keyword">len</span>(numeros)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="next-module-box">
+        <h3>🎉 ¡Excelente trabajo!</h3>
+        <p>Ya tienes una base sólida sobre funciones en Python. Ahora estás listo para poner en práctica lo aprendido.</p>
+        <a href="../Ejercicios/index.html" class="next-module-btn">Ir al módulo de Ejercicios</a>
+    </div>
+    <script>
+    function toggleAccordion(btn) {
+        const allItems = document.querySelectorAll('.accordion-item');
+        allItems.forEach(item => {
+            if (item.querySelector('.accordion-title') !== btn) {
+                item.classList.remove('open');
+            }
+        });
+        btn.parentElement.classList.toggle('open');
+    }
+    </script>
+    <style>
+    .accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .accordion-item {
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+        overflow: hidden;
+        border-left: 5px solid #6f42c1;
+        transition: box-shadow 0.2s;
+    }
+    .accordion-item.open {
+        box-shadow: 0 6px 18px rgba(111,66,193,0.13);
+    }
+    .accordion-title {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        outline: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #6f42c1;
+        padding: 1.2rem 1.5rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .accordion-title:hover {
+        background: #f3e8ff;
+    }
+    .accordion-content {
+        display: none;
+        padding: 0 1.5rem 1.2rem 1.5rem;
+        border-top: 1px solid #eee;
+        animation: fadeIn 0.3s;
+    }
+    .accordion-item.open .accordion-content {
+        display: block;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    </style>
+</body>
+</html> 

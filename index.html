@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 0 a Senior - Cohorte 4</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .module-description {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .class-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .class-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .class-card h2 {
+            color: #6f42c1;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+
+        .class-card p {
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .class-topics {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .class-topics li {
+            padding: 0.7rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .class-topics li::before {
+            content: '▶';
+            color: #6f42c1;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .class-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .class-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .teacher-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .teacher-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .teacher-section p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .teacher-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .teacher-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .repository-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .repository-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .repository-section p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .repository-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .repository-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .repository-link .github-icon {
+            margin-right: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .teacher-info {
+            text-align: left;
+        }
+
+        .teacher-header {
+            margin-bottom: 2rem;
+        }
+
+        .teacher-header h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            color: #6f42c1;
+            font-weight: 600;
+        }
+
+        .teacher-title {
+            font-size: 1.4rem;
+            opacity: 0.8;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .teacher-description {
+            margin-bottom: 2.5rem;
+        }
+
+        .teacher-description p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .teacher-highlights {
+            display: flex;
+            justify-content: space-around;
+            gap: 2rem;
+        }
+
+        .highlight-item {
+            text-align: center;
+            flex: 1;
+            padding: 1.5rem;
+            background: rgba(111, 66, 193, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            background: rgba(111, 66, 193, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .highlight-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .highlight-item span:last-child {
+            font-weight: 500;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .teacher-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .linkedin-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .linkedin-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .linkedin-icon {
+            margin-right: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .coming-soon {
+            opacity: 0.75;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .coming-soon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .coming-soon-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            position: relative;
+            z-index: 1;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .classes-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                max-width: 100%;
+            }
+
+            .class-card {
+                padding: 2rem;
+                min-height: auto;
+            }
+
+            .teacher-section {
+                padding: 1.5rem;
+            }
+
+            .teacher-highlights {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .highlight-item {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Python 0 a Senior</h1>
+            <p><strong>Módulo 1:</strong> Fundamentos de Programación con Python</p>
+            <p>Cohorte 4 - Material de Estudio</p>
+        </div>
+
+        <div class="classes-grid">
+            <div class="class-card coming-soon">
+                <h2>🚀 Clase 1 - 2</h2>
+                <p>Introducción a Python: conceptos básicos, variables, tipos de datos y operadores.</p>
+                <ul class="class-topics">
+                    <li>Introducción a Python</li>
+                    <li>Variables y tipos de datos</li>
+                    <li>Operadores básicos</li>
+                    <li>Primeros programas</li>
+                </ul>
+                <span class="coming-soon-badge">Próximamente</span>
+            </div>
+
+            <div class="class-card coming-soon">
+                <h2>⚡ Clase 3 - 4</h2>
+                <p>Estructuras de datos básicas: strings, listas, tuplas y diccionarios.</p>
+                <ul class="class-topics">
+                    <li>Strings y manipulación de texto</li>
+                    <li>Listas y operaciones</li>
+                    <li>Tuplas y conjuntos</li>
+                    <li>Diccionarios básicos</li>
+                </ul>
+                <span class="coming-soon-badge">Próximamente</span>
+            </div>
+
+            <a href="Clase 5 - 6/Material/index.html" class="class-card">
+                <h2>📚 Clase 5 - 6</h2>
+                <p>Fundamentos de programación con Python: bucles, condicionales y estructuras de control.</p>
+                <ul class="class-topics">
+                    <li>Bucles (for y while)</li>
+                    <li>Condicionales (if, elif, else)</li>
+                    <li>Estructuras de control</li>
+                    <li>Mini proyectos prácticos</li>
+                </ul>
+                <span class="class-link">Acceder al Material</span>
+            </a>
+
+            <a href="Clase 7 - 8/Material/index.html" class="class-card">
+                <h2>🔧 Clase 7 - 8</h2>
+                <p>Taller de funciones: creación, parámetros, retorno de valores y proyectos avanzados.</p>
+                <ul class="class-topics">
+                    <li>Definición y creación de funciones</li>
+                    <li>Parámetros y argumentos</li>
+                    <li>Retorno de valores</li>
+                    <li>Listas y diccionarios</li>
+                    <li>Proyecto final: Sistema de Biblioteca</li>
+                </ul>
+                <span class="class-link">Acceder al Material</span>
+            </a>
+        </div>
+
+        <div class="repository-section">
+            <h2>📁 Repositorio del Curso</h2>
+            <p>Encuentra todo el código, ejemplos y proyectos desarrollados durante las clases en nuestro repositorio de GitHub.</p>
+            <a href="https://github.com/JuanDavidTriana/Python_0_a_Senior" target="_blank" class="repository-link">
+                <span class="github-icon">🐙</span>
+                Ver Repositorio en GitHub
+            </a>
+        </div>
+
+        <div class="teacher-section">
+            <h2>👨‍🏫 Conoce a tu Docente</h2>
+            <div class="teacher-info">
+                <div class="teacher-header">
+                    <h3>Juan David Triana Turmeque</h3>
+                    <p class="teacher-title">Especialista en Ciencia de Datos e Inteligencia Artificial</p>
+                </div>
+                <div class="teacher-description">
+                    <p>Soy un <strong>ingeniero de software</strong> y <strong>desarrollador apasionado</strong> por la <strong>inteligencia artificial</strong>, la <strong>ciencia de datos</strong> y la formación de futuros profesionales. Tengo experiencia en <strong>Python</strong>, <strong>Java</strong>, <strong>React</strong> y <strong>Spring Boot</strong>.</p>
+                    <p>Actualmente trabajo como <strong>Software Developer</strong> desarrollando aplicaciones web y APIs modernas, mientras que como <strong>profesor universitario</strong> en programación, IA y ciencia de datos, disfruto compartiendo mi experiencia práctica y guiando a mis estudiantes en el desarrollo de proyectos innovadores. Me encanta crear soluciones limpias, eficientes y con impacto real.</p>
+                </div>
+                <div class="teacher-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">💻</span>
+                        <span>Software Developer - Aplicaciones web y APIs</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎓</span>
+                        <span>Ingeniero en Sistemas + Máster en Ingeniería de Software</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">👨‍🏫</span>
+                        <span>Profesor universitario apasionado por la docencia</span>
+                    </div>
+                </div>
+                <div class="teacher-cta">
+                    <a href="https://www.linkedin.com/in/juan-david-triana-turmeque-b95710183/" target="_blank" class="linkedin-link">
+                        <span class="linkedin-icon">💼</span>
+                        Conoce más 
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

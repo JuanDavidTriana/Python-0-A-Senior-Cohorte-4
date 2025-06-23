@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final - Clase 7</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: #fff;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #e9d8fd;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section h2 {
+            color: #6f42c1;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #9c27b0;
+            border-radius: 2px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-function {
+            color: #63b3ed;
+        }
+
+        .project-box {
+            background: linear-gradient(135deg, #6f42c1, #9c27b0);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .requirements {
+            background: #f8f9fa;
+            border: 2px solid #6f42c1;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .requirements h4 {
+            color: #6f42c1;
+            margin-bottom: 1rem;
+        }
+
+        .requirements ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .requirements li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .requirements li:before {
+            content: "✅ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .bonus {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .bonus h4 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        .bonus li:before {
+            content: "🌟 ";
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .example-output {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .example-output h4 {
+            color: #2c7a7b;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+
+        .project-list {
+            margin-left: 0;
+            margin-bottom: 1.5rem;
+            padding-left: 0;
+            list-style: none;
+        }
+        .project-list > li {
+            position: relative;
+            margin-bottom: 0.7rem;
+            font-size: 1.08rem;
+            padding-left: 2rem;
+        }
+        .project-list > li::before {
+            content: '';
+            position: absolute;
+            left: 0.3rem;
+            top: 0.8rem;
+            width: 0.65rem;
+            height: 0.65rem;
+            background: #7C3AED;
+            border-radius: 50%;
+            box-shadow: 0 1px 4px rgba(124,58,237,0.13);
+            display: inline-block;
+        }
+        .project-list > li > b,
+        .project-list > li > strong {
+            color: #6f42c1;
+            font-weight: bold;
+        }
+        .project-list ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-left: 1.5rem;
+            padding-left: 0.5rem;
+            list-style: none;
+        }
+        .project-list ul li {
+            position: relative;
+            font-size: 1.01rem;
+            margin-bottom: 0.3rem;
+            padding-left: 1.5rem;
+        }
+        .project-list ul li::before {
+            content: '';
+            position: absolute;
+            left: 0.1rem;
+            top: 0.7rem;
+            width: 0.45rem;
+            height: 0.45rem;
+            background: #b794f4;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .project-list pre.code-block.syntax-highlight {
+            margin-left: 0;
+            margin-bottom: 0.7rem;
+        }
+
+        .project-section-title {
+            color: #6f42c1;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-top: 2.2rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.5px;
+        }
+
+        .github-reminder {
+            background: #f3e8ff;
+            color: #4B2067;
+            border-left: 5px solid #7C3AED;
+            border-radius: 8px;
+            margin: 1.2rem auto 1.5rem auto;
+            padding: 1rem 1.5rem;
+            font-size: 1.08rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            max-width: 700px;
+            box-shadow: 0 2px 8px rgba(111,66,193,0.07);
+            justify-content: center;
+            text-align: left;
+        }
+        .github-icon {
+            font-size: 1.7rem;
+            margin-right: 0.7rem;
+        }
+        .github-link {
+            color: #7C3AED;
+            font-weight: bold;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .github-link:hover {
+            color: #4B2067;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">Clase 7</a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="../Funciones/index.html" class="nav-link">Funciones</a>
+                <a href="../Ejercicios/index.html" class="nav-link">Ejercicios</a>
+                <a href="index.html" class="nav-link active">Proyecto</a>
+            </div>
+        </div>
+    </nav>
+    <div class="hero">
+        <h1>Proyecto Final</h1>
+        <p>Sistema de Gestión de Biblioteca</p>
+    </div>
+
+    <main>
+        <div class="project-box">
+            <h3>📚 Sistema de Gestión de Biblioteca</h3>
+            
+            <p>Desarrolla un sistema completo de gestión de biblioteca utilizando todas las técnicas de funciones que has aprendido. Este proyecto te permitirá aplicar tus conocimientos de manera práctica y crear algo útil.</p>
+            <div class="github-reminder">
+                <span class="github-icon">🐙</span>
+                <span><b>Recuerda:</b> Sube todos tus ejercicios y tu proyecto a <a href="https://github.com/" target="_blank" class="github-link">GitHub</a> para seguir practicando el uso de esta herramienta y llevar un registro de tu progreso.</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Proyecto Final: Sistema de Gestión de Bibliotecas "BiblioGestor"</h2>
+            <h3 class="project-section-title">1. Descripción General del Proyecto</h3>
+            <p>El objetivo de este proyecto es aplicar los conceptos de funciones, modularidad y gestión de datos para desarrollar una aplicación de consola completa en Python. La aplicación simulará el sistema de gestión para una biblioteca, permitiendo al usuario (el bibliotecario) realizar operaciones esenciales como registrar socios, gestionar préstamos de libros y realizar consultas sobre el inventario.</p>
+            <p>Este proyecto está diseñado para consolidar tus habilidades de programación estructurada y resolver un problema práctico de principio a fin.</p>
+            <h3 class="project-section-title">2. Objetivo de Aprendizaje</h3>
+            <ul class="project-list">
+                <li>Diseñar y organizar un programa en múltiples archivos (.py), aplicando el concepto de modularidad.</li>
+                <li>Implementar la solución a un problema utilizando funciones con parámetros y valores de retorno, asignando a cada una una responsabilidad única.</li>
+                <li>Gestionar y manipular estructuras de datos complejas (listas de diccionarios) para representar el estado de una aplicación.</li>
+                <li>Crear una interfaz de usuario de texto (TUI) interactiva y amigable en la consola.</li>
+            </ul>
+            <h3 class="project-section-title">3. Funcionalidades Requeridas</h3>
+            <p>El programa debe presentar un menú principal que permita al usuario realizar las siguientes acciones:</p>
+            <ul class="project-list">
+                <li><b>Registrar Nuevo Socio:</b>
+                    <ul>
+                        <li>Solicitar el nombre completo y número de contacto del socio.</li>
+                        <li>Generar un ID de socio único (ej: SOC-001) y guardarlo en la base de datos de socios.</li>
+                    </ul>
+                </li>
+                <li><b>Registrar Préstamo de Libro:</b>
+                    <ul>
+                        <li>Solicitar el ID del socio y el ISBN del libro.</li>
+                        <li>Validar que el socio exista y que el libro esté "Disponible".</li>
+                        <li>Si es válido, actualizar el estado del libro a "Prestado", registrar el ID del socio que lo tiene y calcular una fecha de devolución (15 días desde la fecha actual).</li>
+                    </ul>
+                </li>
+                <li><b>Registrar Devolución de Libro:</b>
+                    <ul>
+                        <li>Solicitar el ISBN del libro devuelto.</li>
+                        <li>Validar que el libro estuviera "Prestado".</li>
+                        <li>Actualizar el estado del libro a "Disponible" y limpiar los datos del préstamo asociado.</li>
+                    </ul>
+                </li>
+                <li><b>Buscar Libro:</b>
+                    <ul>
+                        <li>Permitir la búsqueda por ISBN, título o autor.</li>
+                        <li>Mostrar la información completa del libro, incluyendo su estado. Si está prestado, mostrar quién lo tiene y la fecha de devolución.</li>
+                    </ul>
+                </li>
+                <li><b>Generar Reporte de Préstamos:</b>
+                    <ul>
+                        <li>Mostrar en pantalla una lista de todos los libros actualmente prestados, incluyendo el título, el nombre del socio y la fecha de devolución.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h3 class="project-section-title">4. Especificaciones Técnicas</h3>
+            <ul class="project-list">
+                <li><b>Modularidad (Requisito Obligatorio):</b>
+                    <ul>
+                        <li><b>main.py:</b> Este archivo contendrá la interfaz de usuario, es decir, el menú principal, el bucle que mantiene el programa en ejecución y las llamadas a las funciones.</li>
+                        <li><b>funciones_biblioteca.py:</b> Este archivo contendrá toda la lógica del negocio. Todas las funciones que manipulan los datos (registrar, buscar, prestar, etc.) deben estar aquí.</li>
+                    </ul>
+                </li>
+                <li><b>Estructura de Datos:</b>
+                    <ul>
+                        <li>El estado de la aplicación se mantendrá en memoria utilizando dos listas de diccionarios:</li>
+                        <li><b>Base de datos de libros (libros_db):</b>
+                            <pre class="code-block syntax-highlight">[
+  {'isbn': '978-0321765723', 'titulo': 'Cien Años de Soledad', 'autor': 'Gabriel García Márquez', 'estado': 'Disponible'},
+  {'isbn': '978-8437604947', 'titulo': 'La Sombra del Viento', 'autor': 'Carlos Ruiz Zafón', 'estado': 'Prestado', 'socio_id': 'SOC-001', 'fecha_devolucion': '2025-07-08'}
+]</pre>
+                        </li>
+                        <li><b>Base de datos de socios (socios_db):</b>
+                            <pre class="code-block syntax-highlight">[
+  {'id': 'SOC-001', 'nombre': 'Ana Rodríguez', 'contacto': '3101234567'},
+  {'id': 'SOC-002', 'nombre': 'Carlos Gómez', 'contacto': '3207654321'}
+]</pre>
+                        </li>
+                    </ul>
+                </li>
+                <li><b>Documentación:</b> Cada función definida en funciones_biblioteca.py debe incluir un docstring que explique su propósito, los parámetros que recibe y lo que retorna.</li>
+            </ul>
+            <h3 class="project-section-title">5. Guía de Desarrollo (Pasos Sugeridos)</h3>
+            <ol class="project-list">
+                <li><b>Planificación:</b> Antes de escribir código, define en papel la estructura exacta de tus diccionarios y cómo se relacionarán. Dibuja un esquema de cómo funcionará el menú.</li>
+                <li><b>Funciones Base:</b> Comienza implementando las funciones más simples en funciones_biblioteca.py, como registrar_nuevo_socio, buscar_libro por ISBN y una función para generar IDs únicos.</li>
+                <li><b>Funciones de Lógica Principal:</b> Desarrolla las funciones más complejas, como prestar_libro y registrar_devolucion_libro. Recuerda que estas funciones llamarán a otras funciones más pequeñas que ya creaste.</li>
+                <li><b>Integración y Menú:</b> En main.py, importa tus funciones, crea el menú principal y el bucle while que lo controla. Conecta cada opción del menú con su función correspondiente.</li>
+                <li><b>Reportes y Pruebas:</b> Implementa la función de reporte. Finalmente, prueba exhaustivamente todo el programa: registra socios, presta y devuelve libros, y busca en diferentes escenarios para asegurar que todo funcione como se espera.</li>
+            </ol>
+        </div>
+
+        <div class="project-box">
+            <h3>🚀 ¡Manos a la obra!</h3>
+            <p>Este proyecto te permitirá aplicar todos los conceptos de funciones que has aprendido. ¡Disfruta creando tu sistema de biblioteca y demuestra todo lo que has aprendido!</p>
+        </div>
+    </main>
+</body>
+</html> 
