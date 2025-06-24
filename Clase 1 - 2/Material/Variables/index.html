@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables y Tipos de Datos - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-number {
+            color: #90cdf4;
+        }
+
+        .code-boolean {
+            color: #fbb6ce;
+        }
+
+        .data-type-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .data-type-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .data-type-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .data-type-card li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .data-type-card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .warning-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+        }
+
+        .next-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                🐍 Python 0 a Senior
+            </a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../Introduccion/index.html" class="nav-link">📚 Introducción</a>
+                <a href="index.html" class="nav-link active">📊 Variables</a>
+                <a href="../Operadores/index.html" class="nav-link">🔧 Operadores</a>
+                <a href="../Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📊 Variables y Tipos de Datos</h1>
+            <p>Almacena y manipula información en tus programas Python</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📦 ¿Qué son las Variables?</h2>
+            <p>Una variable es como una caja donde puedes guardar información. Cada caja tiene un nombre (el nombre de la variable) y puede contener diferentes tipos de datos. En Python, las variables son dinámicas, lo que significa que pueden cambiar de tipo durante la ejecución del programa.</p>
+            
+            <h3>🎯 Sintaxis Básica</h3>
+            <p>Para crear una variable en Python, simplemente escribes el nombre y le asignas un valor:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Crear una variable</span>
+nombre = <span class="code-string">"Juan"</span>
+edad = <span class="code-number">25</span>
+altura = <span class="code-number">1.75</span>
+es_estudiante = <span class="code-boolean">True</span>
+
+<span class="code-comment"># Mostrar las variables</span>
+<span class="code-keyword">print</span>(nombre)
+<span class="code-keyword">print</span>(edad)
+<span class="code-keyword">print</span>(altura)
+<span class="code-keyword">print</span>(es_estudiante)
+            </div>
+
+            <h3>🔤 Reglas para Nombres de Variables</h3>
+            <ul>
+                <li>Pueden contener letras, números y guiones bajos (_)</li>
+                <li>No pueden comenzar con números</li>
+                <li>Son sensibles a mayúsculas y minúsculas</li>
+                <li>No pueden usar palabras reservadas de Python</li>
+                <li>Usa nombres descriptivos y claros</li>
+            </ul>
+
+            <div class="code-block">
+<span class="code-comment"># ✅ Nombres válidos</span>
+mi_variable = <span class="code-string">"Válido"</span>
+variable123 = <span class="code-string">"Válido"</span>
+MiVariable = <span class="code-string">"Válido"</span>
+_variable = <span class="code-string">"Válido"</span>
+
+<span class="code-comment"># ❌ Nombres NO válidos</span>
+<span class="code-comment"># 123variable = "Error"  # No puede comenzar con número</span>
+<span class="code-comment"># mi-variable = "Error"  # No puede usar guiones</span>
+<span class="code-comment"># if = "Error"  # No puede usar palabra reservada</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔢 Tipos de Datos Básicos</h2>
+            <p>Python tiene varios tipos de datos incorporados. Los más importantes son:</p>
+
+            <h3>📝 Strings (Texto)</h3>
+            <p>Los strings son secuencias de caracteres (texto). Se pueden crear con comillas simples o dobles:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Strings con comillas simples</span>
+nombre = <span class="code-string">'Juan David'</span>
+ciudad = <span class="code-string">'Bogotá'</span>
+
+<span class="code-comment"># Strings con comillas dobles</span>
+mensaje = <span class="code-string">"¡Hola mundo!"</span>
+frase = <span class="code-string">"Python es genial"</span>
+
+<span class="code-comment"># Strings multilínea</span>
+texto_largo = <span class="code-string">"""Este es un texto
+que puede ocupar
+múltiples líneas"""</span>
+
+<span class="code-keyword">print</span>(nombre)
+<span class="code-keyword">print</span>(mensaje)
+            </div>
+
+            <h3>🔢 Números Enteros (int)</h3>
+            <p>Los enteros son números sin parte decimal:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Números enteros</span>
+edad = <span class="code-number">25</span>
+año = <span class="code-number">2024</span>
+temperatura = <span class="code-number">-5</span>
+poblacion = <span class="code-number">8000000</span>
+
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(edad))  <span class="code-comment"># Ver el tipo de dato</span>
+            </div>
+
+            <h3>🔢 Números de Punto Flotante (float)</h3>
+            <p>Los flotantes son números con parte decimal:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Números flotantes</span>
+altura = <span class="code-number">1.75</span>
+peso = <span class="code-number">70.5</span>
+pi = <span class="code-number">3.14159</span>
+temperatura = <span class="code-number">-2.5</span>
+
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(altura))
+            </div>
+
+            <h3>✅ Booleanos (bool)</h3>
+            <p>Los booleanos representan valores de verdad: True o False:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Valores booleanos</span>
+es_estudiante = <span class="code-boolean">True</span>
+es_profesor = <span class="code-boolean">False</span>
+mayor_de_edad = <span class="code-boolean">True</span>
+
+<span class="code-keyword">print</span>(es_estudiante)
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(es_estudiante))
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔍 Verificar Tipos de Datos</h2>
+            <p>Puedes verificar el tipo de una variable usando la función <code>type()</code>:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Crear variables de diferentes tipos</span>
+texto = <span class="code-string">"Hola"</span>
+numero_entero = <span class="code-number">42</span>
+numero_decimal = <span class="code-number">3.14</span>
+es_verdadero = <span class="code-boolean">True</span>
+
+<span class="code-comment"># Verificar tipos</span>
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(texto))           <span class="code-comment"># &lt;class 'str'&gt;</span>
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(numero_entero))    <span class="code-comment"># &lt;class 'int'&gt;</span>
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(numero_decimal))   <span class="code-comment"># &lt;class 'float'&gt;</span>
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(es_verdadero))     <span class="code-comment"># &lt;class 'bool'&gt;</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔄 Conversión de Tipos</h2>
+            <p>Python permite convertir entre diferentes tipos de datos usando funciones específicas:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Conversión de tipos</span>
+numero_texto = <span class="code-string">"42"</span>
+numero = <span class="code-keyword">int</span>(numero_texto)      <span class="code-comment"># String a entero</span>
+decimal = <span class="code-keyword">float</span>(numero_texto)   <span class="code-comment"># String a float</span>
+
+<span class="code-keyword">print</span>(numero)    <span class="code-comment"># 42 (int)</span>
+<span class="code-keyword">print</span>(decimal)   <span class="code-comment"># 42.0 (float)</span>
+
+<span class="code-comment"># Convertir números a texto</span>
+numero = <span class="code-number">123</span>
+texto = <span class="code-keyword">str</span>(numero)    <span class="code-comment"># Número a string</span>
+
+<span class="code-keyword">print</span>(texto)     <span class="code-comment"># "123" (string)</span>
+<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(texto))  <span class="code-comment"># &lt;class 'str'&gt;</span>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Cuidado con las Conversiones</h3>
+                <p>No todas las conversiones son posibles. Por ejemplo, no puedes convertir "Hola" a un número:</p>
+                <div class="code-block">
+<span class="code-comment"># Esto causará un error</span>
+<span class="code-comment"># numero = int("Hola")  # ValueError</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 Ejemplos Prácticos</h2>
+            <p>Veamos algunos ejemplos reales de cómo usar variables y tipos de datos:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Ejemplo: Calculadora de edad</span>
+año_nacimiento = <span class="code-number">1995</span>
+año_actual = <span class="code-number">2024</span>
+edad = año_actual - año_nacimiento
+
+<span class="code-keyword">print</span>(<span class="code-string">"Tienes"</span>, edad, <span class="code-string">"años"</span>)
+
+<span class="code-comment"># Ejemplo: Información personal</span>
+nombre = <span class="code-string">"María"</span>
+apellido = <span class="code-string">"García"</span>
+altura = <span class="code-number">1.65</span>
+es_programadora = <span class="code-boolean">True</span>
+
+<span class="code-keyword">print</span>(<span class="code-string">"Nombre:"</span>, nombre, apellido)
+<span class="code-keyword">print</span>(<span class="code-string">"Altura:"</span>, altura, <span class="code-string">"metros"</span>)
+<span class="code-keyword">print</span>(<span class="code-string">"¿Es programadora?"</span>, es_programadora)
+            </div>
+        </div>
+
+        <div class="data-type-card">
+            <h3>📋 Resumen de Tipos de Datos</h3>
+            <ul>
+                <li><strong>str:</strong> Texto (strings) - "Hola", 'Mundo'</li>
+                <li><strong>int:</strong> Números enteros - 42, -5, 1000</li>
+                <li><strong>float:</strong> Números decimales - 3.14, -2.5, 0.0</li>
+                <li><strong>bool:</strong> Valores booleanos - True, False</li>
+            </ul>
+        </div>
+
+        <div class="next-section">
+            <h2>🚀 ¿Listo para Operadores?</h2>
+            <p>¡Perfecto! Ya sabes cómo trabajar con variables y tipos de datos. Ahora es momento de aprender a realizar operaciones con ellos.</p>
+            <a href="../Operadores/index.html" class="next-link">🔧 Continuar con Operadores →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

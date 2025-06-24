@@ -3,174 +3,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenida Clase 5</title>
+    <title>Clase 5 - 6: Bucles y Condicionales - Python 0 a Senior</title>
+    <link rel="stylesheet" href="styles/navbar.css">
     <style>
-        body {
-            min-height: 100vh;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6f42c1 0%, #9c27b0 100%);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
         }
-        #matrix-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-            display: block;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
-        .welcome-container {
-            position: relative;
-            z-index: 2;
-            background: rgba(111, 66, 193, 0.82);
-            box-shadow: 0 8px 32px 0 rgba(111,66,193,0.18);
-            border-radius: 2rem;
-            padding: 5rem 3.5rem 4rem 3.5rem;
+
+        .header {
             text-align: center;
-            max-width: 700px;
-            width: 90vw;
-            min-height: 420px;
-            backdrop-filter: blur(6px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            margin-bottom: 4rem;
+            color: white;
         }
-        .welcome-title {
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-            color: #fff;
-        }
-        .welcome-desc {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            color: #fff;
-        }
-        .modules-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.7rem;
-            margin-top: 2.2rem;
-            width: 100%;
-        }
-        .module-btn {
-            background: linear-gradient(90deg, #fff 60%, #b794f4 100%);
-            color: #6f42c1;
-            font-size: 1.25rem;
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             font-weight: 700;
-            border: none;
-            border-radius: 2rem;
-            padding: 1.3rem 0;
-            cursor: pointer;
-            box-shadow: 0 4px 16px 0 rgba(107,70,193,0.13);
-            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
-            text-decoration: none;
-            display: block;
+            letter-spacing: -1px;
         }
-        .module-btn:hover {
-            background: #fff;
-            color: #6f42c1;
-            box-shadow: 0 8px 32px 0 #b794f4;
-            transform: translateY(-2px) scale(1.03);
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
         }
-        .back-btn {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 1.5rem;
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
+
+        .module-description {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 10;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
         }
-        @media (max-width: 900px) {
-            .welcome-container {
-                max-width: 98vw;
-                padding: 2.5rem 0.7rem 2.5rem 0.7rem;
+
+        .topic-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .topic-card h2 {
+            color: #6f42c1;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+
+        .topic-card p {
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .topic-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .topic-features li {
+            padding: 0.7rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .topic-features li::before {
+            content: '▶';
+            color: #6f42c1;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .topic-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .topic-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .project-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .project-section p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .project-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
             }
-            .welcome-title {
+
+            .header h1 {
                 font-size: 2rem;
             }
-            .welcome-desc {
-                font-size: 1.1rem;
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                max-width: 100%;
+            }
+
+            .topic-card {
+                padding: 2rem;
+                min-height: auto;
+            }
+
+            .project-section {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <a href="../../index.html" class="back-btn">← Volver a Principal</a>
-    <canvas id="matrix-canvas"></canvas>
-    <div class="welcome-container">
-        <div class="welcome-title">¡Bienvenidos a la Clase 5!</div>
-        <div class="welcome-desc">
-            Hoy trabajaremos los siguientes módulos. Haz clic en cada uno para ir directamente al contenido:
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../../index.html" class="navbar-brand">
+                🐍 Python 0 a Senior
+            </a>
+            <div class="navbar-links">
+                <a href="../../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../../Clase 1 - 2/Material/index.html" class="nav-link">🚀 Clase 1 - 2</a>
+                <a href="index.html" class="nav-link active">📚 Clase 5 - 6</a>
+                <a href="../../Clase 7 - 8/Material/index.html" class="nav-link">🔧 Clase 7 - 8</a>
+            </div>
         </div>
-        <div class="modules-list">
-            <a class="module-btn" href="GitHub/index.html">Git y GitHub</a>
-            <a class="module-btn" href="Condicionales/index.html">Condicionales</a>
-            <a class="module-btn" href="Bucles/index.html">Bucles</a>
-            <a class="module-btn" href="MiniProyecto/index.html">Mini Proyecto</a>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Clase 5 - 6</h1>
+            <p><strong>Bucles y Condicionales:</strong> Control de Flujo en Python</p>
+            <p>Domina las Estructuras de Control de Programación</p>
+        </div>
+
+        <div class="module-description">
+            <p>En estas clases aprenderás a controlar el flujo de ejecución de tus programas usando bucles y condicionales. Estas son las herramientas fundamentales que te permitirán crear programas dinámicos y responsivos.</p>
+        </div>
+
+        <div class="topics-grid">
+            <a href="GitHub/index.html" class="topic-card">
+                <h2>🐙 Git y GitHub</h2>
+                <p>Aprende a usar Git para el control de versiones y GitHub para colaborar en proyectos de programación.</p>
+                <ul class="topic-features">
+                    <li>Control de versiones con Git</li>
+                    <li>Repositorios en GitHub</li>
+                    <li>Comandos básicos de Git</li>
+                    <li>Colaboración en proyectos</li>
+                    <li>GitHub Pages</li>
+                </ul>
+                <span class="topic-link">Comenzar</span>
+            </a>
+
+            <a href="Condicionales/index.html" class="topic-card">
+                <h2>🔀 Condicionales</h2>
+                <p>Domina las estructuras condicionales para tomar decisiones en tus programas Python.</p>
+                <ul class="topic-features">
+                    <li>Estructura if, elif, else</li>
+                    <li>Operadores de comparación</li>
+                    <li>Operadores lógicos</li>
+                    <li>Condicionales anidadas</li>
+                    <li>Operador ternario</li>
+                </ul>
+                <span class="topic-link">Explorar</span>
+            </a>
+
+            <a href="Bucles/index.html" class="topic-card">
+                <h2>🔄 Bucles</h2>
+                <p>Aprende a repetir código de manera eficiente usando bucles for y while en Python.</p>
+                <ul class="topic-features">
+                    <li>Bucle for con range()</li>
+                    <li>Bucle while</li>
+                    <li>Control de bucles (break, continue)</li>
+                    <li>Bucles anidados</li>
+                    <li>Comprensión de listas</li>
+                </ul>
+                <span class="topic-link">Aprender</span>
+            </a>
+        </div>
+
+        <div class="project-section">
+            <h2>💻 Mini Proyecto</h2>
+            <p>Pon en práctica todo lo aprendido con un proyecto integrador que combina bucles, condicionales y lógica de programación.</p>
+            <a href="MiniProyecto/index.html" class="project-link">Ver Proyecto</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
         </div>
     </div>
-    <script>
-    // Efecto Matrix simple solo con caracteres violeta claro
-    const matrixChars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    function resizeMatrixCanvas() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-    }
-    resizeMatrixCanvas();
-    window.addEventListener('resize', resizeMatrixCanvas);
-
-    const fontSize = 24;
-    let columns = Math.floor(width / fontSize);
-    let drops = Array(columns).fill(1);
-
-    function randomMatrixChar() {
-        return matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-    }
-
-    function drawMatrix() {
-        ctx.fillStyle = 'rgba(30, 18, 43, 0.18)';
-        ctx.fillRect(0, 0, width, height);
-        ctx.font = fontSize + "px 'Consolas', 'Segoe UI', monospace";
-        for (let i = 0; i < drops.length; i++) {
-            ctx.fillStyle = '#b794f4'; // violeta claro
-            ctx.shadowColor = '#b794f4';
-            ctx.shadowBlur = 10;
-            ctx.font = fontSize + "px 'Consolas', 'Segoe UI', monospace";
-            let text = randomMatrixChar();
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (Math.random() > 0.975 || drops[i] * fontSize > height) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-    setInterval(drawMatrix, 60);
-    </script>
 </body>
 </html>

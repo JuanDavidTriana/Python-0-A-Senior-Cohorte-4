@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a Python - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+        }
+
+        .next-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                🐍 Python 0 a Senior
+            </a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="index.html" class="nav-link active">📚 Introducción</a>
+                <a href="../Variables/index.html" class="nav-link">📊 Variables</a>
+                <a href="../Operadores/index.html" class="nav-link">🔧 Operadores</a>
+                <a href="../Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Introducción a Python</h1>
+            <p>Descubre el poder y la simplicidad del lenguaje de programación más versátil</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🐍 ¿Qué es Python?</h2>
+            <p>Python es un lenguaje de programación de alto nivel, interpretado y orientado a objetos. Fue creado por Guido van Rossum y lanzado por primera vez en 1991. Su filosofía se centra en la legibilidad del código y la simplicidad, lo que lo convierte en una excelente opción para principiantes y profesionales por igual.</p>
+            
+            <div class="highlight-box">
+                <h3>🌟 Características Principales de Python</h3>
+                <ul>
+                    <li><strong>Legible:</strong> Sintaxis clara y fácil de entender</li>
+                    <li><strong>Versátil:</strong> Se usa en web, IA, ciencia de datos, automatización</li>
+                    <li><strong>Productivo:</strong> Menos código para lograr más</li>
+                    <li><strong>Comunidad:</strong> Gran ecosistema de librerías y frameworks</li>
+                    <li><strong>Multiplataforma:</strong> Funciona en Windows, Mac, Linux</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📖 Historia y Evolución</h2>
+            <h3>🎯 Orígenes</h3>
+            <p>Python nació en el Centro de Matemáticas e Informática (CWI) en Amsterdam, Holanda. Guido van Rossum comenzó a trabajar en Python en 1989, inspirado en el lenguaje ABC y con el objetivo de crear un lenguaje que fuera fácil de aprender y usar.</p>
+            
+            <h3>🚀 Evolución</h3>
+            <ul>
+                <li><strong>1991:</strong> Primera versión pública (Python 0.9.0)</li>
+                <li><strong>2000:</strong> Python 2.0 con nuevas características</li>
+                <li><strong>2008:</strong> Python 3.0 (versión actual)</li>
+                <li><strong>2020:</strong> Fin del soporte para Python 2</li>
+                <li><strong>2024:</strong> Python 3.12+ (versión más reciente)</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🌍 Aplicaciones y Usos</h2>
+            <p>Python se utiliza en prácticamente todos los campos de la tecnología moderna:</p>
+            
+            <h3>💻 Desarrollo Web</h3>
+            <ul>
+                <li>Django y Flask para aplicaciones web</li>
+                <li>APIs RESTful</li>
+                <li>Microservicios</li>
+            </ul>
+
+            <h3>🤖 Inteligencia Artificial y Machine Learning</h3>
+            <ul>
+                <li>TensorFlow y PyTorch para deep learning</li>
+                <li>Scikit-learn para machine learning</li>
+                <li>Procesamiento de lenguaje natural</li>
+            </ul>
+
+            <h3>📊 Ciencia de Datos</h3>
+            <ul>
+                <li>Pandas para análisis de datos</li>
+                <li>NumPy para computación científica</li>
+                <li>Matplotlib y Seaborn para visualización</li>
+            </ul>
+
+            <h3>🔧 Automatización</h3>
+            <ul>
+                <li>Scripts de automatización</li>
+                <li>Testing automatizado</li>
+                <li>DevOps y CI/CD</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>⚙️ Instalación y Configuración</h2>
+            <h3>📥 Descargar Python</h3>
+            <p>Para comenzar con Python, necesitas instalar el intérprete en tu computadora:</p>
+            <ul>
+                <li>Ve a <a href="https://python.org" target="_blank" style="color: #6f42c1;">python.org</a></li>
+                <li>Descarga la última versión estable (3.12+)</li>
+                <li>Ejecuta el instalador</li>
+                <li><strong>Importante:</strong> Marca la opción "Add Python to PATH"</li>
+            </ul>
+
+            <h3>🔍 Verificar la Instalación</h3>
+            <p>Abre tu terminal o línea de comandos y ejecuta:</p>
+            <div class="code-block">
+<span class="code-comment"># Verificar la versión de Python</span>
+python --version
+
+<span class="code-comment"># O en algunos sistemas:</span>
+python3 --version
+            </div>
+
+            <h3>🎯 Entorno de Desarrollo</h3>
+            <p>Recomendamos usar un editor de código moderno:</p>
+            <ul>
+                <li><strong>Visual Studio Code:</strong> Gratuito, extensible, excelente para Python</li>
+                <li><strong>PyCharm:</strong> IDE completo con muchas características</li>
+                <li><strong>Jupyter Notebook:</strong> Ideal para ciencia de datos</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>👋 Tu Primer Programa: "Hola Mundo"</h2>
+            <p>Es tradición en programación comenzar con un programa que muestre "Hola Mundo". En Python, esto es increíblemente simple:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Mi primer programa en Python</span>
+<span class="code-keyword">print</span>(<span class="code-string">"¡Hola Mundo!"</span>)
+            </div>
+
+            <h3>🔍 Explicación del Código</h3>
+            <ul>
+                <li><code>print()</code> es una función que muestra texto en la pantalla</li>
+                <li>El texto va entre comillas (pueden ser simples o dobles)</li>
+                <li>Los comentarios comienzan con <code>#</code></li>
+            </ul>
+
+            <h3>🎯 Ejercicio Práctico</h3>
+            <p>Intenta modificar el programa para que muestre tu nombre:</p>
+            <div class="code-block">
+<span class="code-comment"># Cambia "Tu Nombre" por tu nombre real</span>
+<span class="code-keyword">print</span>(<span class="code-string">"¡Hola, me llamo Tu Nombre!"</span>)
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📝 Sintaxis Básica</h2>
+            <p>Python tiene reglas de sintaxis muy claras y simples:</p>
+            
+            <h3>🎯 Indentación</h3>
+            <p>Python usa indentación (espacios) para definir bloques de código:</p>
+            <div class="code-block">
+<span class="code-comment"># La indentación es importante en Python</span>
+<span class="code-keyword">if</span> <span class="code-keyword">True</span>:
+    <span class="code-keyword">print</span>(<span class="code-string">"Este código está indentado"</span>)
+    <span class="code-keyword">print</span>(<span class="code-string">"También este"</span>)
+<span class="code-keyword">print</span>(<span class="code-string">"Este no está indentado"</span>)
+            </div>
+
+            <h3>🔤 Nombres de Variables</h3>
+            <ul>
+                <li>Pueden contener letras, números y guiones bajos</li>
+                <li>No pueden comenzar con números</li>
+                <li>Son sensibles a mayúsculas y minúsculas</li>
+                <li>No pueden usar palabras reservadas</li>
+            </ul>
+
+            <div class="code-block">
+<span class="code-comment"># Ejemplos de nombres válidos</span>
+mi_variable = <span class="code-string">"Hola"</span>
+variable123 = <span class="code-string">"Mundo"</span>
+MiVariable = <span class="code-string">"Python"</span>
+
+<span class="code-comment"># Ejemplos de nombres NO válidos</span>
+<span class="code-comment"># 123variable = "Error"  # No puede comenzar con número</span>
+<span class="code-comment"># if = "Error"  # No puede usar palabra reservada</span>
+            </div>
+        </div>
+
+        <div class="next-section">
+            <h2>🚀 ¿Listo para Continuar?</h2>
+            <p>¡Excelente! Ya conoces los fundamentos de Python. Ahora es momento de aprender sobre variables y tipos de datos.</p>
+            <a href="../Variables/index.html" class="next-link">📊 Continuar con Variables y Tipos de Datos →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

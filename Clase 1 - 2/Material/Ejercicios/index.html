@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Prácticos - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .exercise-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .exercise-card h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .exercise-card p {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .exercise-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .exercise-card li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .exercise-card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-number {
+            color: #90cdf4;
+        }
+
+        .code-boolean {
+            color: #fbb6ce;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .difficulty-easy {
+            background: #68d391;
+            color: white;
+        }
+
+        .difficulty-medium {
+            background: #f6ad55;
+            color: white;
+        }
+
+        .difficulty-hard {
+            background: #fc8181;
+            color: white;
+        }
+
+        .solution-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .solution-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .solution {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .solution.show {
+            display: block;
+        }
+
+        .challenge-section {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .challenge-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+        }
+
+        .next-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .exercise-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                🐍 Python 0 a Senior
+            </a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../Introduccion/index.html" class="nav-link">📚 Introducción</a>
+                <a href="../Variables/index.html" class="nav-link">📊 Variables</a>
+                <a href="../Operadores/index.html" class="nav-link">🔧 Operadores</a>
+                <a href="index.html" class="nav-link active">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>💪 Ejercicios Prácticos</h1>
+            <p>Pon en práctica todo lo aprendido y fortalece tus habilidades</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 Ejercicios Básicos</h2>
+            <p>Estos ejercicios te ayudarán a consolidar los conceptos fundamentales de Python. Intenta resolverlos por tu cuenta antes de ver las soluciones.</p>
+
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-easy">Fácil</span>
+                <h3>Ejercicio 1: Calculadora Simple</h3>
+                <p>Crea un programa que calcule el área de un rectángulo. El usuario debe ingresar la base y la altura.</p>
+                <ul>
+                    <li>Pide al usuario que ingrese la base del rectángulo</li>
+                    <li>Pide al usuario que ingrese la altura del rectángulo</li>
+                    <li>Calcula el área (base × altura)</li>
+                    <li>Muestra el resultado</li>
+                </ul>
+                <button class="solution-toggle" onclick="toggleSolution('sol1')">Ver Solución</button>
+                <div id="sol1" class="solution">
+                    <div class="code-block">
+<span class="code-comment"># Solución: Calculadora de área de rectángulo</span>
+<span class="code-comment"># Pedir datos al usuario</span>
+base = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">"Ingresa la base del rectángulo: "</span>))
+altura = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">"Ingresa la altura del rectángulo: "</span>))
+
+<span class="code-comment"># Calcular área</span>
+area = base <span class="code-operator">*</span> altura
+
+<span class="code-comment"># Mostrar resultado</span>
+<span class="code-keyword">print</span>(<span class="code-string">"El área del rectángulo es:"</span>, area)
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-easy">Fácil</span>
+                <h3>Ejercicio 2: Conversor de Temperatura</h3>
+                <p>Crea un programa que convierta grados Celsius a Fahrenheit usando la fórmula: F = (C × 9/5) + 32</p>
+                <ul>
+                    <li>Pide al usuario que ingrese la temperatura en Celsius</li>
+                    <li>Convierte a Fahrenheit usando la fórmula</li>
+                    <li>Muestra ambos valores</li>
+                </ul>
+                <button class="solution-toggle" onclick="toggleSolution('sol2')">Ver Solución</button>
+                <div id="sol2" class="solution">
+                    <div class="code-block">
+<span class="code-comment"># Solución: Conversor de temperatura</span>
+<span class="code-comment"># Pedir temperatura en Celsius</span>
+celsius = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">"Ingresa la temperatura en Celsius: "</span>))
+
+<span class="code-comment"># Convertir a Fahrenheit</span>
+fahrenheit = (celsius <span class="code-operator">*</span> <span class="code-number">9</span> <span class="code-operator">/</span> <span class="code-number">5</span>) <span class="code-operator">+</span> <span class="code-number">32</span>
+
+<span class="code-comment"># Mostrar resultados</span>
+<span class="code-keyword">print</span>(celsius, <span class="code-string">"grados Celsius equivalen a"</span>, fahrenheit, <span class="code-string">"grados Fahrenheit"</span>)
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>Ejercicio 3: Verificador de Contraseña</h3>
+                <p>Crea un programa que verifique si una contraseña cumple con los requisitos básicos de seguridad.</p>
+                <ul>
+                    <li>La contraseña debe tener al menos 8 caracteres</li>
+                    <li>Debe contener al menos una letra mayúscula</li>
+                    <li>Debe contener al menos un número</li>
+                    <li>Muestra si la contraseña es válida o no</li>
+                </ul>
+                <button class="solution-toggle" onclick="toggleSolution('sol3')">Ver Solución</button>
+                <div id="sol3" class="solution">
+                    <div class="code-block">
+<span class="code-comment"># Solución: Verificador de contraseña</span>
+contraseña = <span class="code-keyword">input</span>(<span class="code-string">"Ingresa tu contraseña: "</span>)
+
+<span class="code-comment"># Verificar longitud</span>
+longitud_ok = <span class="code-keyword">len</span>(contraseña) <span class="code-operator">&gt;=</span> <span class="code-number">8</span>
+
+<span class="code-comment"># Verificar mayúscula</span>
+tiene_mayuscula = <span class="code-keyword">False</span>
+<span class="code-keyword">for</span> letra <span class="code-keyword">in</span> contraseña:
+    <span class="code-keyword">if</span> letra.isupper():
+        tiene_mayuscula = <span class="code-boolean">True</span>
+        <span class="code-keyword">break</span>
+
+<span class="code-comment"># Verificar número</span>
+tiene_numero = <span class="code-keyword">False</span>
+<span class="code-keyword">for</span> letra <span class="code-keyword">in</span> contraseña:
+    <span class="code-keyword">if</span> letra.isdigit():
+        tiene_numero = <span class="code-boolean">True</span>
+        <span class="code-keyword">break</span>
+
+<span class="code-comment"># Verificar si es válida</span>
+es_valida = longitud_ok <span class="code-keyword">and</span> tiene_mayuscula <span class="code-keyword">and</span> tiene_numero
+
+<span class="code-keyword">print</span>(<span class="code-string">"¿La contraseña es válida?"</span>, es_valida)
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>Ejercicio 4: Calculadora de Descuento</h3>
+                <p>Crea un programa que calcule el precio final de un producto después de aplicar un descuento.</p>
+                <ul>
+                    <li>Pide el precio original del producto</li>
+                    <li>Pide el porcentaje de descuento</li>
+                    <li>Calcula el precio con descuento</li>
+                    <li>Muestra el precio original, descuento y precio final</li>
+                </ul>
+                <button class="solution-toggle" onclick="toggleSolution('sol4')">Ver Solución</button>
+                <div id="sol4" class="solution">
+                    <div class="code-block">
+<span class="code-comment"># Solución: Calculadora de descuento</span>
+<span class="code-comment"># Pedir datos</span>
+precio_original = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">"Ingresa el precio original: $"</span>))
+porcentaje_descuento = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">"Ingresa el porcentaje de descuento: "</span>))
+
+<span class="code-comment"># Calcular descuento y precio final</span>
+descuento = precio_original <span class="code-operator">*</span> (porcentaje_descuento <span class="code-operator">/</span> <span class="code-number">100</span>)
+precio_final = precio_original <span class="code-operator">-</span> descuento
+
+<span class="code-comment"># Mostrar resultados</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Precio original: $"</span>, precio_original)
+<span class="code-keyword">print</span>(<span class="code-string">"Descuento: $"</span>, descuento)
+<span class="code-keyword">print</span>(<span class="code-string">"Precio final: $"</span>, precio_final)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="challenge-section">
+            <h3>🏆 Desafío Final</h3>
+            <p>¡Pon a prueba todos tus conocimientos con este desafío integrador!</p>
+            
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-hard">Difícil</span>
+                <h3>Desafío: Sistema de Calificaciones</h3>
+                <p>Crea un programa que calcule el promedio de calificaciones de un estudiante y determine su nivel de rendimiento.</p>
+                <ul>
+                    <li>Pide al estudiante que ingrese 5 calificaciones (0-100)</li>
+                    <li>Calcula el promedio de las calificaciones</li>
+                    <li>Determina el nivel de rendimiento según el promedio:</li>
+                    <li style="margin-left: 2rem;">• 90-100: Excelente</li>
+                    <li style="margin-left: 2rem;">• 80-89: Muy Bueno</li>
+                    <li style="margin-left: 2rem;">• 70-79: Bueno</li>
+                    <li style="margin-left: 2rem;">• 60-69: Regular</li>
+                    <li style="margin-left: 2rem;">• 0-59: Necesita Mejorar</li>
+                    <li>Muestra el promedio y el nivel de rendimiento</li>
+                </ul>
+                <button class="solution-toggle" onclick="toggleSolution('sol5')">Ver Solución</button>
+                <div id="sol5" class="solution">
+                    <div class="code-block">
+<span class="code-comment"># Solución: Sistema de calificaciones</span>
+<span class="code-comment"># Pedir las 5 calificaciones</span>
+calificaciones = []
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-keyword">range</span>(<span class="code-number">5</span>):
+    calificacion = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">f"Ingresa la calificación {i+1}: "</span>))
+    calificaciones.append(calificacion)
+
+<span class="code-comment"># Calcular promedio</span>
+promedio = <span class="code-keyword">sum</span>(calificaciones) <span class="code-operator">/</span> <span class="code-keyword">len</span>(calificaciones)
+
+<span class="code-comment"># Determinar nivel de rendimiento</span>
+<span class="code-keyword">if</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">90</span>:
+    nivel = <span class="code-string">"Excelente"</span>
+<span class="code-keyword">elif</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">80</span>:
+    nivel = <span class="code-string">"Muy Bueno"</span>
+<span class="code-keyword">elif</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">70</span>:
+    nivel = <span class="code-string">"Bueno"</span>
+<span class="code-keyword">elif</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">60</span>:
+    nivel = <span class="code-string">"Regular"</span>
+<span class="code-keyword">else</span>:
+    nivel = <span class="code-string">"Necesita Mejorar"</span>
+
+<span class="code-comment"># Mostrar resultados</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Calificaciones:"</span>, calificaciones)
+<span class="code-keyword">print</span>(<span class="code-string">"Promedio:"</span>, promedio)
+<span class="code-keyword">print</span>(<span class="code-string">"Nivel de rendimiento:"</span>, nivel)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎉 ¡Felicidades!</h2>
+            <p>Has completado exitosamente los fundamentos básicos de Python. Estos ejercicios te han ayudado a:</p>
+            <ul>
+                <li>Practicar el uso de variables y tipos de datos</li>
+                <li>Aplicar operadores aritméticos, de comparación y lógicos</li>
+                <li>Desarrollar lógica de programación</li>
+                <li>Resolver problemas prácticos con Python</li>
+            </ul>
+            
+            <p><strong>Próximo paso:</strong> Estás listo para continuar con estructuras de datos más complejas, bucles y condicionales en las siguientes clases.</p>
+        </div>
+
+        <div class="next-section">
+            <h2>🚀 ¿Qué Sigue?</h2>
+            <p>¡Excelente trabajo! Ya dominas los fundamentos básicos de Python. Ahora puedes continuar con el siguiente módulo.</p>
+            <a href="../../Clase 5 - 6/Material/index.html" class="next-link">📚 Continuar con Clase 5 - 6: Bucles y Condicionales →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+</body>
+</html> 

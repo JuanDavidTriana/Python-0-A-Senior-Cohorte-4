@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 7 - 8: Funciones - Python 0 a Senior</title>
+    <title>Clase 1 - 2: Introducción a Python - Python 0 a Senior</title>
     <link rel="stylesheet" href="styles/navbar.css">
     <style>
         * {
@@ -64,7 +64,16 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 3rem;
             margin-bottom: 4rem;
-            max-width: 1000px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .topics-grid .topic-card:nth-child(3) {
+            grid-column: 1 / span 2;
+            max-width: 400px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -80,7 +89,7 @@
             color: inherit;
             position: relative;
             overflow: hidden;
-            min-height: 400px;
+            min-height: 320px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -159,7 +168,7 @@
             box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
         }
 
-        .project-section {
+        .exercises-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -170,20 +179,20 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .project-section h2 {
+        .exercises-section h2 {
             color: #6f42c1;
             font-size: 2.5rem;
             margin-bottom: 2rem;
             font-weight: 600;
         }
 
-        .project-section p {
+        .exercises-section p {
             color: #666;
             margin-bottom: 2rem;
             font-size: 1.1rem;
         }
 
-        .project-link {
+        .exercises-link {
             display: inline-block;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
@@ -196,7 +205,7 @@
             font-size: 1.1rem;
         }
 
-        .project-link:hover {
+        .exercises-link:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
         }
@@ -229,7 +238,7 @@
                 min-height: auto;
             }
 
-            .project-section {
+            .exercises-section {
                 padding: 1.5rem;
             }
         }
@@ -243,82 +252,70 @@
             </a>
             <div class="navbar-links">
                 <a href="../../index.html" class="nav-link">🏠 Inicio</a>
-                <a href="../../Clase 1 - 2/Material/index.html" class="nav-link">🚀 Clase 1 - 2</a>
-                <a href="../../Clase 5 - 6/Material/index.html" class="nav-link">📚 Clase 5 - 6</a>
-                <a href="index.html" class="nav-link active">🔧 Clase 7 - 8</a>
+                <a href="Introduccion/index.html" class="nav-link">📚 Introducción</a>
+                <a href="Variables/index.html" class="nav-link">📊 Variables</a>
+                <a href="Operadores/index.html" class="nav-link">🔧 Operadores</a>
+                <a href="Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
         <div class="header">
-            <h1>🔧 Clase 7 - 8</h1>
-            <p><strong>Funciones y Proyectos:</strong> Programación Modular</p>
-            <p>Domina la Reutilización de Código y Desarrolla Proyectos Complejos</p>
+            <h1>🚀 Clase 1 - 2</h1>
+            <p><strong>Introducción a Python:</strong> Fundamentos Básicos</p>
+            <p>Primeros Pasos en el Mundo de la Programación</p>
         </div>
 
         <div class="module-description">
-            <p>En estas clases aprenderás a crear funciones reutilizables, trabajar con estructuras de datos avanzadas y desarrollar proyectos completos. Las funciones son la base de la programación modular y te permitirán crear código más organizado y eficiente.</p>
+            <p>Bienvenido al inicio de tu viaje en Python. En estas primeras clases aprenderás los conceptos fundamentales que te permitirán crear tus primeros programas y sentar las bases para convertirte en un desarrollador experto.</p>
         </div>
 
         <div class="topics-grid">
-            <a href="Funciones/index.html" class="topic-card">
-                <h2>🔧 Funciones en Python</h2>
-                <p>Aprende a crear y usar funciones para organizar y reutilizar tu código de manera eficiente.</p>
+            <a href="Introduccion/index.html" class="topic-card">
+                <h2>📚 Introducción a Python</h2>
+                <p>Descubre qué es Python, su historia, aplicaciones y cómo configurar tu entorno de desarrollo para comenzar a programar.</p>
                 <ul class="topic-features">
-                    <li>Definición y creación de funciones</li>
-                    <li>Parámetros y argumentos</li>
-                    <li>Retorno de valores</li>
-                    <li>Funciones con valores por defecto</li>
-                    <li>Funciones lambda</li>
+                    <li>¿Qué es Python?</li>
+                    <li>Historia y evolución</li>
+                    <li>Aplicaciones y usos</li>
+                    <li>Instalación y configuración</li>
+                    <li>Primer programa: "Hola Mundo"</li>
                 </ul>
                 <span class="topic-link">Comenzar</span>
             </a>
 
-            <a href="Ejercicios/index.html" class="topic-card">
-                <h2>💪 Ejercicios Prácticos</h2>
-                <p>Pon en práctica todo lo aprendido sobre funciones con ejercicios guiados y desafíos.</p>
+            <a href="Variables/index.html" class="topic-card">
+                <h2>📊 Variables y Tipos de Datos</h2>
+                <p>Aprende a trabajar con variables, los diferentes tipos de datos en Python y cómo almacenar y manipular información.</p>
                 <ul class="topic-features">
-                    <li>Ejercicios de funciones básicas</li>
-                    <li>Problemas de lógica</li>
-                    <li>Manipulación de datos</li>
-                    <li>Desafíos de programación</li>
-                    <li>Soluciones paso a paso</li>
+                    <li>Concepto de variables</li>
+                    <li>Tipos de datos básicos</li>
+                    <li>Números (int, float)</li>
+                    <li>Texto (strings)</li>
+                    <li>Booleanos (True/False)</li>
                 </ul>
-                <span class="topic-link">Practicar</span>
+                <span class="topic-link">Explorar</span>
             </a>
 
-            <div class="topic-card">
-                <h2>📊 Estructuras de Datos</h2>
-                <p>Explora listas, diccionarios y otras estructuras de datos para manejar información compleja.</p>
+            <a href="Operadores/index.html" class="topic-card">
+                <h2>🔧 Operadores</h2>
+                <p>Domina los operadores aritméticos, de comparación y lógicos para realizar cálculos y tomar decisiones en tus programas.</p>
                 <ul class="topic-features">
-                    <li>Listas y operaciones</li>
-                    <li>Diccionarios y métodos</li>
-                    <li>Tuplas y conjuntos</li>
-                    <li>Comprensión de listas</li>
-                    <li>Manejo de datos complejos</li>
+                    <li>Operadores aritméticos</li>
+                    <li>Operadores de comparación</li>
+                    <li>Operadores lógicos</li>
+                    <li>Precedencia de operadores</li>
+                    <li>Ejemplos prácticos</li>
                 </ul>
-                <span class="topic-link" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">Próximamente</span>
-            </div>
-
-            <div class="topic-card">
-                <h2>💻 Próximos Pasos</h2>
-                <p>Una vez que domines las funciones, estarás listo para programación orientada a objetos y proyectos avanzados.</p>
-                <ul class="topic-features">
-                    <li>Programación orientada a objetos</li>
-                    <li>Manejo de archivos</li>
-                    <li>APIs y web scraping</li>
-                    <li>Bases de datos</li>
-                    <li>Frameworks web</li>
-                </ul>
-                <span class="topic-link" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">Próximamente</span>
-            </div>
+                <span class="topic-link">Aprender</span>
+            </a>
         </div>
 
-        <div class="project-section">
-            <h2>🚀 Proyecto Final: Sistema de Biblioteca</h2>
-            <p>Desarrolla un sistema completo de gestión de biblioteca que integre todas las habilidades aprendidas: funciones, estructuras de datos, bucles y condicionales.</p>
-            <a href="Proyecto/index.html" class="project-link">Ver Proyecto</a>
+        <div class="exercises-section">
+            <h2>💪 Ejercicios Prácticos</h2>
+            <p>Pon en práctica todo lo aprendido con ejercicios guiados y desafíos que te ayudarán a consolidar tus conocimientos.</p>
+            <a href="Ejercicios/index.html" class="exercises-link">Ver Ejercicios</a>
         </div>
 
         <div class="footer">
@@ -326,4 +323,4 @@
         </div>
     </div>
 </body>
-</html>
+</html> 

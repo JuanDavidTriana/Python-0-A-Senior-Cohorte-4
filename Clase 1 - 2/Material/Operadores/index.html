@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-number {
+            color: #90cdf4;
+        }
+
+        .code-boolean {
+            color: #fbb6ce;
+        }
+
+        .code-operator {
+            color: #f6e05e;
+            font-weight: bold;
+        }
+
+        .operator-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .operator-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .operator-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            color: #555;
+        }
+
+        .operator-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .operator-table tr:hover {
+            background: rgba(111, 66, 193, 0.05);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .warning-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+        }
+
+        .next-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .operator-table {
+                font-size: 0.9rem;
+            }
+
+            .operator-table th,
+            .operator-table td {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                🐍 Python 0 a Senior
+            </a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../Introduccion/index.html" class="nav-link">📚 Introducción</a>
+                <a href="../Variables/index.html" class="nav-link">📊 Variables</a>
+                <a href="index.html" class="nav-link active">🔧 Operadores</a>
+                <a href="../Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Operadores</h1>
+            <p>Realiza cálculos y toma decisiones en tus programas Python</p>
+        </div>
+
+        <div class="content-section">
+            <h2>➕ Operadores Aritméticos</h2>
+            <p>Los operadores aritméticos te permiten realizar operaciones matemáticas básicas con números:</p>
+            
+            <table class="operator-table">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>+</code></td>
+                        <td>Suma</td>
+                        <td><code>5 + 3</code></td>
+                        <td><code>8</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>-</code></td>
+                        <td>Resta</td>
+                        <td><code>10 - 4</code></td>
+                        <td><code>6</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>*</code></td>
+                        <td>Multiplicación</td>
+                        <td><code>6 * 7</code></td>
+                        <td><code>42</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/</code></td>
+                        <td>División</td>
+                        <td><code>15 / 3</code></td>
+                        <td><code>5.0</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>//</code></td>
+                        <td>División entera</td>
+                        <td><code>17 // 5</code></td>
+                        <td><code>3</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>Módulo (resto)</td>
+                        <td><code>17 % 5</code></td>
+                        <td><code>2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>**</code></td>
+                        <td>Potencia</td>
+                        <td><code>2 ** 3</code></td>
+                        <td><code>8</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<span class="code-comment"># Ejemplos de operadores aritméticos</span>
+a = <span class="code-number">10</span>
+b = <span class="code-number">3</span>
+
+<span class="code-keyword">print</span>(<span class="code-string">"Suma:"</span>, a <span class="code-operator">+</span> b)           <span class="code-comment"># 13</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Resta:"</span>, a <span class="code-operator">-</span> b)           <span class="code-comment"># 7</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Multiplicación:"</span>, a <span class="code-operator">*</span> b)   <span class="code-comment"># 30</span>
+<span class="code-keyword">print</span>(<span class="code-string">"División:"</span>, a <span class="code-operator">/</span> b)         <span class="code-comment"># 3.333...</span>
+<span class="code-keyword">print</span>(<span class="code-string">"División entera:"</span>, a <span class="code-operator">//</span> b)  <span class="code-comment"># 3</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Módulo:"</span>, a <span class="code-operator">%</span> b)          <span class="code-comment"># 1</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Potencia:"</span>, a <span class="code-operator">**</span> b)        <span class="code-comment"># 1000</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔍 Operadores de Comparación</h2>
+            <p>Los operadores de comparación te permiten comparar valores y devuelven True o False:</p>
+            
+            <table class="operator-table">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>==</code></td>
+                        <td>Igual a</td>
+                        <td><code>5 == 5</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>!=</code></td>
+                        <td>Diferente de</td>
+                        <td><code>5 != 3</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;</code></td>
+                        <td>Mayor que</td>
+                        <td><code>10 &gt; 5</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;</code></td>
+                        <td>Menor que</td>
+                        <td><code>3 &lt; 7</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;=</code></td>
+                        <td>Mayor o igual que</td>
+                        <td><code>5 &gt;= 5</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;=</code></td>
+                        <td>Menor o igual que</td>
+                        <td><code>4 &lt;= 6</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<span class="code-comment"># Ejemplos de operadores de comparación</span>
+edad = <span class="code-number">18</span>
+altura = <span class="code-number">1.75</span>
+
+<span class="code-keyword">print</span>(<span class="code-string">"¿Es mayor de edad?"</span>, edad <span class="code-operator">&gt;=</span> <span class="code-number">18</span>)      <span class="code-comment"># True</span>
+<span class="code-keyword">print</span>(<span class="code-string">"¿Es alto?"</span>, altura <span class="code-operator">&gt;</span> <span class="code-number">1.80</span>)           <span class="code-comment"># False</span>
+<span class="code-keyword">print</span>(<code>¿Es exactamente 18?"</code>, edad <span class="code-operator">==</span> <span class="code-number">18</span>)        <span class="code-comment"># True</span>
+<span class="code-keyword">print</span>(<span class="code-string">"¿No es 20?"</span>, edad <span class="code-operator">!=</span> <span class="code-number">20</span>)              <span class="code-comment"># True</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔗 Operadores Lógicos</h2>
+            <p>Los operadores lógicos te permiten combinar condiciones:</p>
+            
+            <table class="operator-table">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>and</code></td>
+                        <td>Y lógico (ambas condiciones deben ser True)</td>
+                        <td><code>True and True</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>or</code></td>
+                        <td>O lógico (al menos una condición debe ser True)</td>
+                        <td><code>True or False</code></td>
+                        <td><code>True</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>not</code></td>
+                        <td>NO lógico (invierte el valor)</td>
+                        <td><code>not True</code></td>
+                        <td><code>False</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+<span class="code-comment"># Ejemplos de operadores lógicos</span>
+es_estudiante = <span class="code-boolean">True</span>
+es_mayor_de_edad = <span class="code-boolean">True</span>
+tiene_experiencia = <span class="code-boolean">False</span>
+
+<span class="code-comment"># AND: ambas condiciones deben ser True</span>
+puede_trabajar = es_estudiante <span class="code-keyword">and</span> es_mayor_de_edad
+<span class="code-keyword">print</span>(<span class="code-string">"¿Puede trabajar?"</span>, puede_trabajar)  <span class="code-comment"># True</span>
+
+<span class="code-comment"># OR: al menos una condición debe ser True</span>
+es_calificado = es_estudiante <span class="code-keyword">or</span> tiene_experiencia
+<span class="code-keyword">print</span>(<span class="code-string">"¿Está calificado?"</span>, es_calificado)  <span class="code-comment"># True</span>
+
+<span class="code-comment"># NOT: invierte el valor</span>
+no_es_estudiante = <span class="code-keyword">not</span> es_estudiante
+<span class="code-keyword">print</span>(<span class="code-string">"¿No es estudiante?"</span>, no_es_estudiante)  <span class="code-comment"># False</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📊 Precedencia de Operadores</h2>
+            <p>Python sigue un orden específico al evaluar operadores. Los paréntesis tienen la mayor precedencia:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Precedencia de operadores</span>
+resultado1 = <span class="code-number">2</span> <span class="code-operator">+</span> <span class="code-number">3</span> <span class="code-operator">*</span> <span class="code-number">4</span>    <span class="code-comment"># 2 + (3 * 4) = 14</span>
+resultado2 = (<span class="code-number">2</span> <span class="code-operator">+</span> <span class="code-number">3</span>) <span class="code-operator">*</span> <span class="code-number">4</span>  <span class="code-comment"># (2 + 3) * 4 = 20</span>
+
+<span class="code-keyword">print</span>(<span class="code-string">"Sin paréntesis:"</span>, resultado1)  <span class="code-comment"># 14</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Con paréntesis:"</span>, resultado2)  <span class="code-comment"># 20</span>
+
+<span class="code-comment"># Orden de precedencia (de mayor a menor):</span>
+<span class="code-comment"># 1. () - Paréntesis</span>
+<span class="code-comment"># 2. ** - Potencia</span>
+<span class="code-comment"># 3. *, /, //, % - Multiplicación, división, módulo</span>
+<span class="code-comment"># 4. +, - - Suma, resta</span>
+<span class="code-comment"># 5. ==, !=, &gt;, &lt;, &gt;=, &lt;= - Comparación</span>
+<span class="code-comment"># 6. not - Negación lógica</span>
+<span class="code-comment"># 7. and - Y lógico</span>
+<span class="code-comment"># 8. or - O lógico</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 Ejemplos Prácticos</h2>
+            <p>Veamos algunos ejemplos reales de cómo usar operadores:</p>
+            
+            <div class="code-block">
+<span class="code-comment"># Ejemplo: Calculadora de descuento</span>
+precio_original = <span class="code-number">100</span>
+descuento = <span class="code-number">20</span>  <span class="code-comment"># 20%</span>
+
+precio_final = precio_original <span class="code-operator">-</span> (precio_original <span class="code-operator">*</span> descuento <span class="code-operator">/</span> <span class="code-number">100</span>)
+<span class="code-keyword">print</span>(<span class="code-string">"Precio final:"</span>, precio_final)  <span class="code-comment"># 80.0</span>
+
+<span class="code-comment"># Ejemplo: Verificación de contraseña</span>
+contraseña = <span class="code-string">"Python123"</span>
+longitud_minima = <span class="code-number">8</span>
+tiene_mayuscula = <span class="code-string">"P"</span> <span class="code-operator">in</span> contraseña
+tiene_numero = <span class="code-string">"1"</span> <span class="code-operator">in</span> contraseña
+
+es_valida = (<span class="code-keyword">len</span>(contraseña) <span class="code-operator">&gt;=</span> longitud_minima <span class="code-keyword">and</span> 
+             tiene_mayuscula <span class="code-keyword">and</span> tiene_numero)
+
+<span class="code-keyword">print</span>(<span class="code-string">"¿La contraseña es válida?"</span>, es_valida)  <span class="code-comment"># True</span>
+
+<span class="code-comment"># Ejemplo: Verificación de edad para conducir</span>
+edad = <span class="code-number">17</span>
+tiene_licencia = <span class="code-boolean">False</span>
+
+puede_conducir = edad <span class="code-operator">&gt;=</span> <span class="code-number">18</span> <span class="code-keyword">and</span> tiene_licencia
+<span class="code-keyword">print</span>(<span class="code-string">"¿Puede conducir?"</span>, puede_conducir)  <span class="code-comment"># False</span>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3>💡 Consejos Importantes</h3>
+            <ul>
+                <li><strong>Usa paréntesis:</strong> Para evitar confusiones en la precedencia</li>
+                <li><strong>Compara con ==:</strong> No uses = para comparaciones</li>
+                <li><strong>Operadores de asignación:</strong> +=, -=, *=, /= para operaciones rápidas</li>
+                <li><strong>Operador in:</strong> Para verificar si un elemento está en una secuencia</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <h3>⚠️ Errores Comunes</h3>
+            <p>Evita estos errores frecuentes:</p>
+            <div class="code-block">
+<span class="code-comment"># ❌ Error: usar = en lugar de ==</span>
+<span class="code-comment"># if edad = 18:  # SyntaxError</span>
+
+<span class="code-comment"># ✅ Correcto</span>
+<span class="code-comment"># if edad == 18:</span>
+
+<span class="code-comment"># ❌ Error: comparar tipos diferentes</span>
+<span class="code-comment"># "5" == 5  # False (string vs int)</span>
+
+<span class="code-comment"># ✅ Correcto</span>
+<span class="code-comment"># int("5") == 5  # True</span>
+            </div>
+        </div>
+
+        <div class="next-section">
+            <h2>🚀 ¿Listo para Practicar?</h2>
+            <p>¡Excelente! Ya conoces todos los operadores básicos de Python. Ahora es momento de poner en práctica todo lo aprendido con ejercicios.</p>
+            <a href="../Ejercicios/index.html" class="next-link">💪 Ir a Ejercicios Prácticos →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 
