@@ -439,8 +439,125 @@ def <span class="code-function">calcular_estadisticas</span>(numeros):<br>&nbsp;
             </div>
         </div>
 
+        <!-- Ejercicio 4: Filtrar Números Pares e Impares -->
         <div class="exercise">
-            <h2>Ejercicio 4: Generador de Fibonacci</h2>
+            <h2>Ejercicio 4: Filtrar Números Pares e Impares</h2>
+            <span class="difficulty medium">Medio</span>
+            <p>Crea una función llamada <code>filtrar_pares_impares</code> que reciba una lista de números y devuelva dos listas: una con los números pares y otra con los impares.</p>
+            <ul class="exercise-conditions-list">
+                <li>Usa comprensión de listas para separar pares e impares.</li>
+                <li>Devuelve una tupla con ambas listas.</li>
+            </ul>
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Puedes usar el operador módulo <code>%</code> para saber si un número es par o impar.</p>
+            </div>
+            <button class="toggle-btn" onclick="toggleSolution('sol4a')">Ver Solución</button>
+            <div id="sol4a" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+def filtrar_pares_impares(numeros):
+    pares = [n for n in numeros if n % 2 == 0]
+    impares = [n for n in numeros if n % 2 != 0]
+    return pares, impares
+
+# Pruebas
+pares, impares = filtrar_pares_impares([1, 2, 3, 4, 5, 6])
+print("Pares:", pares)      # [2, 4, 6]
+print("Impares:", impares)  # [1, 3, 5]
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 5: Contador de Palabras Únicas -->
+        <div class="exercise">
+            <h2>Ejercicio 5: Contador de Palabras Únicas</h2>
+            <span class="difficulty medium">Medio</span>
+            <p>Crea una función llamada <code>contar_palabras_unicas</code> que reciba una cadena de texto y devuelva cuántas palabras únicas contiene (ignorando mayúsculas/minúsculas y signos de puntuación).</p>
+            <ul class="exercise-conditions-list">
+                <li>Convierte todo el texto a minúsculas.</li>
+                <li>Elimina signos de puntuación comunes.</li>
+                <li>Usa un conjunto (<code>set</code>) para contar palabras únicas.</li>
+            </ul>
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Puedes usar el método <code>.split()</code> y el módulo <code>string</code> para quitar puntuación.</p>
+            </div>
+            <button class="toggle-btn" onclick="toggleSolution('sol5a')">Ver Solución</button>
+            <div id="sol5a" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+import string
+
+def contar_palabras_unicas(texto):
+    texto = texto.lower()
+    for p in string.punctuation:
+        texto = texto.replace(p, "")
+    palabras = texto.split()
+    return len(set(palabras))
+
+# Prueba
+print(contar_palabras_unicas("¡Hola mundo! Hola, Python. Mundo..."))  # 3
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 6: Invertir Palabras en una Frase -->
+        <div class="exercise">
+            <h2>Ejercicio 6: Invertir Palabras en una Frase</h2>
+            <span class="difficulty medium">Medio</span>
+            <p>Crea una función llamada <code>invertir_palabras</code> que reciba una cadena de texto y devuelva una nueva cadena con el orden de las palabras invertido.</p>
+            <ul class="exercise-conditions-list">
+                <li>No inviertas las letras de cada palabra, solo el orden de las palabras.</li>
+                <li>La función debe devolver la frase invertida como un solo string.</li>
+            </ul>
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Puedes usar el método <code>.split()</code> y luego <code>.join()</code>.</p>
+            </div>
+            <button class="toggle-btn" onclick="toggleSolution('sol6a')">Ver Solución</button>
+            <div id="sol6a" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+def invertir_palabras(frase):
+    palabras = frase.split()
+    return ' '.join(reversed(palabras))
+
+# Prueba
+print(invertir_palabras("Hola mundo Python"))  # "Python mundo Hola"
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 7: Sumar Solo Números Positivos -->
+        <div class="exercise">
+            <h2>Ejercicio 7: Sumar Solo Números Positivos</h2>
+            <span class="difficulty medium">Medio</span>
+            <p>Crea una función llamada <code>sumar_positivos</code> que reciba una lista de números y devuelva la suma de solo los números positivos.</p>
+            <ul class="exercise-conditions-list">
+                <li>Ignora los números negativos y el cero.</li>
+                <li>Usa comprensión de listas o la función <code>filter()</code>.</li>
+            </ul>
+            <div class="hint">
+                <h4>💡 Pista</h4>
+                <p>Puedes usar una condición dentro de la comprensión de listas.</p>
+            </div>
+            <button class="toggle-btn" onclick="toggleSolution('sol7a')">Ver Solución</button>
+            <div id="sol7a" class="solution">
+                <h4>✅ Solución</h4>
+                <div class="code-block">
+def sumar_positivos(numeros):
+    return sum(n for n in numeros if n > 0)
+
+# Prueba
+print(sumar_positivos([1, -2, 3, 0, -5, 7]))  # 11
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 8: Generador de Fibonacci -->
+        <div class="exercise">
+            <h2>Ejercicio 8: Generador de Fibonacci</h2>
             <span class="difficulty hard">Difícil</span>
             <p>Crea una función llamada <code>fibonacci</code> que genere los primeros n números de la secuencia de Fibonacci. La función debe usar argumentos variables (*args) para aceptar diferentes parámetros:</p>
             <ul class="exercise-conditions-list">
@@ -454,8 +571,8 @@ def <span class="code-function">calcular_estadisticas</span>(numeros):<br>&nbsp;
                 <p>Usa <code>len(args)</code> para determinar cuántos argumentos se pasaron y ajusta la lógica en consecuencia.</p>
             </div>
 
-            <button class="toggle-btn" onclick="toggleSolution('sol4')">Ver Solución</button>
-            <div id="sol4" class="solution">
+            <button class="toggle-btn" onclick="toggleSolution('sol8')">Ver Solución</button>
+            <div id="sol8" class="solution">
                 <h4>✅ Solución</h4>
                 <div class="code-block">
 <span class="code-keyword">def</span> <span class="code-function">fibonacci</span>(*args):
@@ -503,8 +620,9 @@ def <span class="code-function">calcular_estadisticas</span>(numeros):<br>&nbsp;
             </div>
         </div>
 
+        <!-- Ejercicio 9: Decorador Personalizado -->
         <div class="exercise">
-            <h2>Ejercicio 5: Decorador Personalizado</h2>
+            <h2>Ejercicio 9: Decorador Personalizado</h2>
             <span class="difficulty hard">Difícil</span>
             <p>Crea un decorador llamado <code>medir_tiempo</code> que mida el tiempo de ejecución de cualquier función y muestre cuánto tiempo tardó en ejecutarse.</p>
             
@@ -513,8 +631,8 @@ def <span class="code-function">calcular_estadisticas</span>(numeros):<br>&nbsp;
                 <p>Usa el módulo <code>time</code> para medir el tiempo. Un decorador es una función que toma otra función como argumento y retorna una nueva función.</p>
             </div>
 
-            <button class="toggle-btn" onclick="toggleSolution('sol5')">Ver Solución</button>
-            <div id="sol5" class="solution">
+            <button class="toggle-btn" onclick="toggleSolution('sol9')">Ver Solución</button>
+            <div id="sol9" class="solution">
                 <h4>✅ Solución</h4>
                 <div class="code-block">
 <span class="code-keyword">import</span> time
@@ -546,7 +664,6 @@ def <span class="code-function">calcular_estadisticas</span>(numeros):<br>&nbsp;
                 </div>
             </div>
         </div>
-
 
         <div class="next-module-box">
             <h3>🚀 ¡Muy bien, has completado los ejercicios!</h3>

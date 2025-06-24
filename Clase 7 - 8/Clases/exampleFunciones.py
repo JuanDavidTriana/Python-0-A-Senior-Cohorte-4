@@ -1,96 +1,122 @@
-# Ejemplo de Funciones en Python - Clase 7
-# ======================================
+# Funcion con retorno
+def calcular_area_rectangulo(base: float, altura:float) -> float:
+    '''
+    Calcula el área de un rectángulo
 
-# 1. Función básica sin parámetros
-def saludar():
-    """Función que imprime un saludo"""
-    print("¡Hola! Bienvenido a Python")
+    param: base: float
+    param: altura: float
+    return: float
+    '''
+    return base * altura
 
-# 2. Función con parámetros
-def saludar_persona(nombre):
-    """Función que saluda a una persona específica"""
-    print(f"¡Hola {nombre}! ¿Cómo estás?")
+# Funcion con retorno
+def calcular_area_rectanguloB(base, altura):
+    # Calcula el área de un rectángulo
+    return base * altura
 
-# 3. Función con múltiples parámetros
-def calcular_area_rectangulo(base, altura):
-    """Calcula el área de un rectángulo"""
-    area = base * altura
-    return area
+# Funcion sin retorno
+def calcular_area_rectanguloC(base, altura):
+    # Calcula el área de un rectángulo
+    print(base * altura)
 
-# 4. Función con parámetros por defecto
-def saludar_con_edad(nombre, edad=25):
-    """Saluda a una persona con su edad (edad por defecto: 25)"""
-    print(f"¡Hola {nombre}! Tienes {edad} años")
+area1 = calcular_area_rectangulo(5.0 , 3.0)
+area2 = calcular_area_rectanguloB(10.0, 2.0)
 
-# 5. Función que retorna múltiples valores
-def obtener_info_circulo(radio):
-    """Calcula el área y perímetro de un círculo"""
-    import math
-    area = math.pi * radio ** 2
-    perimetro = 2 * math.pi * radio
-    return area, perimetro
+print(area1)
+print(area2)
 
-# 6. Función con argumentos arbitrarios (*args)
-def sumar_numeros(*numeros):
-    """Suma una cantidad variable de números"""
-    total = 0
-    for numero in numeros:
-        total += numero
-    return total
+calcular_area_rectanguloC(5.0, 3.0)
 
-# 7. Función con argumentos de palabras clave (**kwargs)
-def crear_perfil(**datos):
-    """Crea un perfil con datos variables"""
-    perfil = {}
-    for clave, valor in datos.items():
-        perfil[clave] = valor
-    return perfil
+def mostar_memu():
+    print("Menu")
+    print("1. Opcion 1")
+    print("2. Opcion 2")
+    print("3. Opcion 3")
+    print("4. Opcion 4")
+    print("5. Opcion 5")
+    print("6. Opcion 6")
 
-# Ejemplos de uso
-if __name__ == "__main__":
-    print("=== EJEMPLOS DE FUNCIONES ===\n")
-    
-    # Llamada a función básica
-    print("1. Función básica:")
-    saludar()
-    print()
-    
-    # Llamada a función con parámetro
-    print("2. Función con parámetro:")
-    saludar_persona("Juan")
-    print()
-    
-    # Llamada a función con múltiples parámetros
-    print("3. Función con múltiples parámetros:")
-    area = calcular_area_rectangulo(5, 3)
-    print(f"El área del rectángulo es: {area}")
-    print()
-    
-    # Llamada a función con parámetro por defecto
-    print("4. Función con parámetro por defecto:")
-    saludar_con_edad("María")
-    saludar_con_edad("Carlos", 30)
-    print()
-    
-    # Llamada a función que retorna múltiples valores
-    print("5. Función que retorna múltiples valores:")
-    area_circulo, perimetro_circulo = obtener_info_circulo(3)
-    print(f"Área del círculo: {area_circulo:.2f}")
-    print(f"Perímetro del círculo: {perimetro_circulo:.2f}")
-    print()
-    
-    # Llamada a función con argumentos arbitrarios
-    print("6. Función con argumentos arbitrarios:")
-    suma1 = sumar_numeros(1, 2, 3)
-    suma2 = sumar_numeros(10, 20, 30, 40, 50)
-    print(f"Suma de 1, 2, 3: {suma1}")
-    print(f"Suma de 10, 20, 30, 40, 50: {suma2}")
-    print()
-    
-    # Llamada a función con argumentos de palabras clave
-    print("7. Función con argumentos de palabras clave:")
-    perfil = crear_perfil(nombre="Ana", edad=28, ciudad="Madrid", profesion="Desarrolladora")
-    print(f"Perfil creado: {perfil}")
-    print()
-    
-    print("=== FIN DE EJEMPLOS ===") 
+def menu():    
+    mostar_memu()
+    opcion = int(input("Ingrese una opcion: "))
+    return opcion
+
+#menu()
+
+def manejar(edad, licencia=False):
+    if edad >= 18 and licencia:
+        print("Puedes conducir")
+    elif edad >= 18 and not licencia:
+        print("Necesitas obtener una licencia")
+    else:
+        print("Eres menor de edad")
+
+manejar(18)
+manejar(18, True)
+
+#Funcion lambda(Anonimas)
+calcularAreaRectangulo = lambda base, altura: base * altura #Calcula el área de un rectángulo 
+
+area3 = calcularAreaRectangulo(5, 3)
+print(area3)
+
+def operar(f, x, y):
+    return f(x, y)
+
+def multiplicar(a, b):
+    return a * b
+
+def dividir(a, b):
+    return a / b
+
+resultado = operar(dividir, 4, 5) 
+
+print(resultado)
+
+def areaCuadrado(lado):
+    return lado * lado
+
+def areaRectangulo(base, altura):
+    return base * altura
+
+def areaTriangulo(base, altura):
+    return (base * altura) / 2
+
+print (areaCuadrado(5))
+print (areaRectangulo(5, 3))
+print (areaTriangulo(5, 3))
+
+
+def mayusculas(f):
+    def envoltura(*args, **kwargs):
+        resultado = f(*args, **kwargs)
+        return resultado.upper()
+    return envoltura
+
+@mayusculas
+def saludo():
+    return "hola mundo"
+
+print(saludo())
+
+session = {
+    "usuario_logeado": True
+}
+
+def login_required(f):
+    def wrapper(*args, **kwargs):
+        # ver_panel_de_control("panel de control")
+        if session["usuario_logeado"]:
+            print("Acceso concedido para", session["usuario_logeado"])
+            return f(*args, **kwargs)
+        else:
+            print("Acceso denegado")
+            return None
+    return wrapper
+
+@login_required
+def ver_panel_de_control():
+    print("Panel de control")
+
+
+ver_panel_de_control()

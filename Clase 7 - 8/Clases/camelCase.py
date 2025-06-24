@@ -1,0 +1,5 @@
+miVariable = "Hola Mundo"
+mi_variable = "Hola Mundo"
+MiVariable = "Hola Mundo"
+Mi_Variable = "Hola Mundo"
+myVariable = "Hola Mundo"

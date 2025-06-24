@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Variables y Tipos de Datos - Clase 1 - 2</title>
     <link rel="stylesheet" href="../styles/navbar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -253,17 +256,18 @@
             <p>Para crear una variable en Python, simplemente escribes el nombre y le asignas un valor:</p>
             
             <div class="code-block">
-<span class="code-comment"># Crear una variable</span>
-nombre = <span class="code-string">"Juan"</span>
-edad = <span class="code-number">25</span>
-altura = <span class="code-number">1.75</span>
-es_estudiante = <span class="code-boolean">True</span>
+<pre><code class="language-python"># Crear una variable
+nombre = "Juan"
+edad = 25
+altura = 1.75
+es_estudiante = True
 
-<span class="code-comment"># Mostrar las variables</span>
-<span class="code-keyword">print</span>(nombre)
-<span class="code-keyword">print</span>(edad)
-<span class="code-keyword">print</span>(altura)
-<span class="code-keyword">print</span>(es_estudiante)
+# Mostrar las variables
+print(nombre)
+print(edad)
+print(altura)
+print(es_estudiante)
+</code></pre>
             </div>
 
             <h3>🔤 Reglas para Nombres de Variables</h3>
@@ -276,16 +280,17 @@ es_estudiante = <span class="code-boolean">True</span>
             </ul>
 
             <div class="code-block">
-<span class="code-comment"># ✅ Nombres válidos</span>
-mi_variable = <span class="code-string">"Válido"</span>
-variable123 = <span class="code-string">"Válido"</span>
-MiVariable = <span class="code-string">"Válido"</span>
-_variable = <span class="code-string">"Válido"</span>
+<pre><code class="language-python"># ✅ Nombres válidos
+mi_variable = "Válido"
+variable123 = "Válido"
+MiVariable = "Válido"
+_variable = "Válido"
 
-<span class="code-comment"># ❌ Nombres NO válidos</span>
-<span class="code-comment"># 123variable = "Error"  # No puede comenzar con número</span>
-<span class="code-comment"># mi-variable = "Error"  # No puede usar guiones</span>
-<span class="code-comment"># if = "Error"  # No puede usar palabra reservada</span>
+# ❌ Nombres NO válidos
+# 123variable = "Error"  # No puede comenzar con número
+# mi-variable = "Error"  # No puede usar guiones
+# if = "Error"  # No puede usar palabra reservada
+</code></pre>
             </div>
         </div>
 
@@ -297,60 +302,64 @@ _variable = <span class="code-string">"Válido"</span>
             <p>Los strings son secuencias de caracteres (texto). Se pueden crear con comillas simples o dobles:</p>
             
             <div class="code-block">
-<span class="code-comment"># Strings con comillas simples</span>
-nombre = <span class="code-string">'Juan David'</span>
-ciudad = <span class="code-string">'Bogotá'</span>
+<pre><code class="language-python"># Strings con comillas simples
+nombre = 'Juan David'
+ciudad = 'Bogotá'
 
-<span class="code-comment"># Strings con comillas dobles</span>
-mensaje = <span class="code-string">"¡Hola mundo!"</span>
-frase = <span class="code-string">"Python es genial"</span>
+# Strings con comillas dobles
+mensaje = "¡Hola mundo!"
+frase = "Python es genial"
 
-<span class="code-comment"># Strings multilínea</span>
-texto_largo = <span class="code-string">"""Este es un texto
+# Strings multilínea
+texto_largo = """Este es un texto
 que puede ocupar
-múltiples líneas"""</span>
+múltiples líneas"""
 
-<span class="code-keyword">print</span>(nombre)
-<span class="code-keyword">print</span>(mensaje)
+print(nombre)
+print(mensaje)
+</code></pre>
             </div>
 
             <h3>🔢 Números Enteros (int)</h3>
             <p>Los enteros son números sin parte decimal:</p>
             
             <div class="code-block">
-<span class="code-comment"># Números enteros</span>
-edad = <span class="code-number">25</span>
-año = <span class="code-number">2024</span>
-temperatura = <span class="code-number">-5</span>
-poblacion = <span class="code-number">8000000</span>
+<pre><code class="language-python"># Números enteros
+edad = 25
+año = 2024
+temperatura = -5
+poblacion = 8000000
 
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(edad))  <span class="code-comment"># Ver el tipo de dato</span>
+print(type(edad))  # Ver el tipo de dato
+</code></pre>
             </div>
 
             <h3>🔢 Números de Punto Flotante (float)</h3>
             <p>Los flotantes son números con parte decimal:</p>
             
             <div class="code-block">
-<span class="code-comment"># Números flotantes</span>
-altura = <span class="code-number">1.75</span>
-peso = <span class="code-number">70.5</span>
-pi = <span class="code-number">3.14159</span>
-temperatura = <span class="code-number">-2.5</span>
+<pre><code class="language-python"># Números flotantes
+altura = 1.75
+peso = 70.5
+pi = 3.14159
+temperatura = -2.5
 
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(altura))
+print(type(altura))
+</code></pre>
             </div>
 
             <h3>✅ Booleanos (bool)</h3>
             <p>Los booleanos representan valores de verdad: True o False:</p>
             
             <div class="code-block">
-<span class="code-comment"># Valores booleanos</span>
-es_estudiante = <span class="code-boolean">True</span>
-es_profesor = <span class="code-boolean">False</span>
-mayor_de_edad = <span class="code-boolean">True</span>
+<pre><code class="language-python"># Valores booleanos
+es_estudiante = True
+es_profesor = False
+mayor_de_edad = True
 
-<span class="code-keyword">print</span>(es_estudiante)
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(es_estudiante))
+print(es_estudiante)
+print(type(es_estudiante))
+</code></pre>
             </div>
         </div>
 
@@ -359,17 +368,18 @@ mayor_de_edad = <span class="code-boolean">True</span>
             <p>Puedes verificar el tipo de una variable usando la función <code>type()</code>:</p>
             
             <div class="code-block">
-<span class="code-comment"># Crear variables de diferentes tipos</span>
-texto = <span class="code-string">"Hola"</span>
-numero_entero = <span class="code-number">42</span>
-numero_decimal = <span class="code-number">3.14</span>
-es_verdadero = <span class="code-boolean">True</span>
+<pre><code class="language-python"># Crear variables de diferentes tipos
+texto = "Hola"
+numero_entero = 42
+numero_decimal = 3.14
+es_verdadero = True
 
-<span class="code-comment"># Verificar tipos</span>
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(texto))           <span class="code-comment"># &lt;class 'str'&gt;</span>
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(numero_entero))    <span class="code-comment"># &lt;class 'int'&gt;</span>
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(numero_decimal))   <span class="code-comment"># &lt;class 'float'&gt;</span>
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(es_verdadero))     <span class="code-comment"># &lt;class 'bool'&gt;</span>
+# Verificar tipos
+print(type(texto))           # <class 'str'>
+print(type(numero_entero))    # <class 'int'>
+print(type(numero_decimal))   # <class 'float'>
+print(type(es_verdadero))     # <class 'bool'>
+</code></pre>
             </div>
         </div>
 
@@ -378,28 +388,30 @@ es_verdadero = <span class="code-boolean">True</span>
             <p>Python permite convertir entre diferentes tipos de datos usando funciones específicas:</p>
             
             <div class="code-block">
-<span class="code-comment"># Conversión de tipos</span>
-numero_texto = <span class="code-string">"42"</span>
-numero = <span class="code-keyword">int</span>(numero_texto)      <span class="code-comment"># String a entero</span>
-decimal = <span class="code-keyword">float</span>(numero_texto)   <span class="code-comment"># String a float</span>
+<pre><code class="language-python"># Conversión de tipos
+numero_texto = "42"
+numero = int(numero_texto)      # String a entero
+decimal = float(numero_texto)   # String a float
 
-<span class="code-keyword">print</span>(numero)    <span class="code-comment"># 42 (int)</span>
-<span class="code-keyword">print</span>(decimal)   <span class="code-comment"># 42.0 (float)</span>
+print(numero)    # 42 (int)
+print(decimal)   # 42.0 (float)
 
-<span class="code-comment"># Convertir números a texto</span>
-numero = <span class="code-number">123</span>
-texto = <span class="code-keyword">str</span>(numero)    <span class="code-comment"># Número a string</span>
+# Convertir números a texto
+numero = 123
+texto = str(numero)    # Número a string
 
-<span class="code-keyword">print</span>(texto)     <span class="code-comment"># "123" (string)</span>
-<span class="code-keyword">print</span>(<span class="code-keyword">type</span>(texto))  <span class="code-comment"># &lt;class 'str'&gt;</span>
+print(texto)     # "123" (string)
+print(type(texto))  # <class 'str'>
+</code></pre>
             </div>
 
             <div class="warning-box">
                 <h3>⚠️ Cuidado con las Conversiones</h3>
                 <p>No todas las conversiones son posibles. Por ejemplo, no puedes convertir "Hola" a un número:</p>
                 <div class="code-block">
-<span class="code-comment"># Esto causará un error</span>
-<span class="code-comment"># numero = int("Hola")  # ValueError</span>
+<pre><code class="language-python"># Esto causará un error
+# numero = int("Hola")  # ValueError
+</code></pre>
                 </div>
             </div>
         </div>
@@ -409,22 +421,23 @@ texto = <span class="code-keyword">str</span>(numero)    <span class="code-comme
             <p>Veamos algunos ejemplos reales de cómo usar variables y tipos de datos:</p>
             
             <div class="code-block">
-<span class="code-comment"># Ejemplo: Calculadora de edad</span>
-año_nacimiento = <span class="code-number">1995</span>
-año_actual = <span class="code-number">2024</span>
+<pre><code class="language-python"># Ejemplo: Calculadora de edad
+año_nacimiento = 1995
+año_actual = 2024
 edad = año_actual - año_nacimiento
 
-<span class="code-keyword">print</span>(<span class="code-string">"Tienes"</span>, edad, <span class="code-string">"años"</span>)
+print("Tienes", edad, "años")
 
-<span class="code-comment"># Ejemplo: Información personal</span>
-nombre = <span class="code-string">"María"</span>
-apellido = <span class="code-string">"García"</span>
-altura = <span class="code-number">1.65</span>
-es_programadora = <span class="code-boolean">True</span>
+# Ejemplo: Información personal
+nombre = "María"
+apellido = "García"
+altura = 1.65
+es_programadora = True
 
-<span class="code-keyword">print</span>(<span class="code-string">"Nombre:"</span>, nombre, apellido)
-<span class="code-keyword">print</span>(<span class="code-string">"Altura:"</span>, altura, <span class="code-string">"metros"</span>)
-<span class="code-keyword">print</span>(<span class="code-string">"¿Es programadora?"</span>, es_programadora)
+print("Nombre:", nombre, apellido)
+print("Altura:", altura, "metros")
+print("¿Es programadora?", es_programadora)
+</code></pre>
             </div>
         </div>
 
