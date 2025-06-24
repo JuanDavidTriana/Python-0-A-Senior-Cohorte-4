@@ -12,19 +12,6 @@ Este repositorio contiene el material completo del curso **"Python 0 a Senior"**
 - **Buenas prácticas**: Aprender a escribir código limpio y mantenible
 - **Preparación profesional**: Adquirir habilidades para el desarrollo de software
 
-## 📁 Estructura del Proyecto
-
-```
-Python 0 A Senior - Cohorte 4/
-├── index.html                    # Página principal del curso
-├── Conoce a tu Docente/          # Información del instructor
-├── Clase 5 - 6/                  # Condicionales y Bucles
-│   ├── Clases/                   # Código de ejemplo
-│   └── Material/                 # Material educativo
-└── Clase 7 - 8/                  # Funciones y Estructuras de Datos
-    ├── Clases/                   # Código de ejemplo
-    └── Material/                 # Material educativo
-```
 
 ## 🎓 Contenido por Módulos
 
