@@ -149,7 +149,7 @@ def registar_socio():
 
     # Crear el nuevo socio
     nuevo_socio = {
-        'id': f'Socio-{axuContador:03d}',
+        'id': f"{axuContador}",
         'nombre': nombre,
         'apellido': apellido,
         'email': email,
@@ -167,7 +167,67 @@ def registar_socio():
     print("================================================================")
 
 def prestar_libro():
-    pass
+    '''Prestra un libro a un socio'''
+    global libros, socios
+
+    print("📖 Prestamo de Libros 📖")
+
+    # Pedir ISBN del libro
+    isbn = input("ISBN del libro a presta: ").strip()
+
+    if not isbn:
+        print(" El ISBN no puede estar vacio")
+        return
+    
+    #Buscar el libro
+    libro_encontrado = None
+    for libro in libros:
+        if libro['isbn'] == isbn:
+            libro_encontrado = libro
+            break
+
+    if not libro_encontrado:
+        print(f"No se encontro un libro con el ISBN {isbn}")
+        return
+    
+     # Pedir ID del socio
+    id_socio = input("ID del socio: ").strip()
+
+    print(id_socio)
+
+    if not id_socio:
+        print(" El id no puede estar vacio")
+        return
+    
+    #Buscar el libro
+    id_socio_encontrado = None
+    for socio in socios:
+        if socio['id'] == id_socio:
+            id_socio_encontrado = socio
+            break
+
+    if not id_socio_encontrado:
+        print(f"No se encontro un usuario con el id {id_socio}")
+        return
+    
+    disponible_libro = None
+    for libro in libros:
+        if libro['estado'] == 'Disponible':
+            disponible_libro = True
+            break
+
+    if not disponible_libro:
+        print("Actualemente el libro solicitado no esta disponible")
+        return
+    
+    libro_encontrado['estado'] = 'Prestado'
+    libro_encontrado['socio_prestado'] = id_socio
+
+    print("Libro prestad con exito")
+    print({libro_encontrado['titulo']})
+    print(f"Pestado a: {id_socio_encontrado['nombre']}")
+
+
 
 def devolver_libro():
     pass
@@ -259,7 +319,7 @@ def main():
             case '2':
                 registar_socio()
             case '3':
-                pass
+                prestar_libro()
             case '4':
                 pass
             case '5':
