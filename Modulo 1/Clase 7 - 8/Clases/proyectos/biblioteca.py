@@ -20,8 +20,8 @@ libros = [
         'isbn': '3',
         'titulo': 'La sombra del viento',
         'autor': 'Carlos Ruiz Zafón',
-        'estado': 'Prestado',
-        'socio_prestado': 'Socio-003'
+        'estado': 'Disponible',
+        'socio_prestado': None
     },
     {
         'isbn': '4',
@@ -210,6 +210,7 @@ def prestar_libro():
         print(f"No se encontro un usuario con el id {id_socio}")
         return
     
+    #Verificar que el libro este disponible
     disponible_libro = None
     for libro in libros:
         if libro['estado'] == 'Disponible':
@@ -230,10 +231,48 @@ def prestar_libro():
 
 
 def devolver_libro():
-    pass
+    global libros
+
+    # Pedir ISBN del libro
+    isbn = input("ISBN del libro a presta: ").strip()
+
+    if not isbn:
+        print(" El ISBN no puede estar vacio")
+        return
+    
+    #Buscar el libro
+    libro_encontrado = None
+    for libro in libros:
+        if libro['isbn'] == isbn:
+            libro_encontrado = libro
+            break
+
+    if not libro_encontrado:
+        print(f"No se encontro un libro con el ISBN {isbn}")
+        return
+    
+    libro_encontrado['estado'] = 'Disponible'
+    libro_encontrado['socio_prestado'] = None
+
+    print("Libro devuleto exitosamente")
+
+
 
 def ver_libro_prestado():
-    pass
+
+
+    #TAREA: OPCION QUE MUESTRE QUE NO HAY LIBROS PRESTADOS
+    table = PrettyTable()
+
+    table.field_names = ["titulo", "autor", "isbn", "id_socio"]
+
+    table.title = "📖 Mostrando Libros Prestados 📖"
+
+    for i, libro in enumerate(libros, 1):
+        if libro['estado'] == 'Prestado':
+            table.add_row([libro["titulo"], libro["autor"], libro["isbn"], libro["socio_prestado"]])
+
+    print(table)
 
 def ver_todos_libros():
 
@@ -321,9 +360,9 @@ def main():
             case '3':
                 prestar_libro()
             case '4':
-                pass
+                devolver_libro()
             case '5':
-                pass
+                ver_libro_prestado()
             case '6':
                 ver_todos_libros()
             case '7':
