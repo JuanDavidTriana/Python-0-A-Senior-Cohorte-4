@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Prácticos - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .exercise-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .exercise-card h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .exercise-card p {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .exercise-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .exercise-card li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .exercise-card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-number {
+            color: #90cdf4;
+        }
+
+        .code-boolean {
+            color: #fbb6ce;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .difficulty-easy {
+            background: #68d391;
+            color: white;
+        }
+
+        .difficulty-medium {
+            background: #f6ad55;
+            color: white;
+        }
+
+        .difficulty-hard {
+            background: #fc8181;
+            color: white;
+        }
+
+        .solution-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .solution-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .solution {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .solution.show {
+            display: block;
+        }
+
+        .challenge-section {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .challenge-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+        }
+
+        .next-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .exercise-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../index.html" class="nav-link">🏗️ POO</a>
+                <a href="../Clases y objetos/index.html" class="nav-link">📚 Clases y Objetos</a>
+                <a href="../Encapculamiento/index.html" class="nav-link">🔒 Encapsulación</a>
+                <a href="../Consutructores/index.html" class="nav-link">🏗️ Constructores</a>
+                <a href="index.html" class="nav-link active">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>💪 Ejercicios Prácticos</h1>
+            <p>Pon en práctica todo lo aprendido y fortalece tus habilidades</p>
+        </div>
+
+        <!-- Desafío de la Clase: Sección motivacional antes de los ejercicios -->
+        <div class="challenge-intro-card" style="margin-bottom: 2.5rem; background: #fff; color: #232946; border-radius: 1.2rem; box-shadow: 0 4px 24px rgba(80,80,120,0.10); padding: 2.2rem 2rem 1.5rem 2rem; text-align: center;">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 0.7rem; color: #3a3a5a;">🎯 Desafío de la Clase</h2>
+            <p style="font-size: 1.15rem; margin-bottom: 0.7rem;">Completa todos los ejercicios para dominar las funciones en Python. Cada ejercicio te ayudará a entender mejor cómo crear y usar funciones efectivamente.</p>
+            <div style="font-size: 1.1rem; margin-top: 1.2rem; background: #f3f6fa; color: #232946; border-radius: 0.7rem; padding: 0.8rem 1rem; display: inline-block;">
+                🐙 <b>Recuerda:</b> Sube todos tus ejercicios a <b>GitHub</b> para seguir practicando el uso de esta herramienta y llevar un registro de tu progreso.
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📝 Lista de Ejercicios</h2>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-easy">Fácil</span>
+                <h3>1. Clase Persona Simple</h3>
+                <p>Crea una clase <code>Persona</code> con los atributos <code>nombre</code> y <code>edad</code>. Instancia dos personas y muestra sus datos.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol1')">Ver Solución</button>
+                <div id="sol1" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Persona:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(<span class="code-keyword">self</span>, nombre, edad):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.edad = edad<br>
+<br>
+persona1 = Persona(<span class="code-string">"Ana"</span>, <span class="code-number">25</span>)<br>
+persona2 = Persona(<span class="code-string">"Carlos"</span>, <span class="code-number">30</span>)<br>
+print(persona1.nombre, persona1.edad)<br>
+print(persona2.nombre, persona2.edad)<br>
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-easy">Fácil</span>
+                <h3>2. Saludo Personalizado</h3>
+                <p>Agrega un método <code>saludar()</code> a la clase <code>Persona</code> que imprima "Hola, soy [nombre]".</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol2')">Ver Solución</button>
+                <div id="sol2" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Persona:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(<span class="code-keyword">self</span>, nombre):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> saludar(<span class="code-keyword">self</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="code-string">f"Hola, soy {self.nombre}"</span>)<br>
+<br>
+persona = Persona(<span class="code-string">"Ana"</span>)<br>
+persona.saludar()
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-easy">Fácil</span>
+                <h3>3. Contador de Objetos</h3>
+                <p>Crea una clase <code>Contador</code> que tenga un atributo de clase para contar cuántos objetos se han creado.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol3')">Ver Solución</button>
+                <div id="sol3" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Contador:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cantidad = <span class="code-number">0</span>  <span class="code-comment"># atributo de clase</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(<span class="code-keyword">self</span>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contador.cantidad += 1<br>
+<br>
+c1 = Contador()<br>
+c2 = Contador()<br>
+c3 = Contador()<br>
+print(Contador.cantidad)  <span class="code-comment"># 3</span><br>
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>4. Encapsulamiento Básico</h3>
+                <p>Crea una clase <code>Cuenta</code> con un atributo privado <code>__saldo</code>. Implementa métodos para depositar y retirar dinero, validando que el saldo nunca sea negativo.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol4')">Ver Solución</button>
+                <div id="sol4" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Cuenta:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, saldo):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__saldo = saldo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> depositar(self, monto):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if monto > 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__saldo += monto<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> retirar(self, monto):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if self.__saldo >= monto:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__saldo -= monto<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> mostrar_saldo(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Saldo actual: {self.__saldo}")<br>
+<br>
+cuenta = Cuenta(100)<br>
+cuenta.depositar(50)<br>
+cuenta.retirar(30)<br>
+cuenta.mostrar_saldo()
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>5. Getters y Setters</h3>
+                <p>Modifica la clase <code>Cuenta</code> para que el saldo solo pueda leerse y modificarse usando <code>@property</code> y su setter.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol5')">Ver Solución</button>
+                <div id="sol5" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Cuenta:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, saldo):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__saldo = saldo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@property<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> saldo(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.__saldo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@saldo.setter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> saldo(self, valor):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if valor >= 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__saldo = valor<br>
+<br>
+cuenta = Cuenta(200)<br>
+print(cuenta.saldo)<br>
+cuenta.saldo = 500<br>
+print(cuenta.saldo)<br>
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>6. Producto con Stock</h3>
+                <p>Crea una clase <code>Producto</code> con atributos <code>nombre</code> (público), <code>_stock</code> (protegido) y <code>__precio</code> (privado). Implementa métodos para vender y reponer stock.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol6')">Ver Solución</button>
+                <div id="sol6" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Producto:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, nombre, precio, stock):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._stock = stock<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__precio = precio<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> vender(self, cantidad):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if self._stock >= cantidad:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._stock -= cantidad<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> reponer(self, cantidad):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._stock += cantidad<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> mostrar_info(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{self.nombre} - Stock: {self._stock} - Precio: {self._Producto__precio}")<br>
+<br>
+p = Producto("Mouse", 10, 5)<br>
+p.vender(2)<br>
+p.reponer(3)<br>
+p.mostrar_info()
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>7. Constructor con Validación</h3>
+                <p>Crea una clase <code>Libro</code> cuyo constructor valide que el número de páginas y el precio no sean negativos. Lanza un <code>ValueError</code> si no se cumple.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol7')">Ver Solución</button>
+                <div id="sol7" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Libro:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, titulo, paginas, precio):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if paginas < 0 or precio < 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Páginas y precio no pueden ser negativos")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.titulo = titulo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.paginas = paginas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.precio = precio<br>
+<br>
+l = Libro("Python", 200, 25)<br>
+print(l.titulo, l.paginas, l.precio)<br>
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>8. Valores por Defecto</h3>
+                <p>Haz que la clase <code>Libro</code> permita crear libros con o sin precio y páginas (por defecto: 100 páginas, precio 0.0).</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol8')">Ver Solución</button>
+                <div id="sol8" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Libro:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, titulo, autor, paginas=100, precio=0.0):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.titulo = titulo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.autor = autor<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.paginas = paginas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.precio = precio<br>
+<br>
+l1 = Libro("Python", "Guido")<br>
+l2 = Libro("AI", "Alan", 300, 50)<br>
+print(l1.titulo, l1.paginas, l1.precio)<br>
+print(l2.titulo, l2.paginas, l2.precio)<br>
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>9. Herencia Simple</h3>
+                <p>Crea una clase <code>Empleado</code> que herede de <code>Persona</code> y agregue el atributo <code>puesto</code> y un método <code>trabajar()</code>.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol9')">Ver Solución</button>
+                <div id="sol9" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Persona:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, nombre):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+<br>
+<span class="code-keyword">class</span> Empleado(Persona):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, nombre, puesto):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super().__init__(nombre)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.puesto = puesto<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> trabajar(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"{self.nombre} está trabajando como {self.puesto}")<br>
+<br>
+e = Empleado("Ana", "Ingeniera")<br>
+e.trabajar()
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-medium">Medio</span>
+                <h3>10. Lista de Objetos</h3>
+                <p>Crea una lista de objetos <code>Producto</code> y muestra el nombre de todos los productos cuyo stock sea mayor a 0.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol10')">Ver Solución</button>
+                <div id="sol10" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Producto:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, nombre, stock):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.stock = stock<br>
+<br>
+productos = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Producto("Mouse", 5),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Producto("Teclado", 0),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Producto("Monitor", 3)<br>]<br>
+for p in productos:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if p.stock > 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(p.nombre)<br>
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-hard">Difícil</span>
+                <h3>11. Manipulación de Objetos en Memoria</h3>
+                <p>Crea una clase <code>Carrito</code> que permita agregar y eliminar productos (objetos) y calcule el total del carrito.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol11')">Ver Solución</button>
+                <div id="sol11" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Producto:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, nombre, precio):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.precio = precio<br>
+<br>
+<span class="code-keyword">class</span> Carrito:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.productos = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> agregar(self, producto):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.productos.append(producto)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> eliminar(self, producto):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.productos.remove(producto)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> total(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return sum(p.precio for p in self.productos)<br>
+<br>
+c = Carrito()<br>
+p1 = Producto("Mouse", 10)<br>
+p2 = Producto("Teclado", 20)<br>
+c.agregar(p1)<br>
+c.agregar(p2)<br>
+print(c.total())
+                    </div>
+                </div>
+            </div>
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-hard">Difícil</span>
+                <h3>12. Desafío Final: Sistema de Biblioteca</h3>
+                <p>Implementa un sistema con clases <code>Libro</code>, <code>Usuario</code> y <code>Biblioteca</code>. Permite prestar y devolver libros, controlar el stock y mostrar los libros prestados a cada usuario.</p>
+                <button class="solution-toggle" onclick="toggleSolution('sol12')">Ver Solución</button>
+                <div id="sol12" class="solution">
+                    <div class="code-block">
+<span class="code-keyword">class</span> Libro:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, titulo, stock):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.titulo = titulo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.stock = stock<br>
+<br>
+<span class="code-keyword">class</span> Usuario:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self, nombre):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nombre = nombre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.prestados = []<br>
+<br>
+<span class="code-keyword">class</span> Biblioteca:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> __init__(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.libros = []<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> agregar_libro(self, libro):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.libros.append(libro)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> prestar(self, libro, usuario):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if libro.stock > 0:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libro.stock -= 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usuario.prestados.append(libro)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> devolver(self, libro, usuario):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if libro in usuario.prestados:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libro.stock += 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usuario.prestados.remove(libro)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">def</span> mostrar_prestados(self, usuario):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for libro in usuario.prestados:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(libro.titulo)<br>
+<br>
+b = Biblioteca()<br>
+l1 = Libro("Python", 2)<br>
+l2 = Libro("AI", 1)<br>
+b.agregar_libro(l1)<br>
+b.agregar_libro(l2)<br>
+u = Usuario("Ana")<br>
+b.prestar(l1, u)<br>
+b.mostrar_prestados(u)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="challenge-section">
+            <h3>🏆 Desafío Final</h3>
+            <p>¡Pon a prueba todos tus conocimientos con este desafío integrador!</p>
+            
+            <div class="exercise-card">
+                <span class="difficulty-badge difficulty-hard">Difícil</span>
+                <h3>Desafío: Sistema de Calificaciones</h3>
+                <p>Crea un programa que calcule el promedio de calificaciones de un estudiante y determine su nivel de rendimiento.</p>
+                <ul>
+                    <li>Pide al estudiante que ingrese 5 calificaciones (0-100)</li>
+                    <li>Calcula el promedio de las calificaciones</li>
+                    <li>Determina el nivel de rendimiento según el promedio:</li>
+                    <li style="margin-left: 2rem;">• 90-100: Excelente</li>
+                    <li style="margin-left: 2rem;">• 80-89: Muy Bueno</li>
+                    <li style="margin-left: 2rem;">• 70-79: Bueno</li>
+                    <li style="margin-left: 2rem;">• 60-69: Regular</li>
+                    <li style="margin-left: 2rem;">• 0-59: Necesita Mejorar</li>
+                    <li>Muestra el promedio y el nivel de rendimiento</li>
+                </ul>
+                <div id="sol5" class="solution">
+                    <div class="code-block">
+<span class="code-comment"># Solución: Sistema de calificaciones</span>
+<span class="code-comment"># Pedir las 5 calificaciones</span>
+calificaciones = []
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-keyword">range</span>(<span class="code-number">5</span>):
+    calificacion = <span class="code-keyword">float</span>(<span class="code-keyword">input</span>(<span class="code-string">f"Ingresa la calificación {i+1}: "</span>))
+    calificaciones.append(calificacion)
+
+<span class="code-comment"># Calcular promedio</span>
+promedio = <span class="code-keyword">sum</span>(calificaciones) <span class="code-operator">/</span> <span class="code-keyword">len</span>(calificaciones)
+
+<span class="code-comment"># Determinar nivel de rendimiento</span>
+<span class="code-keyword">if</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">90</span>:
+    nivel = <span class="code-string">"Excelente"</span>
+<span class="code-keyword">elif</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">80</span>:
+    nivel = <span class="code-string">"Muy Bueno"</span>
+<span class="code-keyword">elif</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">70</span>:
+    nivel = <span class="code-string">"Bueno"</span>
+<span class="code-keyword">elif</span> promedio <span class="code-operator">&gt;=</span> <span class="code-number">60</span>:
+    nivel = <span class="code-string">"Regular"</span>
+<span class="code-keyword">else</span>:
+    nivel = <span class="code-string">"Necesita Mejorar"</span>
+
+<span class="code-comment"># Mostrar resultados</span>
+<span class="code-keyword">print</span>(<span class="code-string">"Calificaciones:"</span>, calificaciones)
+<span class="code-keyword">print</span>(<span class="code-string">"Promedio:"</span>, promedio)
+<span class="code-keyword">print</span>(<span class="code-string">"Nivel de rendimiento:"</span>, nivel)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎉 ¡Felicidades!</h2>
+            <p>Has completado exitosamente los fundamentos básicos de Python. Estos ejercicios te han ayudado a:</p>
+            <ul>
+                <li>Practicar el uso de variables y tipos de datos</li>
+                <li>Aplicar operadores aritméticos, de comparación y lógicos</li>
+                <li>Desarrollar lógica de programación</li>
+                <li>Resolver problemas prácticos con Python</li>
+            </ul>
+            
+            <p><strong>Próximo paso:</strong> Estás listo para continuar con estructuras de datos más complejas, bucles y condicionales en las siguientes clases.</p>
+ 
+
+        
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+    </div>
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+    </script>
+</body>
+</html> 

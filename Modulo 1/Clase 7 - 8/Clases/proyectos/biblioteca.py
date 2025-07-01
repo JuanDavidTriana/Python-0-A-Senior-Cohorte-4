@@ -110,7 +110,61 @@ def registar_libro():
     
 
 def registar_socio():
-    pass
+    global socios, axuContador
+
+    print("================================================================")
+    print("Registrar Socio 👤")
+    print("================================================================")
+    print("Digite 0 si quiere cancelar la creacion")
+
+    nombre = input("Nombre del socio: ").strip().lower()
+    
+    if nombre == "0": return
+
+    if not nombre:
+        print("❌ El nombre no puede estar vacío ❌")
+        return
+
+    apellido = input("Apellido del socio: ").strip().lower()
+
+    if apellido == "0": return
+
+    if not apellido:
+        print("❌ El apellido no puede estar vacío ❌")
+        return
+
+    email = input("Email del socio: ").strip().lower()
+
+    if email == "0": return
+
+    if not email:
+        print("❌ El email no puede estar vacío ❌")
+        return
+    
+    # Verificar si ya existe un socio con ese email
+    for socio in socios:
+        if socio['email'] == email:
+            print(f"❌ Ya existe un socio con el email {email} ❌")
+            return
+
+    # Crear el nuevo socio
+    nuevo_socio = {
+        'id': f'Socio-{axuContador:03d}',
+        'nombre': nombre,
+        'apellido': apellido,
+        'email': email,
+        'libros_prestados': []
+    }
+
+    socios.append(nuevo_socio)
+    axuContador += 1
+    
+    print("✅ Socio Registrado Exitosamente 👤")
+    print(f"👤 {nombre} {apellido}")
+    print(f"📧 Email: {email}")
+    print(f"🆔 ID: {nuevo_socio['id']}")
+
+    print("================================================================")
 
 def prestar_libro():
     pass
@@ -156,7 +210,41 @@ def ver_todos_libros():
     
 
 def ver_todo_socios():
-    pass
+    table = PrettyTable()
+
+    table.field_names = ["ID", "Nombre", "Apellido", "Email", "Libros Prestados"]
+
+    table.title = "👤 Mostrando Socios 👤"
+
+    if not socios:
+        print("================================================================")
+        print("No hay socios registrados en la biblioteca")
+        print("================================================================")
+        return
+
+    for socio in socios:
+        libros_prestados = len(socio["libros_prestados"])
+        table.add_row([socio["id"], socio["nombre"], socio["apellido"], socio["email"], libros_prestados])
+
+    print(table)
+
+    """
+    print("================================================================")
+    print("Mostrando todos los socios")
+    print("================================================================")
+
+    if not socios:
+        print("No hay socios registrados en la biblioteca")
+        return
+    
+    for i, socio in enumerate(socios, 1):
+        print("================================================================")
+        print(f"{i}. ID: {socio["id"]}")
+        print(f"     Nombre: {socio["nombre"]} {socio["apellido"]}")
+        print(f"     Email: {socio["email"]}")
+        print(f"     Libros Prestados: {len(socio["libros_prestados"])}")
+        print("================================================================")
+    """
 
 def main():
     '''Funcion principal del programa'''
@@ -169,7 +257,7 @@ def main():
             case '1':
                 registar_libro()
             case '2':
-                pass # Tarea
+                registar_socio()
             case '3':
                 pass
             case '4':
@@ -179,7 +267,7 @@ def main():
             case '6':
                 ver_todos_libros()
             case '7':
-                pass # Tarea
+                ver_todo_socios()
             case '0':
                 print("📚 Gracias por usar MiniBiblio! 📚")
                 print("📚 Hasta Luego 📚")

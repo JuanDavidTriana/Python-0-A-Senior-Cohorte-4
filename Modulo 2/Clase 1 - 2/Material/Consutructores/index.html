@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases y Objetos en Python - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 1px solid #2d3748;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 0;
+        }
+
+        .code-block code {
+            color: #e2e8f0;
+        }
+
+        /* Colores de sintaxis */
+        .code-keyword {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .code-string {
+            color: #51cf66;
+        }
+
+        .code-comment {
+            color: #868e96;
+            font-style: italic;
+        }
+
+        .code-function {
+            color: #74c0fc;
+        }
+
+        .code-class {
+            color: #ffd43b;
+            font-weight: bold;
+        }
+
+        .code-number {
+            color: #fcc419;
+        }
+
+        .code-operator {
+            color: #ff922b;
+        }
+
+        .code-attribute {
+            color: #da77f2;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 4rem;
+            padding: 3.5rem 3.5rem 2.8rem 3.5rem;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            border-radius: 32px;
+            box-shadow: 0 8px 32px rgba(111, 66, 193, 0.18);
+            max-width: 950px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .next-section h2 {
+            font-size: 2.3rem;
+            color: #2d1e4a;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 2px 8px rgba(111,66,193,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+        .next-section p {
+            font-size: 1.25rem;
+            color: #2d1e4a;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+        .next-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 1.3rem 3.5rem;
+            border-radius: 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.35rem;
+            box-shadow: 0 6px 24px rgba(111, 66, 193, 0.18);
+            transition: all 0.2s cubic-bezier(.4,2,.6,1);
+            border: none;
+        }
+        .next-link:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 12px 32px rgba(111, 66, 193, 0.25);
+        }
+        .next-link .emoji {
+            font-size: 1.7em;
+            margin-right: 0.3em;
+        }
+        @media (max-width: 768px) {
+            .next-section {
+                padding: 2rem 0.5rem 1.5rem 0.5rem;
+                max-width: 98vw;
+            }
+            .next-section h2 {
+                font-size: 1.3rem;
+            }
+            .next-link {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+            }
+        }
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../index.html" class="nav-link">🏗️ POO</a>
+                <a href="../Clases y objetos/index.html" class="nav-link">📚 Clases y Objetos</a>
+                <a href="../Encapculamiento/index.html" class="nav-link">🔒 Encapsulación</a>
+                <a href="index.html" class="nav-link active">🏗️ Constructores</a>
+                <a href="../Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ Constructores en Python</h1>
+            <p>Aprende a inicializar objetos de manera flexible y profesional usando el método <code>__init__</code>.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🏗️ ¿Qué es un Constructor?</h2>
+            <p>Un <b>constructor</b> es un método especial que se ejecuta automáticamente al crear un objeto. En Python, el constructor se llama <code>__init__</code> y permite inicializar los atributos del objeto con valores específicos.</p>
+            <div class="highlight-box">
+                <h3>🌟 Ventajas de usar constructores</h3>
+                <ul>
+                    <li>Permiten crear objetos listos para usar desde el inicio</li>
+                    <li>Facilitan la validación y configuración de atributos</li>
+                    <li>Hacen el código más claro y seguro</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔧 El método <code>__init__</code></h2>
+            <p>El método <code>__init__</code> es el constructor por excelencia en Python. Se define dentro de la clase y recibe como primer parámetro <code>self</code>:</p>
+            <div class="code-block">
+<pre><code><span class="code-keyword">class</span> <span class="code-class">Persona</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, nombre, edad):
+        <span class="code-keyword">self</span>.<span class="code-attribute">nombre</span> = nombre
+        <span class="code-keyword">self</span>.<span class="code-attribute">edad</span> = edad
+
+persona1 = <span class="code-class">Persona</span>(<span class="code-string">"Ana"</span>, <span class="code-number">25</span>)
+persona2 = <span class="code-class">Persona</span>(<span class="code-string">"Carlos"</span>, <span class="code-number">30</span>)
+</code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>⚙️ Constructores por Defecto y Parametrizados</h2>
+            <p>Un constructor puede tener parámetros opcionales con valores por defecto, permitiendo crear objetos de diferentes formas:</p>
+            <div class="code-block">
+<pre><code><span class="code-keyword">class</span> <span class="code-class">Producto</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, nombre, precio=<span class="code-number">0.0</span>, stock=<span class="code-number">0</span>):
+        <span class="code-keyword">self</span>.<span class="code-attribute">nombre</span> = nombre
+        <span class="code-keyword">self</span>.<span class="code-attribute">precio</span> = precio
+        <span class="code-keyword">self</span>.<span class="code-attribute">stock</span> = stock
+
+producto1 = <span class="code-class">Producto</span>(<span class="code-string">"Mouse"</span>, <span class="code-number">15.5</span>, <span class="code-number">10</span>)
+producto2 = <span class="code-class">Producto</span>(<span class="code-string">"Teclado"</span>)  <span class="code-comment"># Usa valores por defecto</span>
+</code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🛠️ Inicialización Flexible y Validación</h2>
+            <p>Puedes validar los datos en el constructor y lanzar errores si los valores no son válidos:</p>
+            <div class="code-block">
+<pre><code><span class="code-keyword">class</span> <span class="code-class">Cuenta</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, titular, saldo):
+        <span class="code-keyword">if</span> saldo &lt; <span class="code-number">0</span>:
+            <span class="code-keyword">raise</span> <span class="code-class">ValueError</span>(<span class="code-string">"El saldo no puede ser negativo"</span>)
+        <span class="code-keyword">self</span>.<span class="code-attribute">titular</span> = titular
+        <span class="code-keyword">self</span>.<span class="code-attribute">saldo</span> = saldo
+
+cuenta = <span class="code-class">Cuenta</span>(<span class="code-string">"Ana"</span>, <span class="code-number">1000</span>)
+<span class="code-comment"># cuenta2 = Cuenta("Juan", -50)  # Lanza ValueError</span>
+</code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>✅ Buenas Prácticas y Ventajas</h2>
+            <ul>
+                <li>Usa valores por defecto para mayor flexibilidad</li>
+                <li>Valida los datos en el constructor</li>
+                <li>Documenta los parámetros del constructor</li>
+                <li>Evita lógica compleja dentro del <code>__init__</code></li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🤖 Uso de IA para Generar Constructores</h2>
+            <p>Las herramientas de IA pueden ayudarte a generar constructores automáticamente, sugerir validaciones y documentar los parámetros.</p>
+            <div class="highlight-box">
+                <h3>🌟 Ejemplo de Prompt para IA</h3>
+                <ul>
+                    <li>"Genera un constructor para una clase Empleado con nombre, puesto y salario."</li>
+                    <li>"Sugiere validaciones para el constructor de mi clase Producto."</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>💪 Ejercicio Práctico</h2>
+            <p>Crea una clase <b>Libro</b> con los siguientes atributos:</p>
+            <ul>
+                <li>Título (obligatorio)</li>
+                <li>Autor (obligatorio)</li>
+                <li>Páginas (opcional, por defecto 100)</li>
+                <li>Precio (opcional, por defecto 0.0)</li>
+            </ul>
+            <p>Valida que el número de páginas y el precio no sean negativos. Crea varios libros con diferentes formas de inicialización.</p>
+        </div>
+
+        <div class="next-section">
+            <h2><span class="emoji">🚀</span>¿Listo para Continuar?</h2>
+            <p>¡Excelente! Ahora dominas los constructores en Python.<br>En la siguiente sección podrás practicar con ejercicios y desafíos.</p>
+            <a href="../Ejercicios/index.html" class="next-link"><span class="emoji">💪</span>Ir a Ejercicios →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

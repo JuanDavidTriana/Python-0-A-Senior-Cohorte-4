@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 1 - 2: Programación Orientada a Objetos - Python 0 a Senior</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .module-description {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .topics-grid .topic-card:nth-child(3) {
+            grid-column: 1 / span 2;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .topic-card h2 {
+            color: #6f42c1;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+
+        .topic-card p {
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .topic-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .topic-features li {
+            padding: 0.7rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .topic-features li::before {
+            content: '▶';
+            color: #6f42c1;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .topic-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .topic-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .exercises-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .exercises-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .exercises-section p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .exercises-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .exercises-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                max-width: 100%;
+            }
+
+            .topic-card {
+                padding: 2rem;
+                min-height: auto;
+            }
+
+            .exercises-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="index.html" class="nav-link active">🏗️ POO</a>
+                <a href="Clases y objetos/index.html" class="nav-link">📚 Clases y Objetos</a>
+                <a href="Encapculamiento/index.html" class="nav-link">🔒 Encapsulación</a>
+                <a href="Consutructores/index.html" class="nav-link">🏗️ Constructores</a>
+                <a href="Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ Clase 1 - 2</h1>
+            <p><strong>Programación Orientada a Objetos:</strong> Fundamentos de POO</p>
+            <p>Modelando el Mundo Real con Clases y Objetos</p>
+        </div>
+
+        <div class="module-description">
+            <p>Este módulo introduce al estudiante en la Programación Orientada a Objetos (POO), uno de los pilares fundamentales del desarrollo en Python. Se aprenderá a modelar clases, utilizar herencia, aplicar interfaces. Se promueve el uso de IA para análisis y refactorización de código orientado a objetos.</p>
+        </div>
+
+        <div class="topics-grid">
+            <a href="Introduccion/index.html" class="topic-card">
+                <h2>📚 Clases y Objetos</h2>
+                <p>Comprende la estructura y el propósito de clases y objetos. Aprende a modelar el mundo real usando analogías y conceptos fundamentales de POO.</p>
+                <ul class="topic-features">
+                    <li>¿Qué es un objeto? ¿Qué es una clase?</li>
+                    <li>Analogías del mundo real</li>
+                    <li>Atributos y métodos</li>
+                    <li>Creación de instancias</li>
+                    <li>Manipulación de objetos en memoria</li>
+                </ul>
+                <span class="topic-link">Comenzar</span>
+            </a>
+
+            <a href="Variables/index.html" class="topic-card">
+                <h2>🔒 Encapsulación</h2>
+                <p>Aplica la encapsulación como base de la programación robusta. Aprende a proteger datos y controlar el acceso a las propiedades de tus clases.</p>
+                <ul class="topic-features">
+                    <li>Concepto de encapsulación</li>
+                    <li>Getters y setters</li>
+                    <li>Convenciones de nomenclatura</li>
+                    <li>Control de acceso a atributos</li>
+                    <li>Uso de IA para detectar errores</li>
+                </ul>
+                <span class="topic-link">Explorar</span>
+            </a>
+
+            <a href="Operadores/index.html" class="topic-card">
+                <h2>🏗️ Constructores</h2>
+                <p>Construye y utiliza instancias de clases con propiedades y comportamientos definidos. Aprende a usar constructores por defecto y parametrizados.</p>
+                <ul class="topic-features">
+                    <li>Constructores por defecto</li>
+                    <li>Constructores parametrizados</li>
+                    <li>Inicialización de objetos</li>
+                    <li>Múltiples instancias</li>
+                    <li>Uso de IA para generar clases</li>
+                </ul>
+                <span class="topic-link">Aprender</span>
+            </a>
+        </div>
+
+        <div class="exercises-section">
+            <h2>💪 Ejercicios Prácticos</h2>
+            <p>Pon en práctica todo lo aprendido sobre POO con ejercicios guiados y desafíos que te ayudarán a consolidar tus conocimientos de programación orientada a objetos.</p>
+            <a href="Ejercicios/index.html" class="exercises-link">Ver Ejercicios</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

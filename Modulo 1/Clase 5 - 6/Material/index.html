@@ -201,6 +201,38 @@
             box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
         }
 
+        .back-to-home {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #6f42c1;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 0.95rem;
+            border: 1px solid rgba(111, 66, 193, 0.2);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .back-icon {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
         .footer {
             text-align: center;
             margin-top: 4rem;
@@ -238,20 +270,23 @@
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="../index.html" class="navbar-brand">
+            <a href="../../index.html" class="navbar-brand">
                 🐍 Python 0 a Senior
             </a>
             <div class="navbar-links">
-                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="../../index.html" class="nav-link back-to-module">← Volver al Módulo 1</a>
+                <a href="index.html" class="nav-link active">Inicio</a>
                 <a href="Bucles/index.html" class="nav-link">Bucles</a>
                 <a href="Condicionales/index.html" class="nav-link">Condicionales</a>
-                <a href="MiniProyecto/index.html" class="nav-link">MiniProyecto</a>
                 <a href="GitHub/index.html" class="nav-link">GitHub</a>
+                <a href="MiniProyecto/index.html" class="nav-link">MiniProyecto</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
+
+        
         <div class="header">
             <h1>📚 Clase 5 - 6</h1>
             <p><strong>Bucles y Condicionales:</strong> Control de Flujo en Python</p>

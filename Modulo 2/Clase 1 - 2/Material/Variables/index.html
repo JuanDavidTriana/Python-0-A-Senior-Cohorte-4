@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables y Tipos de Datos - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .code-comment {
+            color: #68d391;
+        }
+
+        .code-keyword {
+            color: #f6ad55;
+        }
+
+        .code-string {
+            color: #fc8181;
+        }
+
+        .code-number {
+            color: #90cdf4;
+        }
+
+        .code-boolean {
+            color: #fbb6ce;
+        }
+
+        .data-type-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .data-type-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .data-type-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .data-type-card li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .data-type-card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+        }
+
+        .warning-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .next-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+        }
+
+        .next-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../index.html" class="navbar-brand">
+                🐍 Python 0 a Senior
+            </a>
+            <div class="navbar-links">
+                <a href="../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../Introduccion/index.html" class="nav-link">📚 Introducción</a>
+                <a href="index.html" class="nav-link active">📊 Variables</a>
+                <a href="../Operadores/index.html" class="nav-link">🔧 Operadores</a>
+                <a href="../Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📊 Variables y Tipos de Datos</h1>
+            <p>Almacena y manipula información en tus programas Python</p>
+        </div>
+
+        <div class="content-section">
+            <h2>📦 ¿Qué son las Variables?</h2>
+            <p>Una variable es como una caja donde puedes guardar información. Cada caja tiene un nombre (el nombre de la variable) y puede contener diferentes tipos de datos. En Python, las variables son dinámicas, lo que significa que pueden cambiar de tipo durante la ejecución del programa.</p>
+            
+            <h3>🎯 Sintaxis Básica</h3>
+            <p>Para crear una variable en Python, simplemente escribes el nombre y le asignas un valor:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Crear una variable
+nombre = "Juan"
+edad = 25
+altura = 1.75
+es_estudiante = True
+
+# Mostrar las variables
+print(nombre)
+print(edad)
+print(altura)
+print(es_estudiante)
+</code></pre>
+            </div>
+
+            <h3>🔤 Reglas para Nombres de Variables</h3>
+            <ul>
+                <li>Pueden contener letras, números y guiones bajos (_)</li>
+                <li>No pueden comenzar con números</li>
+                <li>Son sensibles a mayúsculas y minúsculas</li>
+                <li>No pueden usar palabras reservadas de Python</li>
+                <li>Usa nombres descriptivos y claros</li>
+            </ul>
+
+            <div class="code-block">
+<pre><code class="language-python"># ✅ Nombres válidos
+mi_variable = "Válido"
+variable123 = "Válido"
+MiVariable = "Válido"
+_variable = "Válido"
+
+# ❌ Nombres NO válidos
+# 123variable = "Error"  # No puede comenzar con número
+# mi-variable = "Error"  # No puede usar guiones
+# if = "Error"  # No puede usar palabra reservada
+</code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔢 Tipos de Datos Básicos</h2>
+            <p>Python tiene varios tipos de datos incorporados. Los más importantes son:</p>
+
+            <h3>📝 Strings (Texto)</h3>
+            <p>Los strings son secuencias de caracteres (texto). Se pueden crear con comillas simples o dobles:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Strings con comillas simples
+nombre = 'Juan David'
+ciudad = 'Bogotá'
+
+# Strings con comillas dobles
+mensaje = "¡Hola mundo!"
+frase = "Python es genial"
+
+# Strings multilínea
+texto_largo = """Este es un texto
+que puede ocupar
+múltiples líneas"""
+
+print(nombre)
+print(mensaje)
+</code></pre>
+            </div>
+
+            <h3>🔢 Números Enteros (int)</h3>
+            <p>Los enteros son números sin parte decimal:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Números enteros
+edad = 25
+año = 2024
+temperatura = -5
+poblacion = 8000000
+
+print(type(edad))  # Ver el tipo de dato
+</code></pre>
+            </div>
+
+            <h3>🔢 Números de Punto Flotante (float)</h3>
+            <p>Los flotantes son números con parte decimal:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Números flotantes
+altura = 1.75
+peso = 70.5
+pi = 3.14159
+temperatura = -2.5
+
+print(type(altura))
+</code></pre>
+            </div>
+
+            <h3>✅ Booleanos (bool)</h3>
+            <p>Los booleanos representan valores de verdad: True o False:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Valores booleanos
+es_estudiante = True
+es_profesor = False
+mayor_de_edad = True
+
+print(es_estudiante)
+print(type(es_estudiante))
+</code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔍 Verificar Tipos de Datos</h2>
+            <p>Puedes verificar el tipo de una variable usando la función <code>type()</code>:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Crear variables de diferentes tipos
+texto = "Hola"
+numero_entero = 42
+numero_decimal = 3.14
+es_verdadero = True
+
+# Verificar tipos
+print(type(texto))           # <class 'str'>
+print(type(numero_entero))    # <class 'int'>
+print(type(numero_decimal))   # <class 'float'>
+print(type(es_verdadero))     # <class 'bool'>
+</code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔄 Conversión de Tipos</h2>
+            <p>Python permite convertir entre diferentes tipos de datos usando funciones específicas:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Conversión de tipos
+numero_texto = "42"
+numero = int(numero_texto)      # String a entero
+decimal = float(numero_texto)   # String a float
+
+print(numero)    # 42 (int)
+print(decimal)   # 42.0 (float)
+
+# Convertir números a texto
+numero = 123
+texto = str(numero)    # Número a string
+
+print(texto)     # "123" (string)
+print(type(texto))  # <class 'str'>
+</code></pre>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Cuidado con las Conversiones</h3>
+                <p>No todas las conversiones son posibles. Por ejemplo, no puedes convertir "Hola" a un número:</p>
+                <div class="code-block">
+<pre><code class="language-python"># Esto causará un error
+# numero = int("Hola")  # ValueError
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 Ejemplos Prácticos</h2>
+            <p>Veamos algunos ejemplos reales de cómo usar variables y tipos de datos:</p>
+            
+            <div class="code-block">
+<pre><code class="language-python"># Ejemplo: Calculadora de edad
+año_nacimiento = 1995
+año_actual = 2024
+edad = año_actual - año_nacimiento
+
+print("Tienes", edad, "años")
+
+# Ejemplo: Información personal
+nombre = "María"
+apellido = "García"
+altura = 1.65
+es_programadora = True
+
+print("Nombre:", nombre, apellido)
+print("Altura:", altura, "metros")
+print("¿Es programadora?", es_programadora)
+</code></pre>
+            </div>
+        </div>
+
+        <div class="data-type-card">
+            <h3>📋 Resumen de Tipos de Datos</h3>
+            <ul>
+                <li><strong>str:</strong> Texto (strings) - "Hola", 'Mundo'</li>
+                <li><strong>int:</strong> Números enteros - 42, -5, 1000</li>
+                <li><strong>float:</strong> Números decimales - 3.14, -2.5, 0.0</li>
+                <li><strong>bool:</strong> Valores booleanos - True, False</li>
+            </ul>
+        </div>
+
+        <div class="next-section">
+            <h2>🚀 ¿Listo para Operadores?</h2>
+            <p>¡Perfecto! Ya sabes cómo trabajar con variables y tipos de datos. Ahora es momento de aprender a realizar operaciones con ellos.</p>
+            <a href="../Operadores/index.html" class="next-link">🔧 Continuar con Operadores →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases y Objetos en Python - Clase 1 - 2</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section h2 {
+            color: #6f42c1;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-section h3 {
+            color: #6f42c1;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .content-section p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .content-section ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .content-section li {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 1px solid #2d3748;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 0;
+        }
+
+        .code-block code {
+            color: #e2e8f0;
+        }
+
+        /* Colores de sintaxis */
+        .code-keyword {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .code-string {
+            color: #51cf66;
+        }
+
+        .code-comment {
+            color: #868e96;
+            font-style: italic;
+        }
+
+        .code-function {
+            color: #74c0fc;
+        }
+
+        .code-class {
+            color: #ffd43b;
+            font-weight: bold;
+        }
+
+        .code-number {
+            color: #fcc419;
+        }
+
+        .code-operator {
+            color: #ff922b;
+        }
+
+        .code-attribute {
+            color: #da77f2;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            color: white;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .highlight-box li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .next-section {
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 4rem;
+            padding: 3.5rem 3.5rem 2.8rem 3.5rem;
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            border-radius: 32px;
+            box-shadow: 0 8px 32px rgba(111, 66, 193, 0.18);
+            max-width: 950px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .next-section h2 {
+            font-size: 2.3rem;
+            color: #2d1e4a;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 2px 8px rgba(111,66,193,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+        .next-section p {
+            font-size: 1.25rem;
+            color: #2d1e4a;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+        .next-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 1.3rem 3.5rem;
+            border-radius: 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.35rem;
+            box-shadow: 0 6px 24px rgba(111, 66, 193, 0.18);
+            transition: all 0.2s cubic-bezier(.4,2,.6,1);
+            border: none;
+        }
+        .next-link:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 12px 32px rgba(111, 66, 193, 0.25);
+        }
+        .next-link .emoji {
+            font-size: 1.7em;
+            margin-right: 0.3em;
+        }
+        @media (max-width: 768px) {
+            .next-section {
+                padding: 2rem 0.5rem 1.5rem 0.5rem;
+                max-width: 98vw;
+            }
+            .next-section h2 {
+                font-size: 1.3rem;
+            }
+            .next-link {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+            }
+        }
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="../../index.html" class="navbar-brand">Python 0 a Senior</a>
+            <div class="navbar-links">
+                <a href="../../index.html" class="nav-link">🏠 Inicio</a>
+                <a href="../index.html" class="nav-link">🏗️ POO</a>
+                <a href="index.html" class="nav-link active">📚 Clases y Objetos</a>
+                <a href="../Encapculamiento/index.html" class="nav-link">🔒 Encapsulación</a>
+                <a href="../Consutructores/index.html" class="nav-link">🏗️ Constructores</a>
+                <a href="../Ejercicios/index.html" class="nav-link">💪 Ejercicios</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Clases y Objetos en Python</h1>
+            <p>Comprende la estructura y el propósito de clases y objetos en Programación Orientada a Objetos</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🏗️ ¿Qué es la Programación Orientada a Objetos?</h2>
+            <p>La Programación Orientada a Objetos (POO) es un paradigma de programación que organiza el código en objetos que contienen datos y código. En Python, todo es un objeto, lo que hace que POO sea fundamental para el desarrollo efectivo.</p>
+            
+            <div class="highlight-box">
+                <h3>🌟 Pilares Fundamentales de POO</h3>
+                <ul>
+                    <li><strong>Encapsulación:</strong> Agrupa datos y métodos relacionados</li>
+                    <li><strong>Herencia:</strong> Permite crear nuevas clases basadas en existentes</li>
+                    <li><strong>Polimorfismo:</strong> Permite usar objetos de diferentes clases de manera uniforme</li>
+                    <li><strong>Abstracción:</strong> Simplifica la complejidad mostrando solo lo esencial</li>
+                    <li><strong>Reutilización:</strong> Permite usar código existente para nuevas funcionalidades</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🎯 ¿Qué es un Objeto? ¿Qué es una Clase?</h2>
+            <h3>🏗️ Analogías del Mundo Real</h3>
+            <p>Piensa en una clase como un "molde" y en un objeto como la "pieza" creada con ese molde. Por ejemplo, si tienes un molde para hacer galletas (clase), puedes crear muchas galletas (objetos) con diferentes ingredientes pero la misma forma.</p>
+            
+            <h3>📋 Definiciones Clave</h3>
+            <ul>
+                <li><strong>Clase:</strong> Es el plano o plantilla que define las propiedades y comportamientos</li>
+                <li><strong>Objeto:</strong> Es una instancia específica de una clase con valores únicos</li>
+                <li><strong>Atributos:</strong> Son las características o propiedades del objeto</li>
+                <li><strong>Métodos:</strong> Son las acciones o comportamientos que puede realizar el objeto</li>
+                <li><strong>Instancia:</strong> Es otra forma de referirse a un objeto creado a partir de una clase</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>🔧 Atributos y Métodos</h2>
+            <p>Los objetos en Python tienen dos tipos principales de componentes:</p>
+            
+            <h3>📊 Atributos (Propiedades)</h3>
+            <p>Los atributos son las características o datos que almacena el objeto:</p>
+            <div class="code-block">
+<pre><code><span class="code-comment"># Ejemplo: Clase Persona</span>
+<span class="code-keyword">class</span> <span class="code-class">Persona</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, nombre, edad):
+        <span class="code-keyword">self</span>.<span class="code-attribute">nombre</span> = nombre    <span class="code-comment"># Atributo</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">edad</span> = edad        <span class="code-comment"># Atributo</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">ciudad</span> = <span class="code-string">"Madrid"</span>  <span class="code-comment"># Atributo con valor por defecto</span>
+
+<span class="code-comment"># Crear objetos (instancias)</span>
+persona1 = <span class="code-class">Persona</span>(<span class="code-string">"Ana"</span>, <span class="code-number">25</span>)
+persona2 = <span class="code-class">Persona</span>(<span class="code-string">"Carlos"</span>, <span class="code-number">30</span>)
+
+<span class="code-function">print</span>(persona1.<span class="code-attribute">nombre</span>)  <span class="code-comment"># Ana</span>
+<span class="code-function">print</span>(persona2.<span class="code-attribute">edad</span>)    <span class="code-comment"># 30</span></code></pre>
+            </div>
+
+            <h3>⚡ Métodos (Comportamientos)</h3>
+            <p>Los métodos son las acciones que puede realizar el objeto:</p>
+            <div class="code-block">
+<pre><code><span class="code-keyword">class</span> <span class="code-class">Persona</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, nombre, edad):
+        <span class="code-keyword">self</span>.<span class="code-attribute">nombre</span> = nombre
+        <span class="code-keyword">self</span>.<span class="code-attribute">edad</span> = edad
+    
+    <span class="code-keyword">def</span> <span class="code-function">saludar</span>(<span class="code-keyword">self</span>):                    <span class="code-comment"># Método</span>
+        <span class="code-keyword">return</span> <span class="code-string">f"¡Hola! Soy {self.nombre}"</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">cumplir_anios</span>(<span class="code-keyword">self</span>):              <span class="code-comment"># Método</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">edad</span> += <span class="code-number">1</span>
+        <span class="code-keyword">return</span> <span class="code-string">f"¡Feliz cumpleaños! Ahora tengo {self.edad} años"</span>
+
+<span class="code-comment"># Usar métodos</span>
+persona = <span class="code-class">Persona</span>(<span class="code-string">"María"</span>, <span class="code-number">28</span>)
+<span class="code-function">print</span>(persona.<span class="code-function">saludar</span>())           <span class="code-comment"># ¡Hola! Soy María</span>
+<span class="code-function">print</span>(persona.<span class="code-function">cumplir_anios</span>())     <span class="code-comment"># ¡Feliz cumpleaños! Ahora tengo 29 años</span></code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🏗️ Creación de Múltiples Instancias</h2>
+            <p>Una de las ventajas de POO es que puedes crear múltiples objetos a partir de una sola clase, cada uno con sus propios valores:</p>
+            
+            <div class="code-block">
+<pre><code><span class="code-keyword">class</span> <span class="code-class">Coche</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, marca, modelo, color):
+        <span class="code-keyword">self</span>.<span class="code-attribute">marca</span> = marca
+        <span class="code-keyword">self</span>.<span class="code-attribute">modelo</span> = modelo
+        <span class="code-keyword">self</span>.<span class="code-attribute">color</span> = color
+        <span class="code-keyword">self</span>.<span class="code-attribute">velocidad</span> = <span class="code-number">0</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">acelerar</span>(<span class="code-keyword">self</span>):
+        <span class="code-keyword">self</span>.<span class="code-attribute">velocidad</span> += <span class="code-number">10</span>
+        <span class="code-keyword">return</span> <span class="code-string">f"Velocidad actual: {self.velocidad} km/h"</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">frenar</span>(<span class="code-keyword">self</span>):
+        <span class="code-keyword">self</span>.<span class="code-attribute">velocidad</span> = <span class="code-function">max</span>(<span class="code-number">0</span>, <span class="code-keyword">self</span>.<span class="code-attribute">velocidad</span> - <span class="code-number">10</span>)
+        <span class="code-keyword">return</span> <span class="code-string">f"Velocidad actual: {self.velocidad} km/h"</span>
+
+<span class="code-comment"># Crear múltiples instancias</span>
+coche1 = <span class="code-class">Coche</span>(<span class="code-string">"Toyota"</span>, <span class="code-string">"Corolla"</span>, <span class="code-string">"Rojo"</span>)
+coche2 = <span class="code-class">Coche</span>(<span class="code-string">"Honda"</span>, <span class="code-string">"Civic"</span>, <span class="code-string">"Azul"</span>)
+coche3 = <span class="code-class">Coche</span>(<span class="code-string">"Ford"</span>, <span class="code-string">"Focus"</span>, <span class="code-string">"Verde"</span>)
+
+<span class="code-comment"># Cada objeto tiene su propio estado</span>
+<span class="code-function">print</span>(coche1.<span class="code-attribute">marca</span>)  <span class="code-comment"># Toyota</span>
+<span class="code-function">print</span>(coche2.<span class="code-attribute">color</span>)  <span class="code-comment"># Azul</span>
+<span class="code-function">print</span>(coche3.<span class="code-attribute">modelo</span>) <span class="code-comment"># Focus</span>
+
+<span class="code-comment"># Los métodos afectan solo al objeto específico</span>
+coche1.<span class="code-function">acelerar</span>()  <span class="code-comment"># Solo coche1 aumenta velocidad</span>
+coche2.<span class="code-function">acelerar</span>()  <span class="code-comment"># Solo coche2 aumenta velocidad</span></code></pre>
+            </div>
+
+            <h3>🎯 Manipulación de Objetos en Memoria</h3>
+            <p>Cada objeto ocupa su propio espacio en memoria y puede ser manipulado independientemente:</p>
+            <div class="code-block">
+<pre><code><span class="code-comment"># Demostración de objetos independientes</span>
+<span class="code-keyword">class</span> <span class="code-class">Contador</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>):
+        <span class="code-keyword">self</span>.<span class="code-attribute">valor</span> = <span class="code-number">0</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">incrementar</span>(<span class="code-keyword">self</span>):
+        <span class="code-keyword">self</span>.<span class="code-attribute">valor</span> += <span class="code-number">1</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>.<span class="code-attribute">valor</span>
+
+<span class="code-comment"># Crear dos contadores</span>
+contador1 = <span class="code-class">Contador</span>()
+contador2 = <span class="code-class">Contador</span>()
+
+<span class="code-function">print</span>(contador1.<span class="code-function">incrementar</span>())  <span class="code-comment"># 1</span>
+<span class="code-function">print</span>(contador1.<span class="code-function">incrementar</span>())  <span class="code-comment"># 2</span>
+<span class="code-function">print</span>(contador2.<span class="code-function">incrementar</span>())  <span class="code-comment"># 1 (independiente de contador1)</span>
+<span class="code-function">print</span>(contador1.<span class="code-attribute">valor</span>)          <span class="code-comment"># 2</span>
+<span class="code-function">print</span>(contador2.<span class="code-attribute">valor</span>)          <span class="code-comment"># 1</span></code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🤖 Uso de IA para Generar Clases</h2>
+            <p>Las herramientas de IA pueden ayudarte a generar clases de manera automatizada y detectar errores de encapsulamiento:</p>
+            
+            <div class="highlight-box">
+                <h3>🌟 Beneficios del Uso de IA en POO</h3>
+                <ul>
+                    <li><strong>Generación Automatizada:</strong> Crear clases completas con métodos y atributos</li>
+                    <li><strong>Detección de Errores:</strong> Identificar problemas de encapsulación</li>
+                    <li><strong>Refactorización:</strong> Mejorar la estructura del código existente</li>
+                    <li><strong>Documentación:</strong> Generar documentación automática</li>
+                    <li><strong>Testing:</strong> Crear pruebas unitarias automáticamente</li>
+                </ul>
+            </div>
+
+            <h3>🎯 Ejemplo de Prompt para IA</h3>
+            <div class="code-block">
+<pre><code><span class="code-comment"># Prompt para generar una clase de Estudiante</span>
+<span class="code-string">"""
+Genera una clase Estudiante en Python con:
+- Atributos: nombre, edad, carrera, promedio
+- Métodos: estudiar(), tomar_examen(), calcular_promedio()
+- Incluye validaciones y documentación
+"""</span>
+
+<span class="code-comment"># La IA podría generar algo como:</span>
+<span class="code-keyword">class</span> <span class="code-class">Estudiante</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, nombre, edad, carrera):
+        <span class="code-keyword">self</span>.<span class="code-attribute">nombre</span> = nombre
+        <span class="code-keyword">self</span>.<span class="code-attribute">edad</span> = edad
+        <span class="code-keyword">self</span>.<span class="code-attribute">carrera</span> = carrera
+        <span class="code-keyword">self</span>.<span class="code-attribute">promedio</span> = <span class="code-number">0.0</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">examenes</span> = []
+    
+    <span class="code-keyword">def</span> <span class="code-function">estudiar</span>(<span class="code-keyword">self</span>, horas):
+        <span class="code-keyword">return</span> <span class="code-string">f"{self.nombre} estudió {horas} horas"</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">tomar_examen</span>(<span class="code-keyword">self</span>, nota):
+        <span class="code-keyword">self</span>.<span class="code-attribute">examenes</span>.<span class="code-function">append</span>(nota)
+        <span class="code-keyword">self</span>.<span class="code-function">calcular_promedio</span>()
+        <span class="code-keyword">return</span> <span class="code-string">f"Examen completado con nota: {nota}"</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">calcular_promedio</span>(<span class="code-keyword">self</span>):
+        <span class="code-keyword">if</span> <span class="code-keyword">self</span>.<span class="code-attribute">examenes</span>:
+            <span class="code-keyword">self</span>.<span class="code-attribute">promedio</span> = <span class="code-function">sum</span>(<span class="code-keyword">self</span>.<span class="code-attribute">examenes</span>) / <span class="code-function">len</span>(<span class="code-keyword">self</span>.<span class="code-attribute">examenes</span>)
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>.<span class="code-attribute">promedio</span></code></pre>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📝 Sintaxis de Clases en Python</h2>
+            <p>Python tiene una sintaxis clara y simple para definir clases:</p>
+            
+            <h3>🎯 Estructura Básica de una Clase</h3>
+            <div class="code-block">
+<pre><code><span class="code-keyword">class</span> <span class="code-class">NombreClase</span>:
+    <span class="code-string">"""Docstring de la clase - documentación"""</span>
+    
+    <span class="code-comment"># Atributos de clase (compartidos por todas las instancias)</span>
+    atributo_clase = <span class="code-string">"valor"</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>, parametro1, parametro2):
+        <span class="code-string">"""Constructor - se ejecuta al crear un objeto"""</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">atributo1</span> = parametro1  <span class="code-comment"># Atributo de instancia</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">atributo2</span> = parametro2  <span class="code-comment"># Atributo de instancia</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">metodo1</span>(<span class="code-keyword">self</span>):
+        <span class="code-string">"""Método de instancia"""</span>
+        <span class="code-keyword">return</span> <span class="code-string">f"Valor: {self.atributo1}"</span>
+    
+    <span class="code-operator">@</span><span class="code-function">classmethod</span>
+    <span class="code-keyword">def</span> <span class="code-function">metodo_clase</span>(cls):
+        <span class="code-string">"""Método de clase"""</span>
+        <span class="code-keyword">return</span> cls.<span class="code-attribute">atributo_clase</span>
+    
+    <span class="code-operator">@</span><span class="code-function">staticmethod</span>
+    <span class="code-keyword">def</span> <span class="code-function">metodo_estatico</span>():
+        <span class="code-string">"""Método estático - no necesita self ni cls"""</span>
+        <span class="code-keyword">return</span> <span class="code-string">"Método estático"</span></code></pre>
+            </div>
+
+            <h3>🔤 Convenciones de Nomenclatura</h3>
+            <ul>
+                <li><strong>Clases:</strong> PascalCase (PrimeraLetraMayúscula)</li>
+                <li><strong>Métodos y atributos:</strong> snake_case (con_guiones_bajos)</li>
+                <li><strong>Constantes:</strong> MAYÚSCULAS_CON_GUIONES_BAJOS</li>
+                <li><strong>Atributos privados:</strong> _con_guion_bajo_inicial</li>
+                <li><strong>Atributos muy privados:</strong> __con_doble_guion_bajo</li>
+            </ul>
+
+            <div class="code-block">
+<pre><code><span class="code-comment"># Ejemplo de convenciones</span>
+<span class="code-keyword">class</span> <span class="code-class">MiClase</span>:                    <span class="code-comment"># PascalCase</span>
+    ATRIBUTO_CONSTANTE = <span class="code-number">100</span>      <span class="code-comment"># MAYÚSCULAS</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(<span class="code-keyword">self</span>):
+        <span class="code-keyword">self</span>.<span class="code-attribute">atributo_publico</span> = <span class="code-string">"público"</span>     <span class="code-comment"># snake_case</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">_atributo_privado</span> = <span class="code-string">"privado"</span>    <span class="code-comment"># _guion_bajo</span>
+        <span class="code-keyword">self</span>.<span class="code-attribute">__muy_privado</span> = <span class="code-string">"muy privado"</span>    <span class="code-comment"># __doble_guion</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">mi_metodo</span>(<span class="code-keyword">self</span>):          <span class="code-comment"># snake_case</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">self</span>.<span class="code-attribute">atributo_publico</span></code></pre>
+            </div>
+        </div>
+
+        <div class="next-section">
+            <h2><span class="emoji">🚀</span>¿Listo para Continuar?</h2>
+            <p>¡Excelente! Ya comprendes los conceptos fundamentales de clases y objetos.<br>Ahora es momento de aprender sobre <b>encapsulación</b> y control de acceso.</p>
+            <a href="../Variables/index.html" class="next-link"><span class="emoji">🔒</span>Continuar con Encapsulación →</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html> 

@@ -21,7 +21,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -52,7 +52,7 @@
             color: white;
             font-size: 1.25rem;
             opacity: 0.95;
-            max-width: 1000px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.7;
@@ -60,10 +60,10 @@
 
         .classes-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
             margin-bottom: 4rem;
-            max-width: 1200px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -72,14 +72,14 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 3rem;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             color: inherit;
             position: relative;
             overflow: hidden;
-            min-height: 400px;
+            min-height: 450px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -103,7 +103,7 @@
 
         .class-card h2 {
             color: #6f42c1;
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
@@ -115,7 +115,7 @@
             color: #555;
             margin-bottom: 2rem;
             line-height: 1.7;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .class-topics {
@@ -124,11 +124,11 @@
         }
 
         .class-topics li {
-            padding: 0.5rem 0;
+            padding: 0.7rem 0;
             color: #555;
             position: relative;
-            padding-left: 1.5rem;
-            font-size: 0.95rem;
+            padding-left: 2rem;
+            font-size: 1.05rem;
         }
 
         .class-topics li::before {
@@ -137,20 +137,20 @@
             position: absolute;
             left: 0;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .class-link {
             display: inline-block;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            padding: 1rem 2rem;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .class-link:hover {
@@ -341,6 +341,40 @@
             font-size: 1.3rem;
         }
 
+        .back-to-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #6f42c1;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 0.95rem;
+            border: 1px solid rgba(111, 66, 193, 0.2);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .back-icon {
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
         .footer {
             text-align: center;
             margin-top: 4rem;
@@ -376,30 +410,13 @@
             display: inline-block;
             background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            padding: 1rem 2rem;
+            border-radius: 30px;
             font-weight: 600;
             box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
             position: relative;
             z-index: 1;
-            font-size: 0.9rem;
-        }
-
-        .module-number {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
-        }
-
-        @media (max-width: 1200px) {
-            .classes-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
@@ -439,182 +456,66 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🐍 Python 0 a Senior</h1>
-            <p><strong>Programa Completo:</strong> De Cero a Desarrollador Senior</p>
-            <p>Cohorte 4 - Experiencia Formativa Integral</p>
+        <div class="back-to-home">
+            <a href="../index.html" class="back-button">
+                <span class="back-icon">🏠</span>
+                Volver al Inicio
+            </a>
         </div>
-
-        <div class="module-description">
-            <p>Este programa es mucho más que un curso. Es una <strong>experiencia formativa integral</strong> diseñada para llevarte de cero al nivel senior en desarrollo de software con Python, dominando tanto el backend como el frontend, integrando Inteligencia Artificial en todo el proceso, y creando proyectos reales para el mundo real.</p>
-            <p>A lo largo de <strong>12 módulos</strong>, aprenderás desde los fundamentos del lenguaje hasta el despliegue completo de sistemas profesionales en producción, usando herramientas actuales como FastAPI, PostgreSQL, React, Tailwind, Docker, GitHub Actions, Vercel y Railway. Todo, con el poder de la IA a tu lado, ayudándote a escribir código limpio, validado, seguro y de alto impacto.</p>
+        
+        <div class="header">
+            <span style="display:inline-block;background:linear-gradient(90deg,#667eea,#764ba2);color:#fff;padding:0.5rem 1.5rem;border-radius:2rem;font-weight:600;font-size:1.1rem;letter-spacing:1px;margin-bottom:1.2rem;">Módulo 2</span>
+            <h1>🐍 Programación Orientada a Objetos</h1>
+            <p><strong>Este módulo introduce al estudiante en la Programación Orientada a Objetos (POO), uno de los pilares fundamentales del desarrollo en Python. Se aprenderá a modelar clases, utilizar herencia, aplicar interfaces. Se promueve el uso de IA para análisis y refactorización de código orientado a objetos.</strong></p>
         </div>
 
         <div class="classes-grid">
-            <!-- Módulo 1: Fundamentos Modernos -->
-            <a href="Modulo 1/index.html" class="class-card">
-                <h2><span class="module-number">M1</span>🚀 Fundamentos Modernos</h2>
-                <p>Fundamentos modernos de programación con Python e Inteligencia Artificial.</p>
+            <a href="Clase 1 - 2/Material/index.html" class="class-card">
+                <h2>🚀 Clase 1 - 2</h2>
+                <p>CLASE 1: Clases, Objetos, Constructores</p>
                 <ul class="class-topics">
-                    <li>Python moderno</li>
-                    <li>Variables y tipos de datos</li>
-                    <li>Operadores y estructuras</li>
-                    <li>Funciones básicas</li>
-                    <li>Introducción a IA</li>
+                    <li>¿Qué es la POO?</li>
+                    <li>Clases y Objetos</li>
+                    <li>Constructores</li>
+                    <li>Ejercicios prácticos</li>
                 </ul>
                 <span class="class-link">Acceder al Material</span>
             </a>
 
-            <!-- Módulo 2: Programación Orientada a Objetos -->
-            <a href="Modulo 2/index.html" class="class-card">
-                <h2><span class="module-number">M2</span>🏗️ POO</h2>
-                <p>Programación Orientada a Objetos: clases, herencia, polimorfismo y patrones de diseño.</p>
-                <ul class="class-topics">
-                    <li>Clases y objetos</li>
-                    <li>Herencia y polimorfismo</li>
-                    <li>Encapsulamiento</li>
-                    <li>Patrones de diseño</li>
-                    <li>Métodos especiales</li>
-                </ul>
-                <span class="class-link">Acceder al Material</span>
-            </a>
-
-            <!-- Módulo 3: Estructuras de Datos e IA -->
             <div class="class-card coming-soon">
-                <h2><span class="module-number">M3</span>📊 Estructuras + IA</h2>
-                <p>Estructuras de datos y manipulación inteligente con Inteligencia Artificial.</p>
+                <h2>🧬 Clase 3 - 4</h2>
+                <p>Herencia, Polimorfismo e Interfaces</p>
                 <ul class="class-topics">
-                    <li>Listas y diccionarios</li>
-                    <li>Tuplas y sets</li>
-                    <li>Comprensión de datos</li>
-                    <li>Manipulación con IA</li>
-                    <li>Análisis inteligente</li>
+                    <li>Herencia</li>
+                    <li>Polimorfismo</li>
+                    <li>Interfaces y clases abstractas</li>
+                    <li>Ejemplos y buenas prácticas</li>
+                    <li><em>Próximamente</em></li>
                 </ul>
                 <span class="coming-soon-badge">Próximamente</span>
             </div>
 
-            <!-- Módulo 4: Archivos y Persistencia -->
             <div class="class-card coming-soon">
-                <h2><span class="module-number">M4</span>📁 Archivos & IA</h2>
-                <p>Manejo de archivos, persistencia y validación con Inteligencia Artificial.</p>
+                <h2>🏗️ Clase 5 - 6</h2>
+                <p>Modelado Avanzado de Clases en POO</p>
                 <ul class="class-topics">
-                    <li>Lectura y escritura</li>
-                    <li>JSON y XML</li>
-                    <li>Persistencia de datos</li>
-                    <li>Validación con IA</li>
-                    <li>Procesamiento inteligente</li>
+                    <li>Composición y agregación</li>
+                    <li>Patrones de diseño básicos</li>
+                    <li>Refactorización con IA</li>
+                    <li>Ejercicios avanzados</li>
+                    <li><em>Próximamente</em></li>
                 </ul>
                 <span class="coming-soon-badge">Próximamente</span>
             </div>
 
-            <!-- Módulo 5: Bases de Datos -->
             <div class="class-card coming-soon">
-                <h2><span class="module-number">M5</span>🗄️ PostgreSQL + IA</h2>
-                <p>Bases de datos relacionales con PostgreSQL e integración profesional con Python + IA.</p>
+                <h2>🤖 Clase 7 - 8</h2>
+                <p>Proyecto Integrador Orientado a Objetos con IA</p>
                 <ul class="class-topics">
-                    <li>PostgreSQL avanzado</li>
-                    <li>SQLAlchemy ORM</li>
-                    <li>Integración con Python</li>
-                    <li>IA en bases de datos</li>
-                    <li>Optimización profesional</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 6: FastAPI Profesional -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M6</span>⚡ FastAPI + IA</h2>
-                <p>Desarrollo de APIs profesionales con FastAPI + Python + Inteligencia Artificial.</p>
-                <ul class="class-topics">
-                    <li>FastAPI framework</li>
-                    <li>Pydantic y validación</li>
-                    <li>Documentación automática</li>
-                    <li>Integración con IA</li>
-                    <li>APIs profesionales</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 7: Seguridad en APIs -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M7</span>🔒 Seguridad</h2>
-                <p>Seguridad en APIs con JWT, autenticación y manejo de errores profesionales.</p>
-                <ul class="class-topics">
-                    <li>JWT y autenticación</li>
-                    <li>Autorización avanzada</li>
-                    <li>Manejo de errores</li>
-                    <li>Seguridad profesional</li>
-                    <li>Validación de datos</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 8: Frontend React -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M8</span>⚛️ React + IA</h2>
-                <p>Frontend profesional con React JS, consumo de APIs y UI moderna con IA.</p>
-                <ul class="class-topics">
-                    <li>React JS profesional</li>
-                    <li>Consumo de APIs</li>
-                    <li>UI moderna</li>
-                    <li>Integración con IA</li>
-                    <li>Componentes avanzados</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 9: Proyecto Full Stack -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M9</span>🎓 Universidad Digital</h2>
-                <p>Proyecto full stack real: Universidad Digital (Python + FastAPI + React + IA).</p>
-                <ul class="class-topics">
-                    <li>Arquitectura completa</li>
-                    <li>Python + FastAPI</li>
-                    <li>React frontend</li>
-                    <li>IA integrada</li>
-                    <li>Proyecto real</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 10: Testing y Calidad -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M10</span>🧪 Testing + IA</h2>
-                <p>Testing, cobertura y calidad profesional del código con Inteligencia Artificial.</p>
-                <ul class="class-topics">
-                    <li>Testing automatizado</li>
-                    <li>Cobertura de código</li>
-                    <li>Calidad profesional</li>
-                    <li>IA en testing</li>
-                    <li>Mejores prácticas</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 11: DevOps -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M11</span>🔄 DevOps</h2>
-                <p>DevOps y despliegue profesional con Docker, GitHub Actions, Railway y Vercel.</p>
-                <ul class="class-topics">
-                    <li>Docker y contenedores</li>
-                    <li>GitHub Actions</li>
-                    <li>Railway y Vercel</li>
-                    <li>CI/CD profesional</li>
-                    <li>Despliegue automatizado</li>
-                </ul>
-                <span class="coming-soon-badge">Próximamente</span>
-            </div>
-
-            <!-- Módulo 12: Proyecto Final -->
-            <div class="class-card coming-soon">
-                <h2><span class="module-number">M12</span>🎯 Proyecto Final</h2>
-                <p>Proyecto final profesional full stack + defensa técnica y portafolio.</p>
-                <ul class="class-topics">
-                    <li>Proyecto completo</li>
-                    <li>Full stack profesional</li>
-                    <li>Defensa técnica</li>
-                    <li>Portafolio</li>
-                    <li>Presentación final</li>
+                    <li>Proyecto final de POO</li>
+                    <li>Integración de IA para análisis y refactorización</li>
+                    <li>Presentación y documentación</li>
+                    <li><em>Próximamente</em></li>
                 </ul>
                 <span class="coming-soon-badge">Próximamente</span>
             </div>
@@ -629,7 +530,41 @@
             </a>
         </div>
 
+        <div class="teacher-section">
+            <h2>👨‍🏫 Conoce a tu Docente</h2>
+            <div class="teacher-info">
+                <div class="teacher-header">
+                    <h3>Juan David Triana Turmeque</h3>
+                    <p class="teacher-title">Especialista en Ciencia de Datos e Inteligencia Artificial</p>
+                </div>
+                <div class="teacher-description">
+                    <p>Soy un <strong>ingeniero de software</strong> y <strong>desarrollador apasionado</strong> por la <strong>inteligencia artificial</strong>, la <strong>ciencia de datos</strong> y la formación de futuros profesionales. Tengo experiencia en <strong>Python</strong>, <strong>Java</strong>, <strong>React</strong> y <strong>Spring Boot</strong>.</p>
+                    <p>Actualmente trabajo como <strong>Software Developer</strong> desarrollando aplicaciones web y APIs modernas, mientras que como <strong>profesor universitario</strong> en programación, IA y ciencia de datos, disfruto compartiendo mi experiencia práctica y guiando a mis estudiantes en el desarrollo de proyectos innovadores. Me encanta crear soluciones limpias, eficientes y con impacto real.</p>
+                </div>
+                <div class="teacher-highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">💻</span>
+                        <span>Software Developer - Aplicaciones web y APIs</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎓</span>
+                        <span>Ingeniero en Sistemas + Máster en Ingeniería de Software</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">👨‍🏫</span>
+                        <span>Profesor universitario apasionado por la docencia</span>
+                    </div>
+                </div>
+                <div class="teacher-cta">
+                    <a href="https://www.linkedin.com/in/juan-david-triana-turmeque-b95710183/" target="_blank" class="linkedin-link">
+                        <span class="linkedin-icon">💼</span>
+                        Conoce más 
+                    </a>
+                </div>
+            </div>
+        </div>
 
+        
 
         <div class="footer">
             <p>&copy; 2024 Python 0 a Senior - Cohorte 4. Todos los derechos reservados.</p>
